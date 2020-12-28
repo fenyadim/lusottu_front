@@ -1,0 +1,38 @@
+.header {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.logo {
+  justify-self: center;
+}
+
+.navigation {
+  a {
+    position: relative;
+    margin-right: 25px;
+    &::before {
+      content: '';
+      position: absolute;
+      bottom: -3px;
+      left: 0;
+      right: 0;
+      border-bottom: 3px solid var(--secondary-blue);
+      transform: scaleX(0);
+      transition: transform 0.3s ease;
+    }
+    &:hover {
+      &::before {
+        transform: scaleX(1);
+      }
+    }
+    &:last-child {
+      margin-right: 0;
+    }
+  }
+  .active {
+    border-bottom: 3px solid var(--accent-blue);
+  }
+}
