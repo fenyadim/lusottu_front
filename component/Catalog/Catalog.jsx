@@ -1,135 +1,60 @@
-import React from "react";
-import Link from "next/link";
-import { gql, useQuery } from "@apollo/client";
+import React from 'react';
+import Link from 'next/link';
+import { useQuery } from '@apollo/client';
 
-import { Pagination, ProductCard } from "../index";
+import { GET_PRODUCTS } from '../../lib/graphql/query';
 
-import styles from "./Catalog.module.scss";
+import { Pagination, ProductCard } from '../index';
 
-const GET_PRODUCTS = gql`
-  query(
-    $first: Int
-    $last: Int
-    $after: String
-    $before: String
-    $gender: String
-  ) {
-    products(
-      where: { stockStatus: IN_STOCK, category: $gender }
-      first: $first
-      last: $last
-      after: $after
-      before: $before
-    ) {
-      nodes {
-        ... on SimpleProduct {
-          name
-          slug
-          price(format: RAW)
-          image {
-            mediaItemUrl
-          }
-        }
-      }
-      pageInfo {
-        endCursor
-        hasNextPage
-        hasPreviousPage
-        startCursor
-        offsetPagination {
-          total
-        }
-      }
-    }
-  }
-`;
+import styles from './Catalog.module.scss';
 
-export default function Catalog({ genderSort }) {
-  const { loading, error, data, fetchMore } = useQuery(GET_PRODUCTS, {
-    variables: { gender: genderSort },
+export default function Catalog({ genderSort, total, page }) {
+  const array = [];
+  const { loading, error, data } = useQuery(GET_PRODUCTS, {
+    variables: { gender: genderSort, first: total },
   });
 
   const items = data?.products.nodes;
   const pageInfo = data?.products.pageInfo;
 
+  let pageNum;
+  if (page === undefined) {
+    pageNum = 0;
+  } else {
+    pageNum = (page - 1) * 10;
+  }
+
   if (loading) {
     return <h1>Загрузка...</h1>;
   }
 
-  const updateQuery = (prevResult, { fetchMoreResult }) => {
-    console.log(prevResult);
-    console.log(fetchMoreResult);
-    return fetchMoreResult;
-  };
+  for (let start = pageNum; start < pageNum + 10; start++) {
+    array.push(items[start]);
+  }
+  console.log(`GenderSort: ${genderSort}`);
+  console.log(items);
+  console.log(array);
+  console.log(pageNum);
 
   return (
     <>
       <div className={styles.catalog}>
         {items &&
-          items.map((obj, index) => (
-            <React.Fragment key={index}>
-              <Link href="/product/[slug]" as={`/product/${obj.slug}/`}>
-                <a>
-                  <ProductCard
-                    title={obj.name}
-                    price={obj.price}
-                    img={obj.image.mediaItemUrl}
-                  />
-                </a>
-              </Link>
-            </React.Fragment>
-          ))}
+          array.map((obj, index) =>
+            obj ? (
+              <React.Fragment key={index}>
+                <Link href="/product/[slug]" as={`/product/${obj.slug}/`}>
+                  <a>
+                    <ProductCard title={obj.name} price={obj.price} img={obj.image.mediaItemUrl} />
+                  </a>
+                </Link>
+              </React.Fragment>
+            ) : (
+              ''
+            ),
+          )}
       </div>
       <Pagination gender={genderSort} total={pageInfo.offsetPagination.total} />
-      {/*<button*/}
-      {/*  onClick={() => {*/}
-      {/*    fetchMore({*/}
-      {/*      variables: {*/}
-      {/*        first: 10,*/}
-      {/*        after: prevPage,*/}
-      {/*        last: null,*/}
-      {/*        before: null,*/}
-      {/*      },*/}
-      {/*      updateQuery,*/}
-      {/*    });*/}
-      {/*  }}*/}
-      {/*>*/}
-      {/*  Назад*/}
-      {/*</button>*/}
-
-      {/*<button*/}
-      {/*  onClick={() => {*/}
-      {/*    fetchMore({*/}
-      {/*      variables: {*/}
-      {/*        first: 10,*/}
-      {/*        after: pageInfo.endCursor || null,*/}
-      {/*        last: null,*/}
-      {/*        before: null,*/}
-      {/*      },*/}
-      {/*      updateQuery,*/}
-      {/*    });*/}
-      {/*  }}*/}
-      {/*>*/}
-      {/*  Вперед*/}
-      {/*</button>*/}
-
-      {/*{pageInfo.hasNextPage ? (*/}
-      {/*  <button*/}
-      {/*    onClick={() => {*/}
-      {/*      fetchMore({*/}
-      {/*        variables: {*/}
-      {/*          first: 10,*/}
-      {/*          after: pageInfo.endCursor || null,*/}
-      {/*          last: null,*/}
-      {/*          before: null,*/}
-      {/*        },*/}
-      {/*        updateQuery,*/}
-      {/*      });*/}
-      {/*    }}*/}
-      {/*  >*/}
-      {/*    Вперед*/}
-      {/*  </button>*/}
-      {/*) : null}*/}
     </>
   );
 }

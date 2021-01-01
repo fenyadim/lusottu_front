@@ -1,16 +1,16 @@
-import { useRouter } from "next/router";
+import { useRouter } from 'next/router';
 
-import { Layout, SingleProduct } from "../../component";
+import { SingleProduct } from '../../component';
 
 export default function CatalogSlug() {
   const router = useRouter();
   const { slug } = router.query;
 
-  console.log(slug);
+  console.log(`Slug: ${slug}`);
 
   return (
-    <Layout>
+    <>
       <SingleProduct slug={slug} />
-    </Layout>
+    </>
   );
 }
