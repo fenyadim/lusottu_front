@@ -1,7 +1,7 @@
 import React from 'react';
-import { Router, useRouter } from 'next/router';
+import { useRouter } from 'next/router';
 
-import { GET_PRODUCTS, GET_TOTAL } from '../../lib/graphql/query';
+import { GET_PRODUCTS } from '../../lib/graphql/query';
 
 import { Catalog } from '../../component';
 import { client } from '../../lib/graphql/graph';
