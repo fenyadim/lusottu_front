@@ -2,9 +2,9 @@ import React from 'react';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 
-export default function Pagination({ total, gender }) {
-  const quantityPages = Math.ceil(total / 10); // Подсчет количества страниц
-  const { pathname: url } = useRouter();
+export default function Pagination({ quantityPages, gender }) {
+  const router = useRouter();
+  const { gender: isGender } = router.query;
 
   const Pages = () => {
     const array = [];
@@ -13,17 +13,17 @@ export default function Pagination({ total, gender }) {
     }
 
     return array.map((item) =>
-      url === '/' ? (
-        <Link key={item} href={{ pathname: '/[page]', query: { page: item, gender: 'all' } }}>
+      !isGender ? (
+        <Link key={item} href={{ pathname: '/[page]', query: { page: item } }}>
           <a>{item}</a>
         </Link>
       ) : (
-        <Link key={item} href="/[gender]/[page]" as={`/${gender}/${item}`}>
+        <Link key={item} href={{ pathname: '/[page]', query: { page: item, gender: gender } }}>
           <a>{item}</a>
         </Link>
       ),
     );
   };
 
-  return <div>{Pages()}</div>;
+  return <>{Pages()}</>;
 }

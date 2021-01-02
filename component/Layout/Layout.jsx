@@ -1,8 +1,8 @@
-import Head from "next/head";
+import Head from 'next/head';
 
-import { Header } from "../index";
+import { Header } from '../index';
 
-import styles from "./Layout.module.scss";
+import styles from './Layout.module.scss';
 
 export default function Layout({ children }) {
   return (
@@ -12,7 +12,7 @@ export default function Layout({ children }) {
       </Head>
       <div className={styles.container}>
         <Header />
-        <main className={styles.offer}>{children}</main>
+        {children}
       </div>
     </>
   );

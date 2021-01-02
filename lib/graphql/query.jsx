@@ -14,10 +14,6 @@ export const GET_PRODUCTS = gql`
         }
       }
       pageInfo {
-        endCursor
-        hasNextPage
-        hasPreviousPage
-        startCursor
         offsetPagination {
           total
         }

@@ -1,17 +1,28 @@
 import React from 'react';
 import { useQuery } from '@apollo/client';
 
-import { GET_TOTAL } from '../lib/graphql/query';
+import { GET_PRODUCTS } from '../lib/graphql/query';
 
 import { Catalog } from '../component';
 
-export default function Home() {
-  const { data } = useQuery(GET_TOTAL);
-  const total = data?.products.pageInfo.offsetPagination.total;
+import { client } from '../lib/graphql/graph';
 
+export async function getServerSideProps(params) {
+  const variables = {
+    first: 30,
+    gender: params.query.gender,
+  };
+  const res = await client.query({ query: GET_PRODUCTS, variables }).then();
+  const products = res.data.products;
+  const { nodes: items, pageInfo } = products;
+  const total = pageInfo.offsetPagination.total;
+  return { props: { items, total } };
+}
+
+export default function Home({ items, total, isLoading }) {
   return (
     <>
-      <Catalog total={total} />
+      <Catalog total={total} items={items} isLoading={isLoading} />
     </>
   );
 }

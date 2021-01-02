@@ -13,3 +13,54 @@
   }
 }
 
+.offer {
+  .catalog,
+  .pagination {
+    animation-name: fadeRight;
+    animation-duration: 0.5s;
+  }
+  .loader {
+    display: none;
+  }
+}
+
+.offerInvisible {
+  .catalog,
+  .pagination {
+    opacity: 0;
+    transition: opacity 0.2s ease;
+  }
+  .loader {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    display: inline-block;
+    border: 4px solid rgba(0, 0, 0, 0.1);
+    border-left-color: var(--accent-blue);
+    border-radius: 50%;
+    width: 60px;
+    height: 60px;
+    animation: donut-spin 1.2s linear infinite;
+  }
+}
+
+@keyframes donut-spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes fadeRight {
+  0% {
+    transform: translateX(-50px);
+    opacity: 0;
+  }
+
+  100% {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}

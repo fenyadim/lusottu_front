@@ -1,26 +1,26 @@
 .container {
   height: 100vh;
   padding: 0 80px;
-  &::before {
-    position: absolute;
-    content: '';
-    display: block;
-    background-image: url('../../public/right_patterns.svg');
-    width: 350px;
-    height: 355px;
-    top: 0;
-    right: 0;
-    z-index: -5;
-  }
-  &::after {
-    position: absolute;
-    content: '';
-    display: block;
-    background-image: url('../../public/left_patterns.svg');
-    width: 467px;
-    height: 490px;
-    bottom: 0;
-    left: 0;
-    z-index: -5;
-  }
+  // &::before {
+  //   position: absolute;
+  //   content: '';
+  //   display: block;
+  //   background-image: url('../../public/right_patterns.svg');
+  //   width: 350px;
+  //   height: 355px;
+  //   top: 0;
+  //   right: 0;
+  //   z-index: -5;
+  // }
+  // &::after {
+  //   position: absolute;
+  //   content: '';
+  //   display: block;
+  //   background-image: url('../../public/left_patterns.svg');
+  //   width: 467px;
+  //   height: 490px;
+  //   bottom: 0;
+  //   left: 0;
+  //   z-index: -5;
+  // }
 }

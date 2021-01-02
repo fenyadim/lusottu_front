@@ -1,21 +1,15 @@
 import React from 'react';
 import Link from 'next/link';
-import { useQuery } from '@apollo/client';
-
-import { GET_PRODUCTS } from '../../lib/graphql/query';
+import NProgress from 'nprogress';
 
 import { Pagination, ProductCard } from '../index';
 
 import styles from './Catalog.module.scss';
 
-export default function Catalog({ genderSort, total, page }) {
+export default function Catalog({ genderSort, total, page, items, isLoading }) {
   const array = [];
-  const { loading, error, data } = useQuery(GET_PRODUCTS, {
-    variables: { gender: genderSort, first: total },
-  });
-
-  const items = data?.products.nodes;
-  const pageInfo = data?.products.pageInfo;
+  // Подсчет количества страниц
+  const quantityPages = Math.ceil(total / 10);
 
   let pageNum;
   if (page === undefined) {
@@ -24,20 +18,14 @@ export default function Catalog({ genderSort, total, page }) {
     pageNum = (page - 1) * 10;
   }
 
-  if (loading) {
-    return <h1>Загрузка...</h1>;
-  }
-
+  // Из большого массива делает маленький из 10 элементов
   for (let start = pageNum; start < pageNum + 10; start++) {
     array.push(items[start]);
   }
-  console.log(`GenderSort: ${genderSort}`);
-  console.log(items);
-  console.log(array);
-  console.log(pageNum);
 
   return (
-    <>
+    <main className={!isLoading ? styles.offer : styles.offerInvisible}>
+      <div className={styles.loader} />
       <div className={styles.catalog}>
         {items &&
           array.map((obj, index) =>
@@ -54,7 +42,9 @@ export default function Catalog({ genderSort, total, page }) {
             ),
           )}
       </div>
-      <Pagination gender={genderSort} total={pageInfo.offsetPagination.total} />
-    </>
+      <div className={styles.pagination}>
+        <Pagination gender={genderSort} quantityPages={quantityPages} />
+      </div>
+    </main>
   );
 }

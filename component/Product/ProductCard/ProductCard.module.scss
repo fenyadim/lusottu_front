@@ -2,16 +2,16 @@
   display: grid;
   grid-template-rows: auto 107px;
   padding: 30px 25px;
-  border: 1px solid var(--secondary-grey);
-  border-radius: 10px;
+  outline: 2px solid var(--secondary-blue);
   background-color: #fff;
   height: 100%;
   width: 100%;
 
   transition: all 0.2s ease;
   &:hover {
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
-    border-color: var(--accent-grey);
+    // box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+    box-shadow: 10px 10px 0px var(--accent-blue);
+    outline-color: var(--accent-blue);
   }
 }
 

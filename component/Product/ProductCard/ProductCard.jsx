@@ -1,11 +1,8 @@
-import Image from "next/image";
+import React from 'react';
 
-import React, { Fragment } from "react";
+import styles from './ProductCard.module.scss';
 
-import styles from "./ProductCard.module.scss";
-import { useRouter } from "next/router";
-
-export default function ProductCard({ title, price, img }) {
+export default function ProductCard({ title, price, img, isLoading }) {
   return (
     <div className={styles.productCard}>
       <img className={styles.productImg} src={img} alt={title} />
