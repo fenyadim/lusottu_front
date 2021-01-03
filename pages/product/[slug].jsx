@@ -6,8 +6,6 @@ export default function CatalogSlug() {
   const router = useRouter();
   const { slug } = router.query;
 
-  console.log(`Slug: ${slug}`);
-
   return (
     <>
       <SingleProduct slug={slug} />
