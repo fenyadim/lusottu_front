@@ -34,11 +34,35 @@ export const GET_TOTAL = gql`
   }
 `;
 
-export const FIRST_VALUE_PAGES = gql`
-  query($total: Int) {
-    products(first: $total) {
-      edges {
-        cursor
+export const GET_SINGLE_PRODUCT = gql`
+  query($slug: ID!) {
+    product(idType: SLUG, id: $slug) {
+      ... on SimpleProduct {
+        name
+        slug
+        price(format: RAW)
+        weight
+        description(format: RAW)
+        productTags {
+          nodes {
+            name
+          }
+        }
+        attributes {
+          nodes {
+            ... on GlobalProductAttribute {
+              name
+              terms {
+                nodes {
+                  name
+                }
+              }
+            }
+          }
+        }
+        image {
+          mediaItemUrl
+        }
       }
     }
   }

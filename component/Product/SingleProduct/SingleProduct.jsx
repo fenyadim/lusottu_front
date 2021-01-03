@@ -1,60 +1,17 @@
-import React from "react";
-import { gql, useQuery } from "@apollo/client";
+import React from 'react';
 
-import styles from "./SingleProduct.module.scss";
+import styles from './SingleProduct.module.scss';
 
-const GET_SINGLE_PRODUCT = gql`
-  query($slug: ID!) {
-    product(idType: SLUG, id: $slug) {
-      ... on SimpleProduct {
-        name
-        slug
-        price(format: RAW)
-        weight
-        description(format: RAW)
-        productTags {
-          nodes {
-            name
-          }
-        }
-        attributes {
-          nodes {
-            ... on GlobalProductAttribute {
-              name
-              terms {
-                nodes {
-                  name
-                }
-              }
-            }
-          }
-        }
-        image {
-          mediaItemUrl
-        }
-      }
-    }
-  }
-`;
-
-export default function SingleProduct({ slug }) {
+export default function SingleProduct({ product, isLoading }) {
   let array = [];
-  const { loading, error, data } = useQuery(GET_SINGLE_PRODUCT, {
-    variables: { slug },
-  });
-  let product;
-  if (data) {
-    product = data.product;
-  }
-  if (loading) {
-    return <h2>Загрузка...</h2>;
-  }
+
+  console.log(isLoading);
 
   function ClearElemArray() {
     array = [];
   }
   return (
-    <div className={styles.offer}>
+    <div className={!isLoading ? styles.offer : ''}>
       <div>
         <h2>{product.productTags.nodes[0].name}</h2>
         <h1>{product.name}</h1>
@@ -67,7 +24,7 @@ export default function SingleProduct({ slug }) {
                 {item.terms.nodes.map((obj, index) => {
                   array.push(obj.name);
                 })}
-                <p>{array.join(", ")}</p>
+                <p>{array.join(', ')}</p>
                 {ClearElemArray()}
               </div>
             </React.Fragment>
