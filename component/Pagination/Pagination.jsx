@@ -2,7 +2,9 @@ import React from 'react';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 
-export default function Pagination({ quantityPages, gender }) {
+import styles from './Pagination.module.scss';
+
+export default function Pagination({ quantityPages, gender, currentPage }) {
   const router = useRouter();
   const { gender: isGender } = router.query;
 
@@ -15,11 +17,15 @@ export default function Pagination({ quantityPages, gender }) {
     return array.map((item) =>
       !isGender ? (
         <Link key={item} href={{ pathname: '/[page]', query: { page: item } }}>
-          <a>{item}</a>
+          <a className={currentPage === item ? `${styles.link} ${styles.active}` : styles.link}>
+            {item}
+          </a>
         </Link>
       ) : (
         <Link key={item} href={{ pathname: '/[page]', query: { page: item, gender: gender } }}>
-          <a>{item}</a>
+          <a className={currentPage === item ? `${styles.link} ${styles.active}` : styles.link}>
+            {item}
+          </a>
         </Link>
       ),
     );

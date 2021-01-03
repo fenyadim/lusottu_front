@@ -21,8 +21,18 @@
 }
 
 .productInfo {
+  display: grid;
 }
 
 .productTitle {
+  font-weight: 600;
+  font-size: 1.714em; //24px
   text-align: center;
+  align-self: center;
+}
+
+.productPrice {
+  font-weight: 400;
+  font-size: 1.214em; //17px
+  align-self: center;
 }

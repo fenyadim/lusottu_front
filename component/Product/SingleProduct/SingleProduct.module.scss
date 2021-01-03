@@ -1,6 +1,6 @@
 .offer {
-  display: flex;
-  justify-content: space-around;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
   align-items: center;
   .infoSide {
     animation-name: fadeLeft;
@@ -12,10 +12,26 @@
   }
 }
 
+.offerInvisible {
+  opacity: 0;
+
+  .infoSide {
+    opacity: 0;
+    transition: all 0.5s ease;
+  }
+  .imageSide {
+    opacity: 0;
+    transition: all 0.5s ease;
+  }
+}
+
 .infoSide {
+  box-shadow: 10px 10px 0px var(--accent-blue);
+  outline: 2px solid var(--accent-blue);
 }
 
 .imageSide {
+  justify-self: center;
 }
 
 @keyframes fadeLeft {

@@ -1,5 +1,3 @@
-import { useRouter } from 'next/router';
-
 import { SingleProduct } from '../../component';
 import { GET_SINGLE_PRODUCT } from '../../lib/graphql/query';
 import { client } from '../../lib/graphql/graph';
