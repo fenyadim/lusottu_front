@@ -17,8 +17,10 @@
 }
 
 .productImg {
-  height: 100%;
+  position: relative;
   justify-self: center;
+  height: 100%;
+  width: 100%;
 }
 
 .productInfo {
