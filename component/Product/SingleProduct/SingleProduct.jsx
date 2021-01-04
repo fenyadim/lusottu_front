@@ -1,4 +1,6 @@
 import React from 'react';
+import Image from 'next/image';
+
 import { Loader } from '../..';
 
 import styles from './SingleProduct.module.scss';
@@ -42,7 +44,7 @@ export default function SingleProduct({ product, isLoading }) {
         </h3>
       </div>
       <div className={styles.imageSide}>
-        <img src={product.image.mediaItemUrl} alt={product.name} />
+        <Image src={product.image.mediaItemUrl} layout="fill" objectFit="contain" />
       </div>
     </div>
   ) : (
