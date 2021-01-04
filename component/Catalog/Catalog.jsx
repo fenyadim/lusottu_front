@@ -17,8 +17,6 @@ export default function Catalog({ genderSort, total, page, items, isLoading }) {
     pageNum = (page - 1) * 10;
   }
 
-  console.log(page);
-
   // Из большого массива делает маленький из 10 элементов
   for (let start = pageNum; start < pageNum + 10; start++) {
     array.push(items[start]);
@@ -38,6 +36,7 @@ export default function Catalog({ genderSort, total, page, items, isLoading }) {
                         title={obj.name}
                         price={obj.price}
                         img={obj.image.mediaItemUrl}
+                        gender={genderSort}
                       />
                     </a>
                   </Link>

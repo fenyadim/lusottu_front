@@ -2,9 +2,9 @@ import React from 'react';
 
 import styles from './ProductCard.module.scss';
 
-export default function ProductCard({ title, price, img }) {
+export default function ProductCard({ title, price, img, gender }) {
   return (
-    <div className={styles.productCard}>
+    <div className={`${styles.productCard} ${gender === 'female' ? 'femaleTheme' : 'maleTheme'}`}>
       <img className={styles.productImg} src={img} alt={title} />
       <div className={styles.productInfo}>
         <h2 className={styles.productTitle}>{title}</h2>

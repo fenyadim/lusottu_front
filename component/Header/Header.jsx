@@ -10,7 +10,7 @@ export default function Header() {
 
   return (
     <header className={styles.header}>
-      <nav className={styles.navigation}>
+      <nav className={`${styles.navigation} ${gender === 'female' ? 'femaleTheme' : 'maleTheme'}`}>
         <Link href={{ pathname: '/[page]', query: { page: '1' } }}>
           <a className={!gender ? styles.active : ''}>Все</a>
         </Link>

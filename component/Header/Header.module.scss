@@ -1,8 +1,10 @@
 .header {
+  position: fixed;
+  left: 80px;
+  right: 80px;
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
   align-items: center;
-  margin-bottom: 20px;
 }
 
 .logo {
@@ -11,7 +13,7 @@
 
 .navigation {
   a {
-    font-size: 1.214em; // 17px
+    font-size: 1.0625rem; // 17px
     font-weight: 500;
     position: relative;
     margin-right: 25px;
@@ -21,7 +23,7 @@
       bottom: -3px;
       left: 0;
       right: 0;
-      border-bottom: 3px solid var(--secondary-blue);
+      border-bottom: 3px solid var(--second-color);
       transform: scaleX(0);
       transition: transform 0.3s ease;
     }
@@ -35,6 +37,6 @@
     }
   }
   .active {
-    border-bottom: 3px solid var(--accent-blue);
+    border-bottom: 3px solid var(--accent-color);
   }
 }

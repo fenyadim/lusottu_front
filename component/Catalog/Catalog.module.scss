@@ -1,12 +1,13 @@
 .catalog {
   display: grid;
+  height: 100%;
   grid-template-columns: repeat(auto-fill, 270px);
   grid-template-rows: repeat(2, 349px);
   grid-column-gap: 42px;
   grid-row-gap: 55px;
   justify-content: center;
   align-items: center;
-  margin-bottom: 20px;
+  // margin-bottom: 20px;
   a {
     display: block;
     height: 349px;
@@ -22,9 +23,15 @@
 }
 
 .offer {
+  display: grid;
+  height: 100%;
+  padding-top: 6%;
+  padding-bottom: 5%;
   .catalog {
+    align-self: center;
     animation-name: fadeRight;
     animation-duration: 0.5s;
+    // overflow: scroll;
   }
 }
 

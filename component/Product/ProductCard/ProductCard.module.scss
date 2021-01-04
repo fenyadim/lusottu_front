@@ -2,7 +2,8 @@
   display: grid;
   grid-template-rows: auto 107px;
   padding: 30px 25px;
-  outline: 2px solid var(--secondary-blue);
+  // outline: 2px solid var(--secondary-blue);
+  outline: 2px solid var(--second-color);
   background-color: #fff;
   height: 100%;
   width: 100%;
@@ -10,8 +11,8 @@
   transition: all 0.2s ease;
   &:hover {
     // box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
-    box-shadow: 10px 10px 0px var(--accent-blue);
-    outline-color: var(--accent-blue);
+    box-shadow: 10px 10px 0px var(--accent-color);
+    outline-color: var(--accent-color);
   }
 }
 
@@ -26,13 +27,13 @@
 
 .productTitle {
   font-weight: 600;
-  font-size: 1.714em; //24px
+  font-size: 1.5rem; //24px
   text-align: center;
   align-self: center;
 }
 
 .productPrice {
   font-weight: 400;
-  font-size: 1.214em; //17px
+  font-size: 1.0625rem; //17px
   align-self: center;
 }

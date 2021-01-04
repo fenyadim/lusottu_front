@@ -23,7 +23,10 @@ export default function Pagination({ quantityPages, gender, currentPage }) {
         </Link>
       ) : (
         <Link key={item} href={{ pathname: '/[page]', query: { page: item, gender: gender } }}>
-          <a className={currentPage === item ? `${styles.link} ${styles.active}` : styles.link}>
+          <a
+            className={`${currentPage === item ? `${styles.link} ${styles.active}` : styles.link} ${
+              gender === 'female' ? 'femaleTheme' : 'maleTheme'
+            }`}>
             {item}
           </a>
         </Link>

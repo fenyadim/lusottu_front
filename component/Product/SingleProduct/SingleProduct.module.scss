@@ -2,6 +2,7 @@
   display: grid;
   grid-template-columns: 1fr 1fr;
   align-items: center;
+  height: 100%;
   .infoSide {
     animation-name: fadeLeft;
     animation-duration: 0.5s;
@@ -14,7 +15,6 @@
 
 .offerInvisible {
   opacity: 0;
-
   .infoSide {
     opacity: 0;
     transition: all 0.5s ease;
@@ -26,12 +26,70 @@
 }
 
 .infoSide {
+  padding: 40px;
+  min-width: 600px;
+  max-width: 750px;
   box-shadow: 10px 10px 0px var(--accent-blue);
   outline: 2px solid var(--accent-blue);
+  justify-self: end;
+  & > * {
+    margin-bottom: 10px;
+    &:last-child {
+      margin-bottom: 0;
+    }
+  }
+  .brand {
+    font-weight: 500;
+    font-size: 1.25rem;
+  }
+  .title {
+    font-size: 2.125rem; //30px
+    font-weight: 700;
+    letter-spacing: 0.0625rem;
+    margin-bottom: 30px;
+  }
+  .desc {
+    line-height: 1.5;
+    span {
+      margin: 0;
+      font-size: 1.125rem; // 18px
+      font-weight: 600;
+    }
+  }
+  .attribute {
+    margin: 20px 0;
+  }
+  .attributeTitle {
+    font-weight: 600;
+    font-size: 1.125rem; // 18px
+    margin-bottom: 4px;
+  }
+  .attributeDesc {
+  }
+  .price,
+  .volume {
+    font-weight: 700;
+    font-size: 1.125rem; // 18px
+    span {
+      margin-left: 10px;
+      font-weight: 400;
+    }
+  }
+  .price {
+    margin-top: 40px;
+  }
 }
 
 .imageSide {
+  width: 500px;
+  height: 500px;
+  overflow: hidden;
+  display: flex;
+  justify-content: center;
   justify-self: center;
+  img {
+    height: 100%;
+  }
 }
 
 @keyframes fadeLeft {

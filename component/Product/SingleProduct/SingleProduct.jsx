@@ -13,24 +13,33 @@ export default function SingleProduct({ product, isLoading }) {
   return !isLoading ? (
     <div className={!isLoading ? styles.offer : styles.offerInvisible}>
       <div className={styles.infoSide}>
-        <h2>{product.productTags.nodes[0].name}</h2>
-        <h1>{product.name}</h1>
-        <p>{product.description}</p>
+        <h2 className={styles.brand}>{product.productTags.nodes[0].name}</h2>
+        <h1 className={styles.title}>{product.name}</h1>
+        <p className={styles.desc}>
+          <span>Описание: </span>
+          {product.description}
+        </p>
         {product.attributes &&
           product.attributes.nodes.map((item, index) => (
             <React.Fragment key={index}>
-              <div>
-                <h3>{`${item.name}: `}</h3>
-                {item.terms.nodes.map((obj, index) => {
+              <div className={styles.attribute}>
+                <h3 className={styles.attributeTitle}>{`${item.name}: `}</h3>
+                {item.terms.nodes.map((obj) => {
                   array.push(obj.name);
                 })}
-                <p>{array.join(', ')}</p>
+                <p className={styles.attributeDesc}>{array.join(', ')}</p>
                 {ClearElemArray()}
               </div>
             </React.Fragment>
           ))}
-        <span>{product.price} руб.</span>
-        <span>{product.weight} мл.</span>
+        <h3 className={styles.price}>
+          Цена:
+          <span>{product.price} руб.</span>
+        </h3>
+        <h3 className={styles.volume}>
+          Объем:
+          <span>{product.weight} мл.</span>
+        </h3>
       </div>
       <div className={styles.imageSide}>
         <img src={product.image.mediaItemUrl} alt={product.name} />

@@ -28,6 +28,7 @@ class MyDocument extends Document {
             as="font"
             crossOrigin=""
           />
+          <link rel="preload" href="../public/fonts/Montserrat-Bold.ttf" as="font" crossOrigin="" />
         </Head>
         <body>
           <Main />
