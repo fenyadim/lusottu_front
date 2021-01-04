@@ -12,23 +12,32 @@ class MyDocument extends Document {
         <Head>
           <link
             rel="preload"
-            href="../public/fonts/Montserrat-Regular.ttf"
+            href="/fonts/Montserrat-Regular.woff"
             as="font"
+            type="font/woff"
+            crossOrigin="anonymous"
+          />
+          <link
+            rel="preload"
+            href="/fonts/Montserrat-Medium.woff"
+            as="font"
+            type="font/woff"
             crossOrigin=""
           />
           <link
             rel="preload"
-            href="../public/fonts/Montserrat-Medium.ttf"
+            href="/fonts/Montserrat-SemiBold.woff"
             as="font"
+            type="font/woff"
             crossOrigin=""
           />
           <link
             rel="preload"
-            href="../public/fonts/Montserrat-SemiBold.ttf"
+            href="/fonts/Montserrat-Bold.woff"
             as="font"
+            type="font/woff"
             crossOrigin=""
           />
-          <link rel="preload" href="../public/fonts/Montserrat-Bold.ttf" as="font" crossOrigin="" />
         </Head>
         <body>
           <Main />
