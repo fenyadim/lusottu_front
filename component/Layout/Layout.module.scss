@@ -1,6 +1,7 @@
 .container {
   height: 100vh;
   padding: 0 80px;
+  position: relative;
   // &::before {
   //   position: absolute;
   //   content: '';
@@ -23,4 +24,10 @@
   //   left: 0;
   //   z-index: -5;
   // }
+}
+
+@media screen and (max-width: 1366px) {
+  .container {
+    padding: 0;
+  }
 }

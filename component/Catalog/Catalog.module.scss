@@ -2,12 +2,13 @@
   display: grid;
   height: 100%;
   grid-template-columns: repeat(auto-fill, 270px);
-  grid-template-rows: repeat(2, 349px);
+  grid-template-rows: repeat(auto-fill, 349px);
   grid-column-gap: 42px;
   grid-row-gap: 55px;
   justify-content: center;
   align-items: center;
-  // margin-bottom: 20px;
+  // overflow-y: scroll;
+
   a {
     display: block;
     height: 349px;
@@ -17,21 +18,24 @@
 
 .pagination {
   position: absolute;
-  left: 50%;
-  transform: translateX(-50%);
-  bottom: 50px;
+  display: flex;
+  justify-content: center;
+  height: 45px;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba($color: #fff, $alpha: 0);
 }
 
 .offer {
   display: grid;
   height: 100%;
-  padding-top: 6%;
-  padding-bottom: 5%;
+  align-content: center;
+  padding: 97px 0 80px 0;
   .catalog {
     align-self: center;
     animation-name: fadeRight;
     animation-duration: 0.5s;
-    // overflow: scroll;
   }
 }
 
@@ -51,5 +55,11 @@
   100% {
     transform: translateX(0);
     opacity: 1;
+  }
+}
+
+@media screen and (max-height: 929px), screen and (max-width: 1677px) {
+  .catalog {
+    overflow-y: scroll;
   }
 }
