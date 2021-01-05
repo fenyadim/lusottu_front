@@ -1,11 +1,13 @@
 import React from 'react';
 import Image from 'next/image';
 
+import { ISingleProduct } from './SingleProductTypes';
+
 import { Loader } from '../..';
 
 import styles from './SingleProduct.module.scss';
 
-export default function SingleProduct({ product, isLoading }) {
+export default function SingleProduct({ product, isLoading }: ISingleProduct) {
   let array = [];
 
   function ClearElemArray() {
@@ -14,6 +16,9 @@ export default function SingleProduct({ product, isLoading }) {
 
   return !isLoading ? (
     <div className={!isLoading ? styles.offer : styles.offerInvisible}>
+            <div className={styles.imageSide}>
+        <Image src={product.image.mediaItemUrl} layout="fill" objectFit="contain" />
+      </div>
       <div className={styles.infoSide}>
         <h2 className={styles.brand}>{product.productTags.nodes[0].name}</h2>
         <h1 className={styles.title}>{product.name}</h1>
@@ -42,9 +47,6 @@ export default function SingleProduct({ product, isLoading }) {
           Объем:
           <span>{product.weight} мл.</span>
         </h3>
-      </div>
-      <div className={styles.imageSide}>
-        <Image src={product.image.mediaItemUrl} layout="fill" objectFit="contain" />
       </div>
     </div>
   ) : (

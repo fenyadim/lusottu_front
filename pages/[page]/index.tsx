@@ -1,14 +1,15 @@
 import React from 'react';
 import { useRouter } from 'next/router';
+import { GetServerSideProps } from 'next';
 
 import { GET_PRODUCTS, GET_TOTAL } from '../../lib/graphql/query';
 
 import { Catalog } from '../../component';
 import { client } from '../../lib/graphql/graph';
 
-export async function getServerSideProps(params) {
+export const getServerSideProps: GetServerSideProps = async (params) => {
   const resTotal = await client.query({ query: GET_TOTAL }).then();
-  const total = resTotal.data.products.pageInfo.offsetPagination.total;
+  const total: number = resTotal.data.products.pageInfo.offsetPagination.total;
   const variables = {
     first: total,
     gender: params.query.gender,
@@ -16,20 +17,38 @@ export async function getServerSideProps(params) {
   const res = await client.query({ query: GET_PRODUCTS, variables }).then();
   const products = res.data.products;
   const { nodes: items } = products;
-  return { props: { items, total } };
+  const quantityPages = Math.ceil(total / 10);
+  return { props: { items, total, quantityPages } };
+};
+
+interface IGender {
+  items: Object;
+  isLoading: boolean;
+  quantityPages: number;
 }
 
-function Gender({ items, total, isLoading }) {
+enum ValuesGender {
+  'female',
+  'male',
+  undefined,
+}
+
+function Gender({ items, isLoading, quantityPages }: IGender) {
   // Подсчет количества страниц
-  const quantityPages = Math.ceil(total / 10);
   const router = useRouter();
-  let { page, gender } = router.query;
-  page = Number(page);
+  const { page: currentPage } = router.query;
+  const gender: string | string[] | any = router.query.gender;
+  const page: number = Number(currentPage);
   React.useEffect(() => {
     if (page > quantityPages || isNaN(page)) {
       router.push('/');
     }
-  }, []);
+    if (gender in ValuesGender) {
+      return;
+    } else {
+      router.push('/');
+    }
+  }, [page, gender]);
 
   return (
     <>

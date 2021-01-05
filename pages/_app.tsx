@@ -1,5 +1,6 @@
 import React from 'react';
 import { ApolloProvider } from '@apollo/client';
+
 import { Layout } from '../component';
 import { client } from '../lib/graphql/graph';
 import { Router, useRouter } from 'next/router';

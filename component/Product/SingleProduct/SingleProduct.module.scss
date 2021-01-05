@@ -4,11 +4,11 @@
   align-items: center;
   height: 100%;
   .infoSide {
-    animation-name: fadeLeft;
+    animation-name: fadeRight;
     animation-duration: 0.5s;
   }
   .imageSide {
-    animation-name: fadeRight;
+    animation-name: fadeLeft;
     animation-duration: 0.5s;
   }
 }
@@ -64,8 +64,6 @@
     font-size: 1.125rem; // 18px
     margin-bottom: 4px;
   }
-  .attributeDesc {
-  }
   .price,
   .volume {
     font-weight: 700;
@@ -86,7 +84,6 @@
   overflow: hidden;
   position: relative;
   display: flex;
-  justify-content: center;
   justify-self: center;
   img {
     height: 100%;
@@ -112,5 +109,28 @@
   100% {
     opacity: 1;
     transform: translateX(0);
+  }
+}
+
+@media screen and (max-width: 1150px) {
+  .offer {
+    grid-template-columns: 1fr;
+    grid-template-rows: 1fr 2fr;
+    grid-row-gap: 30px;
+    padding-top: 97px;
+    overflow-y: scroll;
+    .infoSide {
+      justify-self: center;
+    }
+    .imageSide {
+      width: 100%;
+      align-self: flex-end;
+    }
+  }
+}
+
+@media screen and (max-width: 600px) {
+  .infoSide {
+    min-width: 100%;
   }
 }

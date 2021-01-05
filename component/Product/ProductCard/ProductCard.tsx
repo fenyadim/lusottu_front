@@ -3,7 +3,14 @@ import Image from 'next/image';
 
 import styles from './ProductCard.module.scss';
 
-export default function ProductCard({ title, price, img, gender }) {
+interface IProductCardProps {
+  title: string
+  price: number
+  img: string
+  gender: string | string[]
+}
+
+export default function ProductCard({ title, price, img, gender }: IProductCardProps) {
   return (
     <div
       className={`${styles.productCard} ${

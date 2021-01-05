@@ -1,25 +1,17 @@
 import React from 'react';
 import Link from 'next/link';
 
+import { ICatalog, IItems } from './CatalogTypes';
+
 import { Loader, Pagination, ProductCard } from '../index';
 
 import styles from './Catalog.module.scss';
 
-export default function Catalog({ genderSort, page, items, isLoading, quantityPages }) {
-  const [itemsOnScreen, setItemsOnScreen] = React.useState(10);
-  const array = [];
-  // React.useMemo(() => {
-  //   if (screenWidht < 1054 && screenWidht >= 742) {
-  //     setItemsOnScreen(6);
-  //   } else if (screenWidht < 1366 && screenWidht >= 1054) {
-  //     setItemsOnScreen(6);
-  //   } else if (screenWidht <= 1677 && screenWidht >= 1366) {
-  //     setItemsOnScreen(8);
-  //   } else if (screenWidht > 1677) {
-  //     setItemsOnScreen(10);
-  //   }
-  // }, [screenWidht]);
-  let pageNum;
+export default function Catalog({ genderSort, page, items, isLoading, quantityPages }: ICatalog) {
+  const itemsOnScreen: number = 10;
+  const array: Array<IItems> = [];
+
+  let pageNum: number;
   if (page === undefined) {
     pageNum = 0;
   } else {
@@ -34,9 +26,16 @@ export default function Catalog({ genderSort, page, items, isLoading, quantityPa
   return (
     <main className={!isLoading ? styles.offer : styles.offerInvisible}>
       {!isLoading ? (
-        <div className={styles.catalog}>
+        <div
+          className={`${styles.catalog} ${
+            genderSort === 'female'
+              ? 'femaleTheme'
+              : genderSort === 'male'
+              ? 'maleTheme'
+              : 'allTheme'
+          }`}>
           {items &&
-            array.map((obj, index) =>
+            array.map((obj, index: number) =>
               obj ? (
                 <React.Fragment key={index}>
                   <Link href="/product/[slug]" as={`/product/${obj.slug}/`}>

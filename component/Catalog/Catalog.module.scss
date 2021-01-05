@@ -61,5 +61,20 @@
 @media screen and (max-height: 929px), screen and (max-width: 1677px) {
   .catalog {
     overflow-y: scroll;
+    &::-webkit-scrollbar-track {
+      border-radius: 4px;
+    }
+    &::-webkit-scrollbar {
+      width: 6px;
+    }
+    &::-webkit-scrollbar-thumb {
+      border-radius: 4px;
+      background-color: var(--second-color);
+      transition: background-color 0.3s ease;
+    }
+    &:hover::-webkit-scrollbar-thumb {
+      background-color: var(--accent-color);
+      transition: background-color 0.3s ease;
+    }
   }
 }

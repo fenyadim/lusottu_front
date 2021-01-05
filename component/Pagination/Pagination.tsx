@@ -4,7 +4,13 @@ import { useRouter } from 'next/router';
 
 import styles from './Pagination.module.scss';
 
-export default function Pagination({ quantityPages, gender, currentPage }) {
+interface IPagination {
+  quantityPages: number
+  gender: string | string[]
+  currentPage: number
+}
+
+export default function Pagination({ quantityPages, gender, currentPage }: IPagination) {
   const router = useRouter();
   const { gender: isGender } = router.query;
 
