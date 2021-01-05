@@ -1,7 +1,15 @@
 .container {
-  height: 100vh;
-  padding: 0 80px;
-  position: relative;
+  // height: 100vh;
+  // width: 100%;
+  // padding: 0 80px;
+  // position: relative;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 80px;
+  right: 80px;
+
+  // overflow: hidden;
   // &::before {
   //   position: absolute;
   //   content: '';
@@ -28,6 +36,7 @@
 
 @media screen and (max-width: 1150px) {
   .container {
-    padding: 0;
+    left: 0;
+    right: 0;
   }
 }
