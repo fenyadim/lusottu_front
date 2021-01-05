@@ -31,7 +31,7 @@
   max-width: 750px;
   box-shadow: 10px 10px 0px var(--accent-grey);
   outline: 2px solid var(--accent-grey);
-  justify-self: end;
+  justify-self: start;
   & > * {
     margin-bottom: 10px;
     &:last-child {
