@@ -63,6 +63,7 @@
     &::-webkit-scrollbar-track {
       border-radius: 4px;
     }
+    &::-webkit-overflow-scrolling: touch;
     &::-webkit-scrollbar {
       width: 6px;
     }
