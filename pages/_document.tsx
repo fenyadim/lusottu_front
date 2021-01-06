@@ -10,28 +10,28 @@ class MyDocument extends Document {
             href="/fonts/Montserrat-Regular.woff"
             as="font"
             type="font/woff"
-            crossOrigin="anonymous"
+            crossOrigin=""
           />
           <link
             rel="preload"
             href="/fonts/Montserrat-Medium.woff"
             as="font"
             type="font/woff"
-            crossOrigin="anonymous"
+            crossOrigin=""
           />
           <link
             rel="preload"
             href="/fonts/Montserrat-SemiBold.woff"
             as="font"
             type="font/woff"
-            crossOrigin="anonymous"
+            crossOrigin=""
           />
           <link
             rel="preload"
             href="/fonts/Montserrat-Bold.woff"
             as="font"
             type="font/woff"
-            crossOrigin="anonymous"
+            crossOrigin=""
           />
         </Head>
         <body>
