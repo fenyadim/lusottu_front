@@ -21,13 +21,11 @@ interface IProductProps {
   }
 }
 
-interface IAttributes {
+
+
+export interface IAttributes {
   name: string
   terms: {
-    nodes: Array<ITerms>
+    nodes: Array<{name:string}>
   }
-}
-
-interface ITerms {
-  name: string
 }

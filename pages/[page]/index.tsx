@@ -8,17 +8,17 @@ import { Catalog } from '../../component';
 import { client } from '../../lib/graphql/graph';
 
 export const getServerSideProps: GetServerSideProps = async (params) => {
-  const resTotal = await client.query({ query: GET_TOTAL }).then();
-  const total: number = resTotal.data.products.pageInfo.offsetPagination.total;
+  const resTotal = await client.query({ query: GET_TOTAL });
   const variables = {
-    first: total,
+    first: resTotal.data.products.pageInfo.offsetPagination.total,
     gender: params.query.gender,
   };
-  const res = await client.query({ query: GET_PRODUCTS, variables }).then();
+  const res = await client.query({ query: GET_PRODUCTS, variables });
   const products = res.data.products;
+  const total = products.pageInfo.offsetPagination.total;
   const { nodes: items } = products;
-  const quantityPages = Math.ceil(total / 10);
-  return { props: { items, total, quantityPages } };
+  const quantityPages = Math.ceil(total / 12); // Подсчет количества страниц
+  return { props: { items, quantityPages } };
 };
 
 interface IGender {
@@ -34,7 +34,6 @@ enum ValuesGender {
 }
 
 function Gender({ items, isLoading, quantityPages }: IGender) {
-  // Подсчет количества страниц
   const router = useRouter();
   const { page: currentPage } = router.query;
   const gender: string | string[] | any = router.query.gender;

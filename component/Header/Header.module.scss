@@ -8,20 +8,38 @@
   background-color: #fff;
   height: 97px;
   z-index: 3;
-}
-
-.logo {
-  justify-self: center;
-  img {
-    margin: 0 auto;
+  .logo {
+    justify-self: center;
     width: 188px;
     height: 94px;
+    display: block;
+    position: relative;
   }
 }
 
 .menuActive,
 .menuDisable {
   display: none;
+  position: absolute;
+  top: 0;
+  bottom: 10px;
+  left: 0;
+  z-index: 4;
+  width: 500px;
+  transition: all 0.2s ease-out;
+  background-color: #fff;
+  .navigation {
+    position: absolute;
+    top: 50%;
+    left: 50px;
+    transform: translateY(-50%);
+    display: flex;
+    flex-direction: column;
+    a {
+      font-size: 1.5625rem;
+      margin-bottom: 15px;
+    }
+  }
 }
 
 .menuBtn {
@@ -103,17 +121,15 @@
     left: 0;
     right: 0;
     grid-template-columns: 1fr;
-  }
-  .logo {
-    img {
+    .logo {
       width: 150px;
       height: 75px;
     }
   }
+
   .menuDisable {
     transform: translateX(-100%);
   }
-
   .menuActive {
     transform: translateX(0);
     box-shadow: 10px 10px 0px var(--accent-color);
@@ -123,26 +139,6 @@
   .menuActive,
   .menuDisable {
     display: block;
-    position: absolute;
-    top: 0;
-    bottom: 10px;
-    left: 0;
-    z-index: 4;
-    width: 500px;
-    transition: all 0.2s ease-out;
-    background-color: #fff;
-    .navigation {
-      position: absolute;
-      top: 50%;
-      left: 50px;
-      transform: translateY(-50%);
-      display: flex;
-      flex-direction: column;
-      a {
-        font-size: 1.5625rem;
-        margin-bottom: 15px;
-      }
-    }
   }
   .menuBtn {
     display: block;

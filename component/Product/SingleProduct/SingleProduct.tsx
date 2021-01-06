@@ -1,44 +1,46 @@
 import React from 'react';
 import Image from 'next/image';
 
-import { ISingleProduct } from './SingleProductTypes';
+import { IAttributes, ISingleProduct } from './SingleProductTypes';
 
 import { Loader } from '../..';
 
 import styles from './SingleProduct.module.scss';
 
 export default function SingleProduct({ product, isLoading }: ISingleProduct) {
-  let array = [];
+  function attrItems(arrayItems: Array<{ name: string }>) {
+    const array = [];
+    arrayItems.map((obj) => {
+      array.push(obj.name);
+    });
+    return array.join(', ');
+  }
 
-  function ClearElemArray() {
-    array = [];
+  function Attributes({ item }: { item: IAttributes }) {
+    return (
+      <div className={styles.attribute}>
+        <h3 className={styles.attributeTitle}>{`${item.name}: `}</h3>
+        <p className={styles.attributeDesc}>{attrItems(item.terms.nodes)}</p>
+      </div>
+    );
   }
 
   return !isLoading ? (
     <div className={!isLoading ? styles.offer : styles.offerInvisible}>
-            <div className={styles.imageSide}>
+      <div className={styles.imageSide}>
         <Image src={product.image.mediaItemUrl} layout="fill" objectFit="contain" />
       </div>
       <div className={styles.infoSide}>
-        <h2 className={styles.brand}>{product.productTags.nodes[0].name}</h2>
         <h1 className={styles.title}>{product.name}</h1>
+        <h3 className={styles.brand}>
+          Бренд: <span>{product.productTags.nodes[0].name}</span>
+        </h3>
         <p className={styles.desc}>
           <span>Описание: </span>
           {product.description}
         </p>
         {product.attributes &&
-          product.attributes.nodes.map((item, index) => (
-            <React.Fragment key={index}>
-              <div className={styles.attribute}>
-                <h3 className={styles.attributeTitle}>{`${item.name}: `}</h3>
-                {item.terms.nodes.map((obj) => {
-                  array.push(obj.name);
-                })}
-                <p className={styles.attributeDesc}>{array.join(', ')}</p>
-                {ClearElemArray()}
-              </div>
-            </React.Fragment>
-          ))}
+          product.attributes.nodes.map((item, index) => <Attributes key={index} item={item} />)}
         <h3 className={styles.price}>
           Цена:
           <span>{product.price} руб.</span>

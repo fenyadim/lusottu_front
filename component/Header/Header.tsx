@@ -1,9 +1,9 @@
-// import Image from 'next/image';
 import React from 'react';
 import Link from 'next/link';
+import Image from 'next/image';
+import { useRouter } from 'next/router';
 
 import styles from './Header.module.scss';
-import { useRouter } from 'next/router';
 
 export default function Header() {
   const router = useRouter();
@@ -13,9 +13,7 @@ export default function Header() {
 
   return (
     <>
-      <div
-        className={`${!menuHandler ? styles.menuDisable : styles.menuActive} 
-      ${gender === 'female' ? 'femaleTheme' : gender === 'male' ? 'maleTheme' : 'allTheme'}`}>
+      <div className={!menuHandler ? styles.menuDisable : styles.menuActive}>
         {Navigation(gender)}
       </div>
       <button
@@ -25,9 +23,9 @@ export default function Header() {
       </button>
       <header className={styles.header}>
         <div className={styles.noMenu}>{Navigation(gender)}</div>
-        <Link href="/">
+        <Link href="/1">
           <a className={styles.logo}>
-            <img src="/logo.svg" alt="Logo" />
+            <Image src="/logo.svg" layout="fill" />
           </a>
         </Link>
       </header>

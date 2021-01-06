@@ -5,28 +5,6 @@
   left: 80px;
   right: 80px;
   overflow-y: hidden;
-  // &::before {
-  //   position: absolute;
-  //   content: '';
-  //   display: block;
-  //   background-image: url('../../public/right_patterns.svg');
-  //   width: 350px;
-  //   height: 355px;
-  //   top: 0;
-  //   right: 0;
-  //   z-index: -5;
-  // }
-  // &::after {
-  //   position: absolute;
-  //   content: '';
-  //   display: block;
-  //   background-image: url('../../public/left_patterns.svg');
-  //   width: 467px;
-  //   height: 490px;
-  //   bottom: 0;
-  //   left: 0;
-  //   z-index: -5;
-  // }
 }
 
 @media screen and (max-width: 1150px) {
