@@ -17,21 +17,21 @@ class MyDocument extends Document {
             href="/fonts/Montserrat-Medium.woff"
             as="font"
             type="font/woff"
-            crossOrigin=""
+            crossOrigin="anonymous"
           />
           <link
             rel="preload"
             href="/fonts/Montserrat-SemiBold.woff"
             as="font"
             type="font/woff"
-            crossOrigin=""
+            crossOrigin="anonymous"
           />
           <link
             rel="preload"
             href="/fonts/Montserrat-Bold.woff"
             as="font"
             type="font/woff"
-            crossOrigin=""
+            crossOrigin="anonymous"
           />
         </Head>
         <body>

@@ -3,9 +3,9 @@ import { useRouter } from 'next/router';
 import { GetServerSideProps } from 'next';
 
 import { GET_PRODUCTS, GET_TOTAL } from '../../lib/graphql/query';
+import { client } from '../../lib/graphql/graph';
 
 import { Catalog } from '../../component';
-import { client } from '../../lib/graphql/graph';
 
 export const getServerSideProps: GetServerSideProps = async (params) => {
   const resTotal = await client.query({ query: GET_TOTAL });

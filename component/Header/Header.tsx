@@ -8,19 +8,31 @@ import styles from './Header.module.scss';
 export default function Header() {
   const router = useRouter();
   const { gender } = router.query;
-
   const [menuHandler, setMenuHandler] = React.useState<boolean>(false);
+
+  React.useEffect(() => {
+    const NavLink = document.getElementsByClassName(styles.link);
+    document.addEventListener('click', (e) => {
+      for (let i = 0; i < 3; i++) {
+        if (NavLink[i] === e.target) {
+          setMenuHandler(false);
+        }
+      }
+    });
+  }, []);
 
   return (
     <>
-      <div className={!menuHandler ? styles.menuDisable : styles.menuActive}>
-        {Navigation(gender)}
+      <div>
+        <div className={!menuHandler ? styles.menuDisable : styles.menuActive}>
+          {Navigation(gender)}
+        </div>
+        <button
+          className={`${styles.menuBtn} ${!menuHandler ? '' : styles.activeBtn}`}
+          onClick={() => setMenuHandler(!menuHandler)}>
+          <span />
+        </button>
       </div>
-      <button
-        className={`${styles.menuBtn} ${!menuHandler ? '' : styles.activeBtn}`}
-        onClick={() => setMenuHandler(!menuHandler)}>
-        <span />
-      </button>
       <header className={styles.header}>
         <div className={styles.noMenu}>{Navigation(gender)}</div>
         <Link href="/1">
