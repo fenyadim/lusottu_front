@@ -9,7 +9,7 @@ export default function Layout({ children }) {
   const router = useRouter();
   const { gender, slug }: { gender?: string; slug?: string } = router.query;
 
-  function formattingSlug(slug: string) {
+  function formattingSlug(slug: string): string {
     return (
       slug &&
       slug.replace(/-/g, ' ').replace(/(^|\s)\S/g, (a) => {
@@ -17,7 +17,7 @@ export default function Layout({ children }) {
       })
     );
   }
-  function headTitle(gender: string, slug: string) {
+  function headTitle(gender: string, slug: string): string {
     if (gender === 'male') {
       return 'Мужские духи - Lusottu';
     } else if (gender === 'female') {

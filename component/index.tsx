@@ -1,16 +1,18 @@
+import dynamic from 'next/dynamic';
+
 //Layout
-export { default as Header } from './Header/Header';
-export { default as Layout } from './Layout/Layout';
+export const Header = dynamic(() => import('./Header/Header'));
+export const Layout = dynamic(() => import('./Layout/Layout'));
 
 //Catalog
-export { default as Catalog } from './Catalog/Catalog';
+export const Catalog = dynamic(() => import('./Catalog/Catalog'));
 
 //Product
-export { default as ProductCard } from './Product/ProductCard/ProductCard';
-export { default as SingleProduct } from './Product/SingleProduct/SingleProduct';
+export const ProductCard = dynamic(() => import('./Product/ProductCard/ProductCard'));
+export const SingleProduct = dynamic(() => import('./Product/SingleProduct/SingleProduct'));
 
 //Pagination
-export { default as Pagination } from './Pagination/Pagination';
+export const Pagination = dynamic(() => import('./Pagination/Pagination'));
 
 //Loader
-export { default as Loader } from './Loader/Loader';
+export const Loader = dynamic(() => import('./Loader/Loader'));

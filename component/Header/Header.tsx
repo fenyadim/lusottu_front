@@ -25,7 +25,7 @@ export default function Header() {
         <div className={styles.noMenu}>{Navigation(gender)}</div>
         <Link href="/1">
           <a className={styles.logo}>
-            <Image src="/logo.svg" layout="fill" />
+            <Image src="/logo.svg" layout="fill" alt="Lusottu" />
           </a>
         </Link>
       </header>
