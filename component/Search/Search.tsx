@@ -13,7 +13,6 @@ export default function Search() {
     const [toggleContainer, setToggleContainer] = React.useState<boolean>(false);
     const {data, loading} = useQuery(SEARCH_ITEMS, {variables: {search: value}});
     const products: Array<ISearchProduct> = data?.products.nodes;
-    console.log(value.length === 0)
     return (
         <div className={styles.searchOffer}>
             <div className={styles.inputSearch}>
