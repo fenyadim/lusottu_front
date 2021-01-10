@@ -28,7 +28,7 @@ export default function Header() {
                 <div className={!menuHandler ? styles.menuDisable : styles.menuActive}>
                     {Navigation(gender)}
                     <div className={styles.searchBlock}>
-                        <Search/>
+                        {/*<Search/>*/}
                     </div>
                 </div>
                 <button
@@ -44,7 +44,7 @@ export default function Header() {
                         <Image src="/logo.svg" layout="fill" alt="Lusottu"/>
                     </a>
                 </Link>
-                <div className={styles.noMenu} style={{justifySelf: 'right'}}><Search/></div>
+                {/*<div className={styles.noMenu} style={{justifySelf: 'right'}}><Search/></div>*/}
             </header>
         </>
     );
