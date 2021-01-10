@@ -1,24 +1,29 @@
-import React, {ChangeEvent} from "react";
-import {useQuery} from "@apollo/client";
+import React, { ChangeEvent } from "react";
+import { useQuery } from "@apollo/client";
 import Image from "next/image";
 import Link from "next/link";
 
-import {Loader} from "../index";
-import {SEARCH_ITEMS} from "../../lib/graphql/query";
+import { Loader } from "../index";
+import { SEARCH_ITEMS } from "../../lib/graphql/query";
 
 import styles from './Search.module.scss';
 
 export default function Search() {
-    const [value, setValue] = React.useState<string>();
+    const [value, setValue] = React.useState<string>('');
     const [toggleContainer, setToggleContainer] = React.useState<boolean>(false);
     const {data, loading} = useQuery(SEARCH_ITEMS, {variables: {search: value}, ssr: true});
     const products: Array<ISearchProduct> = data?.products.nodes;
+
+    React.useEffect(() => {
+        setValue('');
+    }, [])
+
     return (
         <div className={styles.searchOffer}>
             <div className={styles.inputSearch}>
                 <input type="search" value={value} placeholder='Поиск'
                        onChange={(e: ChangeEvent<HTMLInputElement>) => {
-                           setValue(e.target.value);
+                           e && setValue(e.target.value);
                        }}
                        onFocus={() => {
                            setToggleContainer(true);
@@ -28,7 +33,7 @@ export default function Search() {
                        }}
                 />
                 <button
-                    className={`${styles.clear} ${value !== undefined && value.length !== 0 ? styles.showClear : ''}`}
+                    className={`${styles.clear} ${value && value.length !== 0 ? styles.showClear : ''}`}
                     onClick={() => {
                         setValue('')
                     }}>
