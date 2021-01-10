@@ -10890,8 +10890,8 @@ enum TaxClassEnum {
     INHERIT_CART
     "Standard Tax rate"
     STANDARD
-    ____________________________
-    __________________________________
+    ___________________________
+    _________________________________
 }
 
 "Field to order the connection by"

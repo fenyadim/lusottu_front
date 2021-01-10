@@ -67,3 +67,20 @@ export const GET_SINGLE_PRODUCT = gql`
     }
   }
 `;
+
+export const SEARCH_ITEMS = gql`
+  query($search: String, $first: Int) {
+    products(where: { stockStatus: IN_STOCK, search: $search }, first: $first) {
+      nodes {
+        ... on SimpleProduct {
+          name
+          slug
+          price(format: RAW)
+          image {
+            mediaItemUrl
+          }
+        }
+      }
+    }
+  }
+`;

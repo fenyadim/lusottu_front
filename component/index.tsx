@@ -16,3 +16,6 @@ export const Pagination = dynamic(() => import('./Pagination/Pagination'));
 
 //Loader
 export const Loader = dynamic(() => import('./Loader/Loader'));
+
+//Search
+export const Search = dynamic(() => import('./Search/Search'));

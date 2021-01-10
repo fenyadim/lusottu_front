@@ -6,11 +6,10 @@
   background-color: #fff;
   height: 100%;
   width: 100%;
-
   transition: all 0.2s ease;
   &:hover {
-    box-shadow: 10px 10px 0px var(--accent-color);
-    outline-color: var(--accent-color);
+    box-shadow: 10px 10px 0 var(--accent-color);
+    border-color: var(--accent-color);
   }
 }
 
