@@ -27,7 +27,7 @@ export default function Search() {
                            setToggleContainer(false);
                        }}
                 />
-                <button className={`${styles.clear} ${value.length !== 0 ? styles.showClear : ''}`} onClick={() => {
+                <button className={`${styles.clear} ${value && value.length !== 0 ? styles.showClear : ''}`} onClick={() => {
                     setValue('')
                 }}>
                     <span/>
