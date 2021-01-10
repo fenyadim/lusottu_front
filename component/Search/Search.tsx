@@ -9,9 +9,9 @@ import {SEARCH_ITEMS} from "../../lib/graphql/query";
 import styles from './Search.module.scss';
 
 export default function Search() {
-    const [value, setValue] = React.useState<string>('');
+    const [value, setValue] = React.useState<string>();
     const [toggleContainer, setToggleContainer] = React.useState<boolean>(false);
-    const {data, loading} = useQuery(SEARCH_ITEMS, {variables: {search: value}});
+    const {data, loading} = useQuery(SEARCH_ITEMS, {variables: {search: value}, ssr: true});
     const products: Array<ISearchProduct> = data?.products.nodes;
     return (
         <div className={styles.searchOffer}>
@@ -27,9 +27,11 @@ export default function Search() {
                            setToggleContainer(false);
                        }}
                 />
-                <button className={`${styles.clear} ${value !== undefined && value.length !== 0 ? styles.showClear : ''}`} onClick={() => {
-                    setValue('')
-                }}>
+                <button
+                    className={`${styles.clear} ${value !== undefined && value.length !== 0 ? styles.showClear : ''}`}
+                    onClick={() => {
+                        setValue('')
+                    }}>
                     <span/>
                 </button>
             </div>
