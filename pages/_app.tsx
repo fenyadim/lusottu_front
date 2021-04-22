@@ -8,7 +8,7 @@ import { client } from '../lib/graphql/graph';
 import '../styles/style.scss';
 import { AppProps } from 'next/dist/next-server/lib/router/router';
 
-function MyApp({ Component, pageProps }: AppProps) {
+const MyApp: React.FC<AppProps> = ({ Component, pageProps }) => {
   const [isLoading, setIsLoading] = React.useState<boolean>(false);
   const router = useRouter();
   const { asPath } = router;
@@ -28,6 +28,6 @@ function MyApp({ Component, pageProps }: AppProps) {
       </Layout>
     </ApolloProvider>
   );
-}
+};
 
 export default MyApp;

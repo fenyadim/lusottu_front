@@ -4,7 +4,7 @@
   "extensions": {
     "endpoints": {
       "Default GraphQL Endpoint": {
-        "url": "http://a0490689.xsph.ru/graphql",
+        "url": "https://strapi.lusottu.live/graphql",
         "headers": {
           "user-agent": "JS GraphQL"
         },

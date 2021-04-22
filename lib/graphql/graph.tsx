@@ -1,7 +1,7 @@
 import { ApolloClient, InMemoryCache } from '@apollo/client';
 
 export const client = new ApolloClient({
-  uri: 'http://a0490689.xsph.ru/graphql',
+  uri: 'https://strapi.lusottu.live/graphql',
   cache: new InMemoryCache(),
   ssrMode: true,
 });

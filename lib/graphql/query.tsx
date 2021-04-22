@@ -1,34 +1,23 @@
 import { gql } from '@apollo/client';
 
 export const GET_PRODUCTS = gql`
-  query($first: Int, $gender: String) {
-    products(where: { stockStatus: IN_STOCK, category: $gender }, first: $first) {
-      nodes {
-        ... on SimpleProduct {
-          name
-          slug
-          price(format: RAW)
-          image {
-            mediaItemUrl
-          }
-        }
+  query($gender: [ENUM_PRODUCTS_GENDER]) {
+    products(where: { gender: $gender }) {
+      image {
+        url
       }
-      pageInfo {
-        offsetPagination {
-          total
-        }
-      }
+      slug
+      name
+      price
     }
   }
 `;
 
 export const GET_TOTAL = gql`
   query {
-    products {
-      pageInfo {
-        offsetPagination {
-          total
-        }
+    productsConnection {
+      aggregate {
+        totalCount
       }
     }
   }

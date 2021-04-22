@@ -3,12 +3,12 @@ export interface IItems {
   name: string
   price: number
   image:  {
-    mediaItemUrl: string
+    url: string
   }
 }
 
 export interface ICatalog {
-  items: object
+  items: [IItems]
   isLoading: boolean
   genderSort?: string |  string[]
   page?: number
