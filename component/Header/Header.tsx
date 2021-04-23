@@ -20,6 +20,15 @@ export default function Header() {
         }
       }
     });
+    () => {
+      document.removeEventListener('click', (e) => {
+        for (let i = 0; i < 3; i++) {
+          if (NavLink[i] === e.target) {
+            setMenuHandler(false);
+          }
+        }
+      });
+    };
   }, []);
   //TODO: Поправить здесь
   return (
@@ -48,7 +57,7 @@ export default function Header() {
   );
 }
 
-function Navigation(gender: string | string[]) {
+const Navigation = (gender: string | string[]) => {
   return (
     <nav
       className={`${styles.navigation} ${
@@ -65,4 +74,4 @@ function Navigation(gender: string | string[]) {
       </Link>
     </nav>
   );
-}
+};

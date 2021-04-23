@@ -4,7 +4,7 @@ import { GET_SINGLE_PRODUCT } from '../../lib/graphql/query';
 import { client } from '../../lib/graphql/graph';
 
 import { Error, SingleProduct } from '../../component';
-import { ISingleProduct } from '../../component/Product/SingleProduct/SingleProductTypes';
+import { ISingleProduct } from '../../lib/types/types';
 
 export const getServerSideProps: GetServerSideProps = async (params: GetServerSidePropsContext) => {
   const { slug } = params.query;
