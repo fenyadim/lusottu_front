@@ -4,11 +4,7 @@ import { useRouter } from 'next/router';
 
 import styles from './Pagination.module.scss';
 
-interface IPagination {
-  quantityPages: number;
-}
-
-const Pagination: React.FC<IPagination> = ({ quantityPages }) => {
+const Pagination: React.FC<{quantityPages: number}> = ({ quantityPages }) => {
   const router = useRouter();
   const { page: currentPage, gender } = router.query;
   const paginator: number[] = [];

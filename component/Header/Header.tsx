@@ -13,22 +13,17 @@ export default function Header() {
 
   React.useEffect(() => {
     const NavLink = document.getElementsByClassName(styles.link);
-    document.addEventListener('click', (e) => {
+    let btnMenuListener = (e) => {
       for (let i = 0; i < 3; i++) {
         if (NavLink[i] === e.target) {
           setMenuHandler(false);
         }
       }
-    });
-    () => {
-      document.removeEventListener('click', (e) => {
-        for (let i = 0; i < 3; i++) {
-          if (NavLink[i] === e.target) {
-            setMenuHandler(false);
-          }
-        }
-      });
     };
+    document.addEventListener('click', btnMenuListener);
+    return () => {
+      document.removeEventListener('click', btnMenuListener);
+    }
   }, []);
   //TODO: Поправить здесь
   return (

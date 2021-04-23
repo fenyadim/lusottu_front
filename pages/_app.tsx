@@ -1,12 +1,12 @@
 import React from 'react';
 import { ApolloProvider } from '@apollo/client';
 import { Router, useRouter } from 'next/router';
+import { AppProps } from 'next/dist/next-server/lib/router/router';
 
 import { Layout } from '../component';
 import { client } from '../lib/graphql/graph';
 
 import '../styles/style.scss';
-import { AppProps } from 'next/dist/next-server/lib/router/router';
 
 const MyApp: React.FC<AppProps> = ({ Component, pageProps }) => {
   const [isLoading, setIsLoading] = React.useState<boolean>(false);

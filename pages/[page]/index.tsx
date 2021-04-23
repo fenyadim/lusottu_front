@@ -4,7 +4,7 @@ import { GetServerSideProps } from 'next';
 import { GET_PRODUCTS, GET_TOTAL } from '../../lib/graphql/query';
 import { client } from '../../lib/graphql/graph';
 
-import { Catalog } from '../../component';
+import { Catalog, Error } from '../../component';
 import { IItems } from '../../lib/types/types';
 
 export const getServerSideProps: GetServerSideProps = async (params) => {
@@ -37,11 +37,11 @@ interface IPage {
 }
 
 const Page: React.FC<IPage> = ({ items, quantityPages, isLoading }) => {
-  return (
+  return items[0] !== undefined ? (
     <>
       <Catalog items={items} quantityPages={quantityPages} isLoading={isLoading} />
     </>
-  );
+  ) : <Error />;
 };
 
 export default Page;

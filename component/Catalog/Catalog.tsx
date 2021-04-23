@@ -5,6 +5,7 @@ import { IItems } from '../../lib/types/types';
 import { Loader, Pagination, ProductCard } from '../index';
 
 import styles from './Catalog.module.scss';
+
 interface ICatalog {
   items: [IItems];
   isLoading: boolean;
@@ -21,7 +22,7 @@ const Catalog: React.FC<ICatalog> = ({ items, isLoading, quantityPages }) => {
               obj ? (
                 <ProductCard
                   key={`${obj.slug}_${index}`}
-                  title={obj.name}
+                  name={obj.name}
                   price={obj.price}
                   img={obj.image.url}
                   slug={obj.slug}

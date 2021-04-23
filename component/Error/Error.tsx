@@ -5,7 +5,7 @@ import styles from './Error.module.scss';
 const Error: React.FC = () => {
   return (
     <div className={styles.errorContainer}>
-      <h3>Что-то пошло не так 😞</h3>
+      <h3>Ничего не найдено... 😞</h3>
     </div>
   );
 };

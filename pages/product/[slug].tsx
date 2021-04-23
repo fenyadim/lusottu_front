@@ -1,3 +1,4 @@
+import React from "react";
 import { GetServerSideProps, GetServerSidePropsContext } from 'next';
 
 import { GET_SINGLE_PRODUCT } from '../../lib/graphql/query';
