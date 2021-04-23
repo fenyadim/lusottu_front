@@ -5,6 +5,7 @@ import { GET_PRODUCTS, GET_TOTAL } from '../../lib/graphql/query';
 import { client } from '../../lib/graphql/graph';
 
 import { Catalog } from '../../component';
+import { IItems } from '../../lib/types/types';
 
 export const getServerSideProps: GetServerSideProps = async (params) => {
   const totalCount = await (await client.query({ query: GET_TOTAL })).data.productsConnection
@@ -18,40 +19,24 @@ export const getServerSideProps: GetServerSideProps = async (params) => {
   } else {
     gender = ['unisex', 'female'];
   }
-  const res = await client.query({ query: GET_PRODUCTS, variables: { gender } });
+  const quanityItemsOnPage = 12;
+  const quantityPages = Math.ceil(totalCount / quanityItemsOnPage); // Подсчет количества страниц
+  const currentPage = Number(params.query.page) * 12 - 12;
+  const res = await client.query({
+    query: GET_PRODUCTS,
+    variables: { gender, limit: quanityItemsOnPage, start: currentPage },
+  });
   const products = res.data.products;
-  const quantityPages = Math.ceil(totalCount / 12); // Подсчет количества страниц
   return { props: { items: products, quantityPages } };
 };
 
 interface IPage {
-  items: any;
+  items: [IItems];
   isLoading: boolean;
   quantityPages: number;
 }
 
-enum ValuesGender {
-  'female',
-  'male',
-  undefined,
-}
-
 const Page: React.FC<IPage> = ({ items, quantityPages, isLoading }) => {
-  // const router = useRouter();
-  // const { page: currentPage } = router.query;
-  // const gender: string | string[] | any = router.query.gender;
-  // const page: number = Number(currentPage);
-  // React.useEffect(() => {
-  //   if (page > quantityPages || isNaN(page)) {
-  //     router.push('/');
-  //   }
-  //   if (gender in ValuesGender) {
-  //     return;
-  //   } else {
-  //     router.push('/');
-  //   }
-  // }, [page, gender]);
-
   return (
     <>
       <Catalog items={items} quantityPages={quantityPages} isLoading={isLoading} />

@@ -1,7 +1,7 @@
 import React from 'react';
 import Image from 'next/image';
 
-import { IAttributes, ISingleProduct } from './SingleProductTypes';
+import { ISingleProduct } from '../../../lib/types/types';
 
 import { Loader } from '../..';
 

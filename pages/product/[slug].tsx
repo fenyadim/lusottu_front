@@ -10,7 +10,6 @@ export const getServerSideProps: GetServerSideProps = async (params: GetServerSi
   const { slug } = params.query;
   const res = await client.query({ query: GET_SINGLE_PRODUCT, variables: { slug } });
   const product = res.data.productFindSlug;
-  console.log(slug);
   return { props: { product } };
 };
 

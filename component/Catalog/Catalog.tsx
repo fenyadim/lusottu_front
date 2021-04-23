@@ -1,23 +1,17 @@
 import React from 'react';
 
-import { ICatalog, IItems } from './CatalogTypes';
+import { IItems } from '../../lib/types/types';
 
 import { Loader, Pagination, ProductCard } from '../index';
 
 import styles from './Catalog.module.scss';
+interface ICatalog {
+  items: [IItems];
+  isLoading: boolean;
+  quantityPages: number;
+}
 
-const Catalog: React.FC<ICatalog> = ({ genderSort, page, items, isLoading, quantityPages }) => {
-  // const itemsOnScreen: number = 12;
-  // const products: Array<IItems> = [];
-
-  // let pageNum: number;
-  // pageNum = page === undefined ? 0 : (page - 1) * itemsOnScreen;
-
-  // // Из большого массива делает маленький из 12 элементов
-  // for (let start = pageNum; start < pageNum + itemsOnScreen; start++) {
-  //   products.push(items[start]);
-  // }
-
+const Catalog: React.FC<ICatalog> = ({ items, isLoading, quantityPages }) => {
   return (
     <main className={!isLoading ? styles.offer : styles.offerInvisible}>
       {!isLoading ? (
@@ -41,7 +35,7 @@ const Catalog: React.FC<ICatalog> = ({ genderSort, page, items, isLoading, quant
         <Loader />
       )}
       <div className={styles.pagination}>
-        {/* <Pagination gender={genderSort} quantityPages={quantityPages} currentPage={page} /> */}
+        <Pagination quantityPages={quantityPages} />
       </div>
     </main>
   );

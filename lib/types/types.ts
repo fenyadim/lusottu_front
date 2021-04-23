@@ -1,6 +1,15 @@
+export interface IItems {
+  slug: string
+  name: string
+  price: number
+  image:  {
+    url: string
+  }
+}
+
 export interface ISingleProduct {
-  product: IProductProps
-  isLoading: boolean
+  product: IProductProps;
+  isLoading: boolean;
 }
 
 interface IProductProps {
@@ -23,14 +32,5 @@ interface IProductProps {
   }
   middle_notes: {
     desc: string
-  }
-}
-
-
-
-export interface IAttributes {
-  name: string
-  terms: {
-    nodes: Array<{name:string}>
   }
 }
