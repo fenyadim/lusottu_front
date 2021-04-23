@@ -6,7 +6,7 @@ import { Loader, Pagination, ProductCard } from '../index';
 
 import styles from './Catalog.module.scss';
 
-export default function Catalog({ genderSort, page, items, isLoading, quantityPages }: ICatalog) {
+const Catalog: React.FC<ICatalog> = ({ genderSort, page, items, isLoading, quantityPages }) => {
   // const itemsOnScreen: number = 12;
   // const products: Array<IItems> = [];
 
@@ -45,4 +45,6 @@ export default function Catalog({ genderSort, page, items, isLoading, quantityPa
       </div>
     </main>
   );
-}
+};
+
+export default Catalog;

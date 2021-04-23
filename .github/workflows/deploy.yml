@@ -25,5 +25,5 @@ jobs:
       - run: npm ci
       - run: npm run build
       # Deploy
-      - run: rsync -e "ssh -i $HOME/.ssh/key -o StrictHostKeyChecking=no" --archive --compress --delete . fenyadim@185.251.89.191:/var/www/lusottu.live/html/
+      - run: rsync -e "ssh -i $HOME/.ssh/key -o StrictHostKeyChecking=no" --archive --compress --delete . fenyadim@185.251.88.68:/var/www/lusottu.live/html/
 # cd .next &&

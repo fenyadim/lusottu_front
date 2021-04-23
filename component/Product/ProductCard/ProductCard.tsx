@@ -17,7 +17,12 @@ const ProductCard: React.FC<IProductCardProps> = ({ title, price, img, slug }) =
       <a>
         <div className={styles.productCard}>
           <div className={styles.productImg}>
-            <Image src={`${img}`} layout="fill" objectFit="contain" alt={title} />
+            <Image
+              src={`https://strapi.lusottu.live${img}`}
+              layout="fill"
+              objectFit="contain"
+              alt={title}
+            />
           </div>
           <div className={styles.productInfo}>
             <h2 className={styles.productTitle}>{title}</h2>

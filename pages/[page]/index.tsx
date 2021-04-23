@@ -1,5 +1,4 @@
 import React from 'react';
-import { useRouter } from 'next/router';
 import { GetServerSideProps } from 'next';
 
 import { GET_PRODUCTS, GET_TOTAL } from '../../lib/graphql/query';
@@ -25,7 +24,7 @@ export const getServerSideProps: GetServerSideProps = async (params) => {
   return { props: { items: products, quantityPages } };
 };
 
-interface IGender {
+interface IPage {
   items: any;
   isLoading: boolean;
   quantityPages: number;
@@ -37,9 +36,7 @@ enum ValuesGender {
   undefined,
 }
 
-// const Gender: React.FC<IGender> = ({ items, isLoading, quantityPages }) => {
-
-const Gender: React.FC<IGender> = ({ items, quantityPages, isLoading }) => {
+const Page: React.FC<IPage> = ({ items, quantityPages, isLoading }) => {
   // const router = useRouter();
   // const { page: currentPage } = router.query;
   // const gender: string | string[] | any = router.query.gender;
@@ -57,15 +54,9 @@ const Gender: React.FC<IGender> = ({ items, quantityPages, isLoading }) => {
 
   return (
     <>
-      <Catalog
-        items={items}
-        // genderSort={gender}
-        // page={page}
-        quantityPages={quantityPages}
-        isLoading={isLoading}
-      />
+      <Catalog items={items} quantityPages={quantityPages} isLoading={isLoading} />
     </>
   );
 };
 
-export default Gender;
+export default Page;

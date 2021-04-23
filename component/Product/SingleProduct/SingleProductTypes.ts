@@ -4,20 +4,25 @@ export interface ISingleProduct {
 }
 
 interface IProductProps {
-  name: string
-  price: number
-  weight: number
   image: {
-    mediaItemUrl: string
+    url: string
   }
-  productTags: {
-    nodes: {
-      name: string
-    }
+  name: string
+  brand: string
+  desc: string
+  price: number
+  volume: number
+  perfumer: {
+    desc: string
   }
-  description: string
-  attributes: {
-    nodes: Array<IAttributes>
+  base_notes: {
+    desc: string
+  }
+  top_notes: {
+    desc: string
+  }
+  middle_notes: {
+    desc: string
   }
 }
 
