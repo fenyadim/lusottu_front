@@ -41,7 +41,9 @@ const Page: React.FC<IPage> = ({ items, quantityPages, isLoading }) => {
     <>
       <Catalog items={items} quantityPages={quantityPages} isLoading={isLoading} />
     </>
-  ) : <Error />;
+  ) : (
+    <Error />
+  );
 };
 
 export default Page;
