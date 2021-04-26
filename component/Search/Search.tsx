@@ -17,14 +17,40 @@ interface ISearchProductProps {
   };
 }
 
-const Search = () => {
+interface SearchProps {
+  menuHandler?: (value: boolean) => void;
+}
+
+const Search: React.FC<SearchProps> = ({ menuHandler }) => {
   const [value, setValue] = React.useState<string>('');
   const [toggleContainer, setToggleContainer] = React.useState<boolean>(false);
-  const { data, loading } = useQuery(SEARCH_ITEMS, { variables: { search: value }, ssr: true });
+
+  const { data, loading } = useQuery(SEARCH_ITEMS, { variables: { search: value } });
   const products: Array<ISearchProductProps> = data?.products;
 
   React.useEffect(() => {
-    setValue('');
+    const screenWidht: number = document.documentElement.clientWidth;
+    const inputSearch = document.getElementsByTagName('input');
+    const searchResultContainer = document.getElementsByClassName(styles.searchResult);
+    const idActiveScreen = screenWidht > 1050 ? 1 : 0;
+
+    console.log(menuHandler);
+
+    const toggleMenu = (e: Event) => {
+      if (
+        e.target === searchResultContainer[idActiveScreen] ||
+        e.target === inputSearch[idActiveScreen]
+      ) {
+        setToggleContainer(true);
+      } else {
+        setToggleContainer(false);
+        menuHandler(false);
+      }
+    };
+    document.addEventListener('click', toggleMenu);
+    return () => {
+      document.removeEventListener('click', toggleMenu);
+    };
   }, []);
 
   return (
@@ -34,14 +60,9 @@ const Search = () => {
           type="search"
           value={value}
           placeholder="Поиск"
+          id="search"
           onChange={(e: ChangeEvent<HTMLInputElement>) => {
             e && setValue(e.target.value);
-          }}
-          onFocus={() => {
-            setToggleContainer(true);
-          }}
-          onBlur={() => {
-            setToggleContainer(false);
           }}
         />
         <button
@@ -54,7 +75,7 @@ const Search = () => {
           <span />
         </button>
       </div>
-      <div className={`${styles.searchResult} ${toggleContainer ? styles.active : ''}`}>
+      <div className={`${styles.searchResult} ${toggleContainer ? styles.visible : ''}`}>
         {!loading ? (
           products.length !== 0 ? (
             products.map(({ image, name, price, slug }, index: number) => (

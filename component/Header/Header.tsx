@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { ReducerAction, ReducerState } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 import { useRouter } from 'next/router';
@@ -6,10 +6,11 @@ import { useRouter } from 'next/router';
 import styles from './Header.module.scss';
 import { Search } from '../index';
 
-export default function Header() {
+const Header = () => {
   const router = useRouter();
   const { gender } = router.query;
   const [menuHandler, setMenuHandler] = React.useState<boolean>(false);
+  console.log(menuHandler);
 
   React.useEffect(() => {
     const NavLink = document.getElementsByClassName(styles.link);
@@ -25,14 +26,18 @@ export default function Header() {
       document.removeEventListener('click', btnMenuListener);
     };
   }, []);
-  //TODO: Поправить здесь
+
+  function toggleMenuHandler(value: boolean) {
+    setMenuHandler(value);
+  }
+
   return (
     <>
       <div>
         <div className={!menuHandler ? styles.menuDisable : styles.menuActive}>
           {Navigation(gender)}
           <div className={styles.searchBlock}>
-            <Search />
+            <Search menuHandler={(value) => setMenuHandler(value)} />
           </div>
         </div>
         <button
@@ -54,7 +59,9 @@ export default function Header() {
       </header>
     </>
   );
-}
+};
+
+export default Header;
 
 const Navigation = (gender: string | string[]) => {
   return (
