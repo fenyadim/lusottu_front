@@ -4,7 +4,7 @@ import Image from 'next/image';
 import { useRouter } from 'next/router';
 
 import styles from './Header.module.scss';
-// import { Search } from "../index";
+import { Search } from '../index';
 
 export default function Header() {
   const router = useRouter();
@@ -13,7 +13,7 @@ export default function Header() {
 
   React.useEffect(() => {
     const NavLink = document.getElementsByClassName(styles.link);
-    let btnMenuListener = (e) => {
+    const btnMenuListener = (e: Event) => {
       for (let i = 0; i < 3; i++) {
         if (NavLink[i] === e.target) {
           setMenuHandler(false);
@@ -23,7 +23,7 @@ export default function Header() {
     document.addEventListener('click', btnMenuListener);
     return () => {
       document.removeEventListener('click', btnMenuListener);
-    }
+    };
   }, []);
   //TODO: Поправить здесь
   return (
@@ -31,7 +31,9 @@ export default function Header() {
       <div>
         <div className={!menuHandler ? styles.menuDisable : styles.menuActive}>
           {Navigation(gender)}
-          <div className={styles.searchBlock}>{/*<Search/>*/}</div>
+          <div className={styles.searchBlock}>
+            <Search />
+          </div>
         </div>
         <button
           className={`${styles.menuBtn} ${!menuHandler ? '' : styles.activeBtn}`}
@@ -46,7 +48,9 @@ export default function Header() {
             <Image src="/logo.svg" layout="fill" alt="Lusottu" />
           </a>
         </Link>
-        {/*<div className={styles.noMenu} style={{justifySelf: 'right'}}><Search/></div>*/}
+        <div className={styles.noMenu} style={{ justifySelf: 'right' }}>
+          <Search />
+        </div>
       </header>
     </>
   );
