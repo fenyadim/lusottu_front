@@ -59,6 +59,7 @@
   span,
   span::before,
   span::after {
+    pointer-events: none;
     position: absolute;
     top: 50%;
     margin-top: -2px;

@@ -1,22 +1,35 @@
-import React, { ReducerAction, ReducerState } from 'react';
+import React from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 import { useRouter } from 'next/router';
 
-import styles from './Header.module.scss';
 import { Search } from '../index';
 
-const Header = () => {
+import styles from './Header.module.scss';
+
+const Header: React.FC = () => {
   const router = useRouter();
   const { gender } = router.query;
   const [menuHandler, setMenuHandler] = React.useState<boolean>(false);
-  console.log(menuHandler);
 
   React.useEffect(() => {
-    const NavLink = document.getElementsByClassName(styles.link);
+    const navLink = document.getElementsByClassName(styles.link);
+    const menuContainer = document.getElementsByClassName(styles.menuActive);
+    const menuBtn = document.getElementsByClassName(styles.menuBtn);
+    const searchBlock = document.getElementsByTagName('input');
+    const resultBlock = document.getElementById('resultBlock');
+
     const btnMenuListener = (e: Event) => {
+      if (
+        e.target !== menuContainer[0] &&
+        e.target !== menuBtn[0] &&
+        e.target !== searchBlock[0] &&
+        e.target !== resultBlock
+      ) {
+        setMenuHandler(false);
+      }
       for (let i = 0; i < 3; i++) {
-        if (NavLink[i] === e.target) {
+        if (navLink[i] === e.target) {
           setMenuHandler(false);
         }
       }
@@ -25,11 +38,7 @@ const Header = () => {
     return () => {
       document.removeEventListener('click', btnMenuListener);
     };
-  }, []);
-
-  function toggleMenuHandler(value: boolean) {
-    setMenuHandler(value);
-  }
+  }, [menuHandler]);
 
   return (
     <>
@@ -37,7 +46,7 @@ const Header = () => {
         <div className={!menuHandler ? styles.menuDisable : styles.menuActive}>
           {Navigation(gender)}
           <div className={styles.searchBlock}>
-            <Search menuHandler={(value) => setMenuHandler(value)} />
+            <Search />
           </div>
         </div>
         <button

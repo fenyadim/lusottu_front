@@ -3,7 +3,7 @@ import { useQuery } from '@apollo/client';
 import Image from 'next/image';
 import Link from 'next/link';
 
-import { Loader } from '../index';
+import { Error, Loader } from '../index';
 import { SEARCH_ITEMS } from '../../lib/graphql/query';
 
 import styles from './Search.module.scss';
@@ -17,11 +17,7 @@ interface ISearchProductProps {
   };
 }
 
-interface SearchProps {
-  menuHandler?: (value: boolean) => void;
-}
-
-const Search: React.FC<SearchProps> = ({ menuHandler }) => {
+const Search: React.FC = () => {
   const [value, setValue] = React.useState<string>('');
   const [toggleContainer, setToggleContainer] = React.useState<boolean>(false);
 
@@ -34,8 +30,6 @@ const Search: React.FC<SearchProps> = ({ menuHandler }) => {
     const searchResultContainer = document.getElementsByClassName(styles.searchResult);
     const idActiveScreen = screenWidht > 1050 ? 1 : 0;
 
-    console.log(menuHandler);
-
     const toggleMenu = (e: Event) => {
       if (
         e.target === searchResultContainer[idActiveScreen] ||
@@ -44,7 +38,7 @@ const Search: React.FC<SearchProps> = ({ menuHandler }) => {
         setToggleContainer(true);
       } else {
         setToggleContainer(false);
-        menuHandler(false);
+        toggleMenu;
       }
     };
     document.addEventListener('click', toggleMenu);
@@ -75,7 +69,9 @@ const Search: React.FC<SearchProps> = ({ menuHandler }) => {
           <span />
         </button>
       </div>
-      <div className={`${styles.searchResult} ${toggleContainer ? styles.visible : ''}`}>
+      <div
+        className={`${styles.searchResult} ${toggleContainer ? styles.visible : ''}`}
+        id="resultBlock">
         {!loading ? (
           products.length !== 0 ? (
             products.map(({ image, name, price, slug }, index: number) => (
@@ -88,7 +84,7 @@ const Search: React.FC<SearchProps> = ({ menuHandler }) => {
               />
             ))
           ) : (
-            'Ничего не найдено'
+            <Error />
           )
         ) : (
           <Loader />
