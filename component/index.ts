@@ -22,3 +22,6 @@ export const Search = dynamic(() => import('./Search/Search'));
 
 //Error
 export const Error = dynamic(() => import('./Error/Error'));
+
+//MenuPopup
+export const MenuPopup = dynamic(() => import('./MenuPopup/MenuPopup'));

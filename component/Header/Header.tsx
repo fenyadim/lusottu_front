@@ -3,58 +3,17 @@ import Link from 'next/link';
 import Image from 'next/image';
 import { useRouter } from 'next/router';
 
-import { Search } from '../index';
+import { MenuPopup, Search } from '../index';
 
 import styles from './Header.module.scss';
 
 const Header: React.FC = () => {
   const router = useRouter();
   const { gender } = router.query;
-  const [menuHandler, setMenuHandler] = React.useState<boolean>(false);
-
-  React.useEffect(() => {
-    const navLink = document.getElementsByClassName(styles.link);
-    const menuContainer = document.getElementsByClassName(styles.menuActive);
-    const menuBtn = document.getElementsByClassName(styles.menuBtn);
-    const searchBlock = document.getElementsByTagName('input');
-    const resultBlock = document.getElementById('resultBlock');
-
-    const btnMenuListener = (e: Event) => {
-      if (
-        e.target !== menuContainer[0] &&
-        e.target !== menuBtn[0] &&
-        e.target !== searchBlock[0] &&
-        e.target !== resultBlock
-      ) {
-        setMenuHandler(false);
-      }
-      for (let i = 0; i < 3; i++) {
-        if (navLink[i] === e.target) {
-          setMenuHandler(false);
-        }
-      }
-    };
-    document.addEventListener('click', btnMenuListener);
-    return () => {
-      document.removeEventListener('click', btnMenuListener);
-    };
-  }, [menuHandler]);
 
   return (
     <>
-      <div>
-        <div className={!menuHandler ? styles.menuDisable : styles.menuActive}>
-          {Navigation(gender)}
-          <div className={styles.searchBlock}>
-            <Search />
-          </div>
-        </div>
-        <button
-          className={`${styles.menuBtn} ${!menuHandler ? '' : styles.activeBtn}`}
-          onClick={() => setMenuHandler(!menuHandler)}>
-          <span />
-        </button>
-      </div>
+      <MenuPopup gender={gender} />
       <header className={styles.header}>
         <div className={styles.noMenu}>{Navigation(gender)}</div>
         <Link href="/1">
@@ -72,7 +31,7 @@ const Header: React.FC = () => {
 
 export default Header;
 
-const Navigation = (gender: string | string[]) => {
+export const Navigation = (gender: string | string[]) => {
   return (
     <nav
       className={`${styles.navigation} ${
