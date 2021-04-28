@@ -2,7 +2,7 @@ import React from 'react';
 
 import { IItems } from '../../lib/types/types';
 
-import { Loader, Pagination, ProductCard } from '../index';
+import { Filter, Loader, Pagination, ProductCard } from '../index';
 
 import styles from './Catalog.module.scss';
 
@@ -38,6 +38,7 @@ const Catalog: React.FC<ICatalog> = ({ items, isLoading, quantityPages }) => {
       <div className={styles.pagination}>
         <Pagination quantityPages={quantityPages} />
       </div>
+      <Filter />
     </main>
   );
 };

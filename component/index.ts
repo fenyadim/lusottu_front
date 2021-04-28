@@ -25,3 +25,7 @@ export const Error = dynamic(() => import('./Error/Error'));
 
 //MenuPopup
 export const MenuPopup = dynamic(() => import('./MenuPopup/MenuPopup'));
+
+//Filter
+export const Filter = dynamic(() => import('./Filter/Filter/Filter'))
+export const FilterItem = dynamic(() => import('./Filter/FilterItem/FilterItem'))
