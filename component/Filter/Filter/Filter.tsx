@@ -1,47 +1,63 @@
 import { useQuery } from '@apollo/client';
-import React, { ChangeEvent } from 'react';
+import React, { Reducer } from 'react';
 
 import { FilterItem } from '../..';
 
 import { GET_BRAND } from '../../../lib/graphql/query';
+import { BrandProps, Context } from '../../../pages/[page]';
 
 import styles from './Filter.module.scss';
 
+const initialState = [];
+
+const reducer = (state: string[], action: { type: string; payload: string }) => {
+  const { type, payload } = action;
+  switch (type) {
+    case 'ADD':
+      return [...state, payload];
+    case 'DELETE':
+      let newArr = state;
+      state.map((value: string, index: number) => {
+        if (value === payload) {
+          newArr.splice(index, 1);
+          return (state = newArr);
+        }
+      });
+      if (newArr.length === 0) {
+        console.log('РАБОТАЕТ');
+        return (state = initialState);
+      }
+    default:
+      return state;
+  }
+};
+
 const Filter: React.FC = () => {
   const [filterMenu, setFilterMenu] = React.useState<boolean>(false);
-  const [brandValue, setBrandValue] = React.useState([]);
-  const { data } = useQuery(GET_BRAND);
-  const brands: [] = data?.brands;
+  const [state, dispatch] = React.useReducer(reducer, initialState);
+  // const { data } = useQuery(GET_BRAND);
+  // const brands: [] = data?.brands;
+  const context = React.useContext(Context);
+  console.log(context);
+  const { brands } = context;
+  // const [brandValue, setBrandValue] = React.useState([]);
 
   const Toggle = (toggle: boolean) => {
     return toggle ? styles.active : styles.disable;
   };
+  // brandValue.map((item) => console.log(item));
 
-  const fetchBrandValue = (e) => {
-    const id = brandValue.indexOf(e.target.value);
-    setBrandValue((prevState) => [...prevState, e.target.value]);
-    if (brandValue.includes(e.target.value)) {
-      brandValue.forEach((value) => {
-        if (e.target.value === value) {
-          const newArr = brandValue.splice(id, 1);
-          setBrandValue(newArr);
-        }
-      });
+  console.log(state, state.length);
+
+  const fetchBrandValue = ({ currentTarget }: React.MouseEvent<HTMLInputElement>) => {
+    if (currentTarget.checked) {
+      dispatch({ type: 'ADD', payload: currentTarget.value });
+    } else {
+      dispatch({ type: 'DELETE', payload: currentTarget.value });
     }
-    // if (!brandValue.includes(e.target.value)) {
-    //   setBrandValue((prevState) => [...prevState, e.target.value]);
-    // } else {
-    //   brandValue.forEach((value) => {
-    //     if (e.target.value === value) {
-    //       const newArr = brandValue.splice(id - 1, 1);
-    //       setBrandValue(newArr);
-    //     }
-    //   });
-    // }
-    console.log(id);
   };
-
-  console.log(brandValue);
+  // };
+  // console.log(brandValue);
 
   return (
     <div className={`${styles.filterOffer} ${Toggle(filterMenu)}`}>
@@ -58,13 +74,23 @@ const Filter: React.FC = () => {
           {brands?.map(({ name, slug }: { name: string; slug: string }) => (
             <div key={`${name}_${slug}`}>
               <label>
-                <input type="checkbox" name={name} value={slug} onClick={fetchBrandValue} />
+                <input
+                  type="checkbox"
+                  name={name}
+                  value={slug}
+                  onClick={fetchBrandValue}
+                  id={'brand'}
+                />
                 {name}
               </label>
             </div>
           ))}
         </FilterItem>
-        <FilterItem title={'Тест'}>{brandValue}</FilterItem>
+        <FilterItem title={'Тест'}>
+          {state.map((item) => (
+            <p>{item}</p>
+          ))}
+        </FilterItem>
       </div>
       <button className={styles.filterBtn} onClick={() => setFilterMenu(!filterMenu)}>
         <svg x="0px" y="0px" viewBox="0 0 477.875 477.875">

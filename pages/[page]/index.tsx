@@ -1,7 +1,7 @@
 import React from 'react';
 import { GetServerSideProps } from 'next';
 
-import { GET_PRODUCTS, GET_TOTAL } from '../../lib/graphql/query';
+import { GET_BRAND, GET_PRODUCTS, GET_TOTAL } from '../../lib/graphql/query';
 import { client } from '../../lib/graphql/graph';
 
 import { Catalog, Error } from '../../component';
@@ -26,20 +26,38 @@ export const getServerSideProps: GetServerSideProps = async (params) => {
     query: GET_PRODUCTS,
     variables: { gender, limit: quanityItemsOnPage, start: currentPage },
   });
+  const resBrand = await client.query({
+    query: GET_BRAND,
+  });
+  const brands = resBrand.data;
   const products = res.data.products;
-  return { props: { items: products, quantityPages } };
+  return { props: { items: products, quantityPages, brands } };
 };
 
 interface IPage {
   items: [IItems];
   isLoading: boolean;
   quantityPages: number;
+  brands: [BrandProps];
 }
 
-const Page: React.FC<IPage> = ({ items, quantityPages, isLoading }) => {
+export interface BrandProps {
+  name?: string;
+  slug?: string;
+}
+
+type ContextProps = {
+  brands?: BrandProps[] | undefined[];
+};
+
+export const Context = React.createContext<ContextProps>({});
+
+const Page: React.FC<IPage> = ({ items, quantityPages, isLoading, brands }) => {
   return items[0] !== undefined ? (
     <>
-      <Catalog items={items} quantityPages={quantityPages} isLoading={isLoading} />
+      <Context.Provider value={brands as ContextProps}>
+        <Catalog items={items} quantityPages={quantityPages} isLoading={isLoading} />
+      </Context.Provider>
     </>
   ) : (
     <Error />
