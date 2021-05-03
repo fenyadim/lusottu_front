@@ -1,34 +1,38 @@
-import React, { ChangeEvent } from 'react';
-import { useQuery } from '@apollo/client';
-import Image from 'next/image';
-import Link from 'next/link';
+import React, { ChangeEvent } from "react";
+import { useQuery } from "@apollo/client";
+import Image from "next/image";
+import Link from "next/link";
 
-import { Error, Loader } from '../index';
-import { SEARCH_ITEMS } from '../../lib/graphql/query';
+import { Error, Loader } from "../index";
+import { SEARCH_ITEMS } from "../../lib/graphql/query";
 
-import styles from './Search.module.scss';
+import styles from "./Search.module.scss";
 
 interface ISearchProductProps {
   name: string;
   slug: string;
   price: number;
-  image: {
+  image?: {
     url: string;
   };
 }
 
 const Search: React.FC = () => {
-  const [value, setValue] = React.useState<string>('');
+  const [value, setValue] = React.useState<string>("");
   const [toggleContainer, setToggleContainer] = React.useState<boolean>(false);
 
-  const { data, loading } = useQuery(SEARCH_ITEMS, { variables: { search: value } });
+  const { data, loading } = useQuery(SEARCH_ITEMS, {
+    variables: { search: value },
+  });
   const products: Array<ISearchProductProps> = data?.products;
 
   React.useEffect(() => {
-    const screenWidht: number = document.documentElement.clientWidth;
-    const inputSearch = document.getElementsByTagName('input');
-    const searchResultContainer = document.getElementsByClassName(styles.searchResult);
-    const idActiveScreen = screenWidht > 1050 ? 1 : 0;
+    const screenWidth: number = document.documentElement.clientWidth;
+    const inputSearch = document.getElementsByTagName("input");
+    const searchResultContainer = document.getElementsByClassName(
+      styles.searchResult
+    );
+    const idActiveScreen = screenWidth > 1050 ? 1 : 0;
 
     const toggleMenu = (e: Event) => {
       if (
@@ -41,9 +45,9 @@ const Search: React.FC = () => {
         toggleMenu;
       }
     };
-    document.addEventListener('click', toggleMenu);
+    document.addEventListener("click", toggleMenu);
     return () => {
-      document.removeEventListener('click', toggleMenu);
+      document.removeEventListener("click", toggleMenu);
     };
   }, []);
 
@@ -61,23 +65,27 @@ const Search: React.FC = () => {
         />
         <button
           className={`${styles.clear} ${
-            value && value.trim().length !== 0 ? styles.showClear : ''
+            value && value.trim().length !== 0 ? styles.showClear : ""
           }`}
           onClick={() => {
-            setValue('');
-          }}>
+            setValue("");
+          }}
+        >
           <span />
         </button>
       </div>
       <div
-        className={`${styles.searchResult} ${toggleContainer ? styles.visible : ''}`}
-        id="resultBlock">
+        className={`${styles.searchResult} ${
+          toggleContainer ? styles.visible : ""
+        }`}
+        id="resultBlock"
+      >
         {!loading ? (
           products.length !== 0 ? (
             products.map(({ image, name, price, slug }, index: number) => (
               <SearchProduct
                 key={`${name}_${index}`}
-                image={image}
+                image={image && image}
                 name={name}
                 price={price}
                 slug={slug}
@@ -103,7 +111,9 @@ const SearchProduct = ({ image, name, price, slug }: ISearchProductProps) => {
         <div className={styles.productContainer}>
           <div className={styles.image}>
             <Image
-              src={`https://strapi.lusottu.live${image.url}`}
+              src={`${
+                image ? `https://strapi.lusottu.live${image.url}` : "/null"
+              }`}
               layout="fill"
               objectFit="contain"
             />
