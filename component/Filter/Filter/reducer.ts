@@ -1,20 +1,32 @@
-import { Action, State } from "../../../lib/types";
+import { Action, State } from '../../../lib/types';
 
-export const reducer = (state: Array<State>, action: Action) => {
+export const initialState: State = {
+  brandsFilter: [],
+  typesFilter: [],
+};
+
+export const reducer = (state: State, action: Action) => {
   const { type, payload } = action;
+  const brandsFilter = state?.brandsFilter;
+  const typesFilter = state?.typesFilter;
+
+  console.log(state);
+
   switch (type) {
-    case "ADD":
-      return [...state, payload];
-    case "TOGGLE": {
+    case 'BRANDS_ADD': {
+      const { name, slug } = payload;
+      return { brandsFilter: [...brandsFilter, { name: name, slug: slug, isChecked: false }] };
+    }
+    case 'TYPES_ADD': {
+      const { name, slug } = payload;
+      console.log(name, slug);
+      return { typesFilter: [...typesFilter, { name: name, slug: slug, isChecked: false }] };
+    }
+    case 'BRANDS_TOGGLE': {
       const { targetValue, targetIsChecked } = payload;
-      let newArr = [];
-      state.map(({ name, slug, isChecked }) => {
-        if (slug !== targetValue) {
-          newArr.push({ name, slug, isChecked });
-          return (state = newArr);
-        } else {
-          newArr.push({ name, slug, isChecked: targetIsChecked });
-          return (state = newArr);
+      brandsFilter.forEach(({ slug }, index) => {
+        if (slug === targetValue) {
+          return (brandsFilter[index].isChecked = targetIsChecked);
         }
       });
     }

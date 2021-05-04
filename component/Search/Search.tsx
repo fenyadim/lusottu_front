@@ -1,12 +1,12 @@
-import React, { ChangeEvent } from "react";
-import { useQuery } from "@apollo/client";
-import Image from "next/image";
-import Link from "next/link";
+import React, { ChangeEvent } from 'react';
+import { useQuery } from '@apollo/client';
+import Image from 'next/image';
+import Link from 'next/link';
 
-import { Error, Loader } from "../index";
-import { SEARCH_ITEMS } from "../../lib/graphql/query";
+import { Error, Loader } from '../index';
+import { SEARCH_ITEMS } from '../../lib/graphql/query';
 
-import styles from "./Search.module.scss";
+import styles from './Search.module.scss';
 
 interface ISearchProductProps {
   name: string;
@@ -18,7 +18,7 @@ interface ISearchProductProps {
 }
 
 const Search: React.FC = () => {
-  const [value, setValue] = React.useState<string>("");
+  const [value, setValue] = React.useState<string>('');
   const [toggleContainer, setToggleContainer] = React.useState<boolean>(false);
 
   const { data, loading } = useQuery(SEARCH_ITEMS, {
@@ -28,10 +28,8 @@ const Search: React.FC = () => {
 
   React.useEffect(() => {
     const screenWidth: number = document.documentElement.clientWidth;
-    const inputSearch = document.getElementsByTagName("input");
-    const searchResultContainer = document.getElementsByClassName(
-      styles.searchResult
-    );
+    const inputSearch = document.getElementsByTagName('input');
+    const searchResultContainer = document.getElementsByClassName(styles.searchResult);
     const idActiveScreen = screenWidth > 1050 ? 1 : 0;
 
     const toggleMenu = (e: Event) => {
@@ -45,9 +43,9 @@ const Search: React.FC = () => {
         toggleMenu;
       }
     };
-    document.addEventListener("click", toggleMenu);
+    document.addEventListener('click', toggleMenu);
     return () => {
-      document.removeEventListener("click", toggleMenu);
+      document.removeEventListener('click', toggleMenu);
     };
   }, []);
 
@@ -65,21 +63,17 @@ const Search: React.FC = () => {
         />
         <button
           className={`${styles.clear} ${
-            value && value.trim().length !== 0 ? styles.showClear : ""
+            value && value.trim().length !== 0 ? styles.showClear : ''
           }`}
           onClick={() => {
-            setValue("");
-          }}
-        >
+            setValue('');
+          }}>
           <span />
         </button>
       </div>
       <div
-        className={`${styles.searchResult} ${
-          toggleContainer ? styles.visible : ""
-        }`}
-        id="resultBlock"
-      >
+        className={`${styles.searchResult} ${toggleContainer ? styles.visible : ''}`}
+        id="resultBlock">
         {!loading ? (
           products.length !== 0 ? (
             products.map(({ image, name, price, slug }, index: number) => (
@@ -111,9 +105,7 @@ const SearchProduct = ({ image, name, price, slug }: ISearchProductProps) => {
         <div className={styles.productContainer}>
           <div className={styles.image}>
             <Image
-              src={`${
-                image ? `https://strapi.lusottu.live${image.url}` : "/null"
-              }`}
+              src={`${image ? `https://strapi.lusottu.live${image.url}` : '/null'}`}
               layout="fill"
               objectFit="contain"
             />

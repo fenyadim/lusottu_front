@@ -36,9 +36,16 @@ interface IProductProps {
 }
 
 export interface State {
-  name: string;
-  slug: string;
-  isChecked: boolean;
+  brandsFilter?: Array<{
+    name: string;
+    slug: string;
+    isChecked: boolean;
+  }>;
+  typesFilter?: Array<{
+    name: string;
+    slug: string;
+    isChecked: boolean;
+  }>;
 }
 
 export interface Action {
