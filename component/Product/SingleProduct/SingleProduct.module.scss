@@ -29,7 +29,7 @@
   padding: 40px;
   min-width: 600px;
   max-width: 750px;
-  box-shadow: 10px 10px 0px var(--accent-grey);
+  box-shadow: 10px 10px 0 var(--accent-grey);
   outline: 2px solid var(--accent-grey);
   justify-self: start;
   h3 {
@@ -55,17 +55,14 @@
   }
   .desc {
     line-height: 1.5;
-    span {
-      font-weight: 600;
-      font-size: 1.125rem; // 18px
-      margin: 0;
-    }
   }
   .attribute {
     margin: 20px 0;
   }
-  .attributeTitle {
-    margin-bottom: 4px;
+  .itemTitle {
+    font-weight: 600;
+    font-size: 1.125rem; // 18px
+    margin: 0;
   }
   .price,
   .volume {

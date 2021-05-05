@@ -7,7 +7,7 @@ import styles from './ProductCard.module.scss';
 interface IProductCardProps {
   name: string;
   price: number;
-  img: string;
+  img?: string;
   slug: string;
 }
 
@@ -18,7 +18,7 @@ const ProductCard: React.FC<IProductCardProps> = ({ name, price, img, slug }) =>
         <div className={styles.productCard}>
           <div className={styles.productImg}>
             <Image
-              src={`https://strapi.lusottu.live${img}`}
+              src={`${img ? `https://strapi.lusottu.live${img}` : '/null'}`}
               layout="fill"
               objectFit="contain"
               alt={name}

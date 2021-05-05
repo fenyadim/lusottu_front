@@ -12,7 +12,7 @@ interface ISearchProductProps {
   name: string;
   slug: string;
   price: number;
-  image: {
+  image?: {
     url: string;
   };
 }
@@ -21,14 +21,16 @@ const Search: React.FC = () => {
   const [value, setValue] = React.useState<string>('');
   const [toggleContainer, setToggleContainer] = React.useState<boolean>(false);
 
-  const { data, loading } = useQuery(SEARCH_ITEMS, { variables: { search: value } });
+  const { data, loading } = useQuery(SEARCH_ITEMS, {
+    variables: { search: value },
+  });
   const products: Array<ISearchProductProps> = data?.products;
 
   React.useEffect(() => {
-    const screenWidht: number = document.documentElement.clientWidth;
+    const screenWidth: number = document.documentElement.clientWidth;
     const inputSearch = document.getElementsByTagName('input');
     const searchResultContainer = document.getElementsByClassName(styles.searchResult);
-    const idActiveScreen = screenWidht > 1050 ? 1 : 0;
+    const idActiveScreen = screenWidth > 1050 ? 1 : 0;
 
     const toggleMenu = (e: Event) => {
       if (
@@ -77,7 +79,7 @@ const Search: React.FC = () => {
             products.map(({ image, name, price, slug }, index: number) => (
               <SearchProduct
                 key={`${name}_${index}`}
-                image={image}
+                image={image && image}
                 name={name}
                 price={price}
                 slug={slug}
@@ -103,7 +105,7 @@ const SearchProduct = ({ image, name, price, slug }: ISearchProductProps) => {
         <div className={styles.productContainer}>
           <div className={styles.image}>
             <Image
-              src={`https://strapi.lusottu.live${image.url}`}
+              src={`${image ? `https://strapi.lusottu.live${image.url}` : '/null'}`}
               layout="fill"
               objectFit="contain"
             />

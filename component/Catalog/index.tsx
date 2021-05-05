@@ -1,8 +1,8 @@
 import React from 'react';
 
-import { IItems } from '../../lib/types/types';
+import { IItems } from '../../lib/types';
 
-import { Loader, Pagination, ProductCard } from '../index';
+import { Filter, Loader, Pagination, ProductCard } from '../index';
 
 import styles from './Catalog.module.scss';
 
@@ -24,7 +24,7 @@ const Catalog: React.FC<ICatalog> = ({ items, isLoading, quantityPages }) => {
                   key={`${obj.slug}_${index}`}
                   name={obj.name}
                   price={obj.price}
-                  img={obj.image.url}
+                  img={obj.image && obj.image.url}
                   slug={obj.slug}
                 />
               ) : (
@@ -38,6 +38,7 @@ const Catalog: React.FC<ICatalog> = ({ items, isLoading, quantityPages }) => {
       <div className={styles.pagination}>
         <Pagination quantityPages={quantityPages} />
       </div>
+      <Filter />
     </main>
   );
 };
