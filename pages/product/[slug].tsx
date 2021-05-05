@@ -1,15 +1,13 @@
-import React from "react";
-import { GetServerSideProps, GetServerSidePropsContext } from "next";
+import React from 'react';
+import { GetServerSideProps, GetServerSidePropsContext } from 'next';
 
-import { GET_SINGLE_PRODUCT } from "../../lib/graphql/query";
-import { client } from "../../lib/graphql/graph";
+import { GET_SINGLE_PRODUCT } from '../../lib/graphql/query';
+import { client } from '../../lib/graphql/';
 
-import { Error, SingleProduct } from "../../component";
-import { ISingleProduct } from "../../lib/types";
+import { Error, SingleProduct } from '../../component';
+import { ISingleProduct } from '../../lib/types';
 
-export const getServerSideProps: GetServerSideProps = async (
-  params: GetServerSidePropsContext
-) => {
+export const getServerSideProps: GetServerSideProps = async (params: GetServerSidePropsContext) => {
   const { slug } = params.query;
   const res = await client.query({
     query: GET_SINGLE_PRODUCT,

@@ -1,7 +1,7 @@
 import React from 'react';
 
 import { Search } from '..';
-import { Navigation } from '../Header/Header';
+import { Navigation } from '../Header';
 
 import styles from './MenuPopup.module.scss';
 

@@ -19,11 +19,14 @@ const Filter: React.FC = () => {
   const { state, dispatch } = context;
   const router = useRouter();
   const { page, gender } = router.query as RouterProps;
-  const { brandsFilter } = state;
+  const { brandsFilter, typesFilter } = state;
 
-  const fetchBrandValue = ({ currentTarget }: React.MouseEvent<HTMLInputElement>) => {
+  const toggleCheckboxFilter = (
+    { currentTarget }: React.MouseEvent<HTMLInputElement>,
+    typeDispatch: string,
+  ) => {
     dispatch({
-      type: 'BRANDS_TOGGLE',
+      type: typeDispatch,
       payload: {
         targetValue: currentTarget.value,
         targetIsChecked: currentTarget.checked,
@@ -31,34 +34,36 @@ const Filter: React.FC = () => {
     });
   };
 
-  const isFilterNull = (sex: string, array?: string[]) => {
-    switch (sex !== undefined) {
-      case true:
-        if (array.length !== 0) {
-          return { page, gender, filter: array.join('_') };
-        } else {
-          return { page, gender };
-        }
-      case false:
-        if (array.length !== 0) {
-          return { page, filter: array.join('_') };
-        } else {
-          return { page };
-        }
+  const FilterUrl = (sex: string, brands: string[], types: string[], price: string[]) => {
+    const queryObj = {
+      page,
+      gender: sex,
+      brands: brands.join('_'),
+      types: types.join('_'),
+      price: price.join('_'),
+    };
+    for (let i in queryObj) {
+      if (queryObj[i] === undefined || !queryObj[i]) {
+        delete queryObj[i];
+      }
     }
+    return queryObj;
   };
 
   const handleSubmit = (e: React.SyntheticEvent) => {
-    let newArr: string[] | undefined = [];
-    brandsFilter.map(({ slug, isChecked }) => (isChecked ? newArr.push(slug) : ''));
+    let brandsFilterActive: string[] | undefined = [];
+    let typesFilterActive: string[] | undefined = [];
+    let priceFilterActive: string[] | undefined = [];
+    if (valueFrom || valueTo) {
+      priceFilterActive.push(valueFrom, valueTo);
+    }
+    brandsFilter.map(({ slug, isChecked }) => (isChecked ? brandsFilterActive.push(slug) : ''));
+    typesFilter.map(({ slug, isChecked }) => (isChecked ? typesFilterActive.push(slug) : ''));
     router.push({
       pathname: '/[page]',
-      query: isFilterNull(gender, newArr),
+      query: FilterUrl(gender, brandsFilterActive, typesFilterActive, priceFilterActive),
     });
     e.preventDefault();
-
-    // console.log(inputFrom.current.value);
-    // console.log(inputTo.current.value);
   };
 
   return (
@@ -79,7 +84,7 @@ const Filter: React.FC = () => {
               />
             </label>
             <label>
-              До:{' '}
+              До:
               <input
                 type="number"
                 name="to"
@@ -99,7 +104,21 @@ const Filter: React.FC = () => {
                     name={name}
                     slug={slug}
                     isChecked={isChecked}
-                    onClickFunc={(e) => fetchBrandValue(e)}
+                    onClickFunc={(e) => toggleCheckboxFilter(e, 'BRANDS_TOGGLE')}
+                  />
+                ),
+              )}
+          </FilterItem>
+          <FilterItem title={'Тип парфюма'}>
+            {typesFilter &&
+              typesFilter.map(
+                ({ name, slug, isChecked }: { name: string; slug: string; isChecked: boolean }) => (
+                  <Checkbox
+                    key={`${name}_${slug}`}
+                    name={name}
+                    slug={slug}
+                    isChecked={isChecked}
+                    onClickFunc={(e) => toggleCheckboxFilter(e, 'TYPES_TOGGLE')}
                   />
                 ),
               )}

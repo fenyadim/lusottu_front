@@ -4,7 +4,7 @@ import { Router, useRouter } from 'next/router';
 import { AppProps } from 'next/dist/next-server/lib/router/router';
 
 import { Layout } from '../component';
-import { client } from '../lib/graphql/graph';
+import { client } from '../lib/graphql/';
 
 import '../styles/style.scss';
 

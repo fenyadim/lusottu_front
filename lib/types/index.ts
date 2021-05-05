@@ -21,18 +21,7 @@ interface IProductProps {
   desc?: string;
   price?: number;
   volume?: number;
-  perfumer?: {
-    desc: string;
-  };
-  base_notes?: {
-    desc: string;
-  };
-  top_notes?: {
-    desc: string;
-  };
-  middle_notes?: {
-    desc: string;
-  };
+  note?: string;
 }
 
 export interface State {

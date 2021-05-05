@@ -1,10 +1,10 @@
-import React from "react";
+import React from 'react';
 
-import { IItems } from "../../lib/types";
+import { IItems } from '../../lib/types';
 
-import { Filter, Loader, Pagination, ProductCard } from "../index";
+import { Filter, Loader, Pagination, ProductCard } from '../index';
 
-import styles from "./Catalog.module.scss";
+import styles from './Catalog.module.scss';
 
 interface ICatalog {
   items: [IItems];
@@ -28,8 +28,8 @@ const Catalog: React.FC<ICatalog> = ({ items, isLoading, quantityPages }) => {
                   slug={obj.slug}
                 />
               ) : (
-                ""
-              )
+                ''
+              ),
             )}
         </div>
       ) : (
