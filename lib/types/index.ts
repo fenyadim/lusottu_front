@@ -17,11 +17,13 @@ interface IProductProps {
     url: string;
   };
   name?: string;
-  brand?: string;
+  brand?: {
+    name: string;
+  };
   desc?: string;
   price?: number;
   volume?: number;
-  note?: string;
+  notes?: string;
 }
 
 export interface State {
