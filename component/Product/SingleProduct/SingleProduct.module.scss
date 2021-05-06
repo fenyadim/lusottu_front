@@ -1,4 +1,5 @@
 .offer {
+  grid-area: content;
   display: grid;
   grid-template-columns: 1fr 1fr;
   align-items: center;
@@ -56,8 +57,8 @@
   .desc {
     line-height: 1.5;
   }
-  .attribute {
-    margin: 20px 0;
+  .notes {
+    line-height: 1.5;
   }
   .itemTitle {
     font-weight: 600;

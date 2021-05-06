@@ -4,7 +4,7 @@ import { useRouter } from 'next/router';
 
 import styles from './Pagination.module.scss';
 
-const Pagination: React.FC<{quantityPages: number}> = ({ quantityPages }) => {
+const Pagination: React.FC<{ quantityPages: number }> = ({ quantityPages }) => {
   const router = useRouter();
   const { page: currentPage, gender } = router.query;
   const paginator: number[] = [];
@@ -13,7 +13,7 @@ const Pagination: React.FC<{quantityPages: number}> = ({ quantityPages }) => {
   }
 
   return (
-    <>
+    <div className={styles.offer}>
       {paginator.map((page: number) =>
         !gender ? (
           <Link key={page} href={{ pathname: '/[page]', query: { page: page } }}>
@@ -29,7 +29,7 @@ const Pagination: React.FC<{quantityPages: number}> = ({ quantityPages }) => {
           </Link>
         ),
       )}
-    </>
+    </div>
   );
 };
 

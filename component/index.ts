@@ -3,6 +3,7 @@ import dynamic from 'next/dynamic';
 //Layout
 export const Header = dynamic(() => import('./Header'));
 export const Layout = dynamic(() => import('./Layout'));
+export const Footer = dynamic(() => import('./Footer'));
 
 //Catalog
 export const Catalog = dynamic(() => import('./Catalog'));

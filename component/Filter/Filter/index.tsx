@@ -5,6 +5,7 @@ import { Checkbox, FilterItem } from '../..';
 import { Context } from '../../../pages/[page]';
 
 import styles from './Filter.module.scss';
+import Link from 'next/link';
 
 interface RouterProps {
   page?: number;
@@ -20,6 +21,21 @@ const Filter: React.FC = () => {
   const router = useRouter();
   const { page, gender } = router.query as RouterProps;
   const { brandsFilter, typesFilter } = state;
+
+  React.useEffect(() => {
+    const test = document.querySelector('#test');
+    console.log(test.childNodes);
+
+    const toggleFilter = (e: Event) => {
+      const target = e.target as HTMLInputElement;
+      // console.log(target);
+      console.log(target.parentNode);
+    };
+    document.addEventListener('click', toggleFilter);
+    return () => {
+      document.removeEventListener('click', toggleFilter);
+    };
+  }, []);
 
   const toggleCheckboxFilter = (
     { currentTarget }: React.MouseEvent<HTMLInputElement>,
@@ -65,9 +81,10 @@ const Filter: React.FC = () => {
     });
     e.preventDefault();
   };
-
   return (
-    <div className={`${styles.filterOffer} ${filterMenu ? styles.active : styles.disable}`}>
+    <div
+      className={`${styles.filterOffer} ${filterMenu ? styles.active : styles.disable}`}
+      id="test">
       <div className={styles.filterBlock}>
         <form onSubmit={handleSubmit}>
           <FilterItem title={'Цена'}>
@@ -123,7 +140,12 @@ const Filter: React.FC = () => {
                 ),
               )}
           </FilterItem>
-          <input type="submit" value="Отправить" />
+          <div className={styles.controlForm}>
+            <input className="btn solidBtn" type="submit" value="Принять" />
+            <Link href={{ pathname: '/[page]', query: FilterUrl(gender, [], [], []) }}>
+              <button className="btn borderBtn">Сброс</button>
+            </Link>
+          </div>
         </form>
       </div>
       <button className={styles.filterBtn} onClick={() => setFilterMenu(!filterMenu)}>

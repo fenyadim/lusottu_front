@@ -4,7 +4,12 @@
   bottom: 0;
   left: 80px;
   right: 80px;
-  //overflow-y: hidden;
+  display: grid;
+  grid-template-rows: 97px 1fr 80px;
+  grid-template-areas:
+    'header'
+    'content'
+    'footer';
 }
 
 @media screen and (max-width: 1150px) {

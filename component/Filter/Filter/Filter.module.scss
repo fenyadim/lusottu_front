@@ -1,14 +1,27 @@
 .filterOffer {
-  position: absolute;
-  bottom: 20px;
-  left: 0;
+  display: block;
+  align-self: center;
+  grid-area: filter;
   * {
     transition: all 0.2s ease-out;
   }
   .filterBlock {
+    position: absolute;
+    bottom: 80px;
+    left: 0;
+    display: none;
     padding: 10px;
     width: 300px;
     background-color: #fff;
+  }
+  .controlForm {
+    display: flex;
+    * {
+      margin-right: 10px;
+      &:last-child {
+        margin-right: 0;
+      }
+    }
   }
   .filterBtn {
     display: block;
@@ -20,21 +33,36 @@
     &:hover {
       fill: var(--second-color);
     }
+    svg {
+      pointer-events: none;
+    }
   }
 }
 
 .active {
   .filterBlock {
+    display: block;
     opacity: 1;
-    transform: translateY(-30px);
     box-shadow: 10px 10px 0 var(--accent-color);
     border: 2px solid var(--accent-color);
+    animation-name: fadeIn;
+    animation-duration: 0.2s;
   }
 }
 
 .disable {
   .filterBlock {
     opacity: 0;
-    transform: translateY(200%);
+  }
+}
+
+@keyframes fadeIn {
+  0% {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
   }
 }

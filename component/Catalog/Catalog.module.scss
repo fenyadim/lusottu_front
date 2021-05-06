@@ -1,5 +1,7 @@
 .catalog {
+  grid-area: content;
   display: grid;
+  padding-top: 30px;
   height: 100%;
   grid-template-columns: repeat(auto-fill, 270px);
   grid-template-rows: repeat(auto-fill, 349px);
@@ -11,36 +13,14 @@
     height: 349px;
     width: 270px;
   }
+  align-self: center;
+  animation-name: fadeRight;
+  animation-duration: 0.5s;
 }
 
-.pagination {
-  position: absolute;
-  display: flex;
-  justify-content: center;
-  height: 45px;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background-color: rgba($color: #fff, $alpha: 0);
-}
-
-.offer {
-  display: grid;
-  height: 100%;
-  align-content: space-around;
-  padding: 97px 0 80px 0;
-  .catalog {
-    align-self: center;
-    animation-name: fadeRight;
-    animation-duration: 0.5s;
-  }
-}
-
-.offerInvisible {
-  .catalog {
-    opacity: 0;
-    transition: opacity 0.2s ease;
-  }
+.catalogInvisible {
+  opacity: 0;
+  transition: opacity 0.2s ease;
 }
 
 @keyframes fadeRight {

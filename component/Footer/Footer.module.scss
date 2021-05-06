@@ -1,0 +1,14 @@
+.offer {
+  position: relative;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-template-areas: 'filter pagination empty';
+  grid-area: footer;
+  height: 100%;
+}
+
+@media screen and (max-width: 1150px) {
+  .offer {
+    padding: 0 30px;
+  }
+}

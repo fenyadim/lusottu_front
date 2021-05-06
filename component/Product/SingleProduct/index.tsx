@@ -1,12 +1,12 @@
-import React from "react";
-import Image from "next/image";
+import React from 'react';
+import Image from 'next/image';
 
-import { ISingleProduct } from "../../../lib/types";
+import { ISingleProduct } from '../../../lib/types';
 
-import { Loader } from "../..";
+import { Loader } from '../..';
 
-import styles from "./SingleProduct.module.scss";
-import AttributeWrapper from "../../Elements/AttributeWrapper";
+import styles from './SingleProduct.module.scss';
+import AttributeWrapper from '../../Elements/AttributeWrapper';
 
 const SingleProduct: React.FC<ISingleProduct> = ({ product, isLoading }) => {
   const { name, brand, desc, image, price, volume, notes } = product;
@@ -15,7 +15,7 @@ const SingleProduct: React.FC<ISingleProduct> = ({ product, isLoading }) => {
     <div className={!isLoading ? styles.offer : styles.offerInvisible}>
       <div className={styles.imageSide}>
         <Image
-          src={`${image ? `https://strapi.lusottu.live${image.url}` : "/null"}`}
+          src={`${image ? `https://strapi.lusottu.live${image.url}` : '/null'}`}
           layout="fill"
           objectFit="contain"
         />
@@ -36,12 +36,10 @@ const SingleProduct: React.FC<ISingleProduct> = ({ product, isLoading }) => {
           </p>
         </AttributeWrapper>
         <AttributeWrapper value={notes}>
-          <div className={styles.attribute}>
-            <p className={styles.attributeDesc}>
-              <span className={styles.itemTitle}>Ноты: </span>
-              {notes}
-            </p>
-          </div>
+          <p className={styles.notes}>
+            <span className={styles.itemTitle}>Ноты: </span>
+            {notes}
+          </p>
         </AttributeWrapper>
         <AttributeWrapper value={price}>
           <h3 className={styles.price}>

@@ -2,40 +2,70 @@
   display: flex;
   flex-direction: column;
   border: 2px solid var(--second-color);
-  padding: 10px;
   margin-bottom: 10px;
   overflow: hidden;
   transition: height 0.2s ease-in;
   &:hover {
     border: 2px solid var(--accent-color);
   }
-  &:last-child {
-    margin-bottom: 0;
-  }
-  .itemTitle {
+  .itemHeader {
+    position: relative;
     cursor: pointer;
-    background-color: #fff;
+    padding: 10px;
+    $height: 3px;
+    $width: 15px;
+    &::before,
+    &::after {
+      content: '';
+      display: block;
+      position: absolute;
+      top: 50%;
+      right: 10px;
+      width: $width;
+      height: $height;
+      background-color: #000;
+      transition: all 0.1s ease;
+      cursor: pointer;
+    }
+    &::before {
+      transform: translateY(-1px);
+    }
+    &::after {
+      transform: translateY(-1px) rotateZ(90deg);
+    }
+    .itemTitle {
+      background-color: #fff;
+    }
   }
   .itemData {
     display: flex;
     flex-direction: column;
-    margin-top: 10px;
+    padding: 0 10px 10px 10px;
   }
 }
 
 .active {
-  max-height: 100%;
-  * {
-    opacity: 1;
-    transform: translateY(0);
+  .itemHeader {
+    &::after {
+      transform: translateY(-1px) rotateZ(0deg);
+    }
+  }
+  .itemData {
+    max-height: 100%;
+    * {
+      opacity: 1;
+      transform: translateY(0);
+    }
   }
 }
 
 .disable {
-  height: 0;
-  margin-top: 0 !important;
-  * {
-    opacity: 0;
-    transform: translateY(100%);
+  .itemData {
+    height: 0;
+    padding: 0;
+    * {
+      opacity: 0;
+      transform: translateY(100%);
+    }
   }
 }

@@ -28,19 +28,20 @@ const Search: React.FC = () => {
 
   React.useEffect(() => {
     const screenWidth: number = document.documentElement.clientWidth;
-    const inputSearch = document.getElementsByTagName('input');
+    const inputSearch = document.querySelectorAll('#search');
     const searchResultContainer = document.getElementsByClassName(styles.searchResult);
     const idActiveScreen = screenWidth > 1050 ? 1 : 0;
 
     const toggleMenu = (e: Event) => {
+      const target = e.target as HTMLInputElement;
       if (
-        e.target === searchResultContainer[idActiveScreen] ||
-        e.target === inputSearch[idActiveScreen]
+        target === searchResultContainer[idActiveScreen] ||
+        (target === inputSearch[idActiveScreen] && target.value.length !== 0) ||
+        searchResultContainer[idActiveScreen].firstChild === target
       ) {
         setToggleContainer(true);
       } else {
         setToggleContainer(false);
-        toggleMenu;
       }
     };
     document.addEventListener('click', toggleMenu);
@@ -48,6 +49,14 @@ const Search: React.FC = () => {
       document.removeEventListener('click', toggleMenu);
     };
   }, []);
+
+  React.useEffect(() => {
+    if (value.length === 0) {
+      setToggleContainer(false);
+    } else {
+      setToggleContainer(true);
+    }
+  }, [value]);
 
   return (
     <div className={styles.searchOffer}>

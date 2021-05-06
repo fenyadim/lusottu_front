@@ -10,13 +10,11 @@ const FilterItem: React.FC<FilterItemProps> = ({ children, title }) => {
   const [itemFilter, setItemFilter] = React.useState<boolean>(false);
 
   return (
-    <div className={styles.itemOffer}>
-      <h3 className={styles.itemTitle} onClick={() => setItemFilter(!itemFilter)}>
-        {title}
-      </h3>
-      <div className={`${styles.itemData} ${itemFilter ? styles.active : styles.disable}`}>
-        {children}
+    <div className={`${styles.itemOffer} ${itemFilter ? styles.active : styles.disable}`}>
+      <div className={styles.itemHeader} onClick={() => setItemFilter(!itemFilter)}>
+        <h3 className={styles.itemTitle}>{title}</h3>
       </div>
+      <div className={`${styles.itemData} `}>{children}</div>
     </div>
   );
 };
