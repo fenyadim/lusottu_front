@@ -26,7 +26,7 @@ interface IProductProps {
   notes?: string;
 }
 
-export interface State {
+export interface IState {
   brandsFilter?: Array<{
     name: string;
     slug: string;
@@ -39,7 +39,7 @@ export interface State {
   }>;
 }
 
-export interface Action {
+export interface IAction {
   type: string;
-  payload?: State | string | any;
+  payload?: IState | string | any;
 }

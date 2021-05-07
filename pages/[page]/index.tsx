@@ -4,11 +4,10 @@ import { GetServerSideProps } from 'next';
 import { GET_BRAND, GET_PRODUCTS, GET_TOTAL, GET_TYPES } from '../../lib/graphql/query';
 import { client } from '../../lib/graphql/';
 
-import { Catalog, Error } from '../../component';
+import { Catalog, Footer } from '../../component';
 import { initialState, reducer } from '../../component/Filter/Filter/reducer';
 
-import { Action, IItems, State } from '../../lib/types';
-import Footer from '../../component/Footer';
+import { IAction, IItems, IState } from '../../lib/types';
 
 interface IPage {
   items: [IItems];
@@ -24,8 +23,8 @@ export interface FilterProps {
 }
 
 interface ContextProps {
-  state?: State;
-  dispatch?: React.Dispatch<Action>;
+  state?: IState;
+  dispatch?: React.Dispatch<IAction>;
 }
 
 interface QueryProps {

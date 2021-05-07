@@ -1,4 +1,5 @@
 import React from 'react';
+import styles from './Checkbox.module.scss';
 
 interface CheckboxProps {
   name: string;
@@ -9,17 +10,16 @@ interface CheckboxProps {
 
 const Checkbox = ({ name, slug, isChecked, onClickFunc }: CheckboxProps) => {
   return (
-    <div>
-      <label>
-        <input
-          type="checkbox"
-          name={name}
-          value={slug}
-          defaultChecked={isChecked}
-          onClick={onClickFunc}
-        />
-        {name}
-      </label>
+    <div className={styles.checkbox}>
+      <input
+        type="checkbox"
+        name={name}
+        value={slug}
+        defaultChecked={isChecked}
+        id={`${slug}_checkbox`}
+        onClick={onClickFunc}
+      />
+      <label htmlFor={`${slug}_checkbox`}>{name}</label>
     </div>
   );
 };

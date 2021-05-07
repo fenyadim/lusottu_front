@@ -1,11 +1,11 @@
 import React from 'react';
+import Link from 'next/link';
 import { useRouter } from 'next/router';
 
 import { Checkbox, FilterItem } from '../..';
 import { Context } from '../../../pages/[page]';
 
 import styles from './Filter.module.scss';
-import Link from 'next/link';
 
 interface RouterProps {
   page?: number;
@@ -18,18 +18,17 @@ const Filter: React.FC = () => {
   const [valueTo, setValueTo] = React.useState<string>('');
   const context = React.useContext(Context);
   const { state, dispatch } = context;
+  const { brandsFilter, typesFilter } = state;
   const router = useRouter();
   const { page, gender } = router.query as RouterProps;
-  const { brandsFilter, typesFilter } = state;
 
   React.useEffect(() => {
-    const test = document.querySelector('#test');
-    console.log(test.childNodes);
-
+    const filterOffer = document.querySelector(`.${styles.filterOffer}`);
     const toggleFilter = (e: Event) => {
       const target = e.target as HTMLInputElement;
-      // console.log(target);
-      console.log(target.parentNode);
+      if (!filterOffer.contains(target)) {
+        setFilterMenu(false);
+      }
     };
     document.addEventListener('click', toggleFilter);
     return () => {
@@ -81,12 +80,11 @@ const Filter: React.FC = () => {
     });
     e.preventDefault();
   };
+
   return (
-    <div
-      className={`${styles.filterOffer} ${filterMenu ? styles.active : styles.disable}`}
-      id="test">
-      <div className={styles.filterBlock}>
-        <form onSubmit={handleSubmit}>
+    <div className={`${styles.filterOffer} ${filterMenu ? styles.active : styles.disable}`}>
+      <form onSubmit={handleSubmit} className={styles.filterBlock}>
+        <div className={styles.filterWrapper}>
           <FilterItem title={'Цена'}>
             <label>
               От:
@@ -140,14 +138,14 @@ const Filter: React.FC = () => {
                 ),
               )}
           </FilterItem>
-          <div className={styles.controlForm}>
-            <input className="btn solidBtn" type="submit" value="Принять" />
-            <Link href={{ pathname: '/[page]', query: FilterUrl(gender, [], [], []) }}>
-              <button className="btn borderBtn">Сброс</button>
-            </Link>
-          </div>
-        </form>
-      </div>
+        </div>
+        <div className={styles.controlForm}>
+          <input className="btn solidBtn" type="submit" value="Принять" />
+          <Link href={{ pathname: '/[page]', query: FilterUrl(gender, [], [], []) }}>
+            <button className="btn borderBtn">Сброс</button>
+          </Link>
+        </div>
+      </form>
       <button className={styles.filterBtn} onClick={() => setFilterMenu(!filterMenu)}>
         <svg x="0px" y="0px" viewBox="0 0 477.875 477.875">
           <g>

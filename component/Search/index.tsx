@@ -27,17 +27,18 @@ const Search: React.FC = () => {
   const products: Array<ISearchProductProps> = data?.products;
 
   React.useEffect(() => {
+    const searchOffer = document.querySelectorAll(`.${styles.searchOffer}`);
     const screenWidth: number = document.documentElement.clientWidth;
     const inputSearch = document.querySelectorAll('#search');
-    const searchResultContainer = document.getElementsByClassName(styles.searchResult);
     const idActiveScreen = screenWidth > 1050 ? 1 : 0;
 
     const toggleMenu = (e: Event) => {
       const target = e.target as HTMLInputElement;
+      const inputValue: string | undefined = inputSearch[idActiveScreen].value;
       if (
-        target === searchResultContainer[idActiveScreen] ||
-        (target === inputSearch[idActiveScreen] && target.value.length !== 0) ||
-        searchResultContainer[idActiveScreen].firstChild === target
+        searchOffer[idActiveScreen].contains(target) &&
+        inputValue.length !== 0 &&
+        target.attributes[0].value !== styles.productContainer
       ) {
         setToggleContainer(true);
       } else {

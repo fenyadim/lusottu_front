@@ -114,6 +114,9 @@
     &:hover {
       border-color: var(--accent-color);
     }
+    * {
+      pointer-events: none;
+    }
     .image {
       grid-area: img;
       height: 100%;

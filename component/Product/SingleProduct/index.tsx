@@ -3,10 +3,9 @@ import Image from 'next/image';
 
 import { ISingleProduct } from '../../../lib/types';
 
-import { Loader } from '../..';
+import { Loader, AttributeWrapper } from '../..';
 
 import styles from './SingleProduct.module.scss';
-import AttributeWrapper from '../../Elements/AttributeWrapper';
 
 const SingleProduct: React.FC<ISingleProduct> = ({ product, isLoading }) => {
   const { name, brand, desc, image, price, volume, notes } = product;
