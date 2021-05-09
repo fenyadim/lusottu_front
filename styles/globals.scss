@@ -45,6 +45,22 @@ a {
 
 * {
   box-sizing: border-box;
+  -webkit-overflow-scrolling: touch;
+  &::-webkit-scrollbar-track {
+    border-radius: 4px;
+  }
+  &::-webkit-scrollbar {
+    width: 6px;
+  }
+  &::-webkit-scrollbar-thumb {
+    border-radius: 4px;
+    background-color: var(--second-color);
+    transition: background-color 0.3s ease;
+  }
+  &:hover::-webkit-scrollbar-thumb {
+    background-color: var(--accent-color);
+    transition: background-color 0.3s ease;
+  }
 }
 
 .maleTheme {
@@ -62,13 +78,17 @@ a {
   --second-color: var(--secondary-grey);
 }
 
+label {
+  font-weight: 500;
+}
+
 .btn {
   height: 40px;
   width: 100%;
   border: 0;
   font-size: 0.923077rem;
   font-weight: 500;
-  font-family: 'Montserrat';
+  font-family: 'Montserrat', sans-serif;
   cursor: pointer;
 }
 

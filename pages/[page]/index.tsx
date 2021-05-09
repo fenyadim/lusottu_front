@@ -1,13 +1,13 @@
-import React, { useReducer } from 'react';
-import { GetServerSideProps } from 'next';
+import React, { useReducer } from "react";
+import { GetServerSideProps } from "next";
 
-import { GET_BRAND, GET_PRODUCTS, GET_TOTAL, GET_TYPES } from '../../lib/graphql/query';
-import { client } from '../../lib/graphql/';
+import { GET_BRAND, GET_PRODUCTS, GET_TYPES } from "../../lib/graphql/query";
+import { client } from "../../lib/graphql/";
 
-import { Catalog, Footer } from '../../component';
-import { initialState, reducer } from '../../component/Filter/Filter/reducer';
+import { Catalog, Footer } from "../../component";
+import { initialState, reducer } from "../../component/Filter/Filter/reducer";
 
-import { IAction, IItems, IState } from '../../lib/types';
+import { IAction, IItems, IState } from "../../lib/types";
 
 interface IPage {
   items: [IItems];
@@ -15,6 +15,8 @@ interface IPage {
   quantityPages: number;
   brands: [FilterProps];
   types: [FilterProps];
+  minPrice: number;
+  maxPrice: number;
 }
 
 export interface FilterProps {
@@ -25,6 +27,8 @@ export interface FilterProps {
 interface ContextProps {
   state?: IState;
   dispatch?: React.Dispatch<IAction>;
+  maxPrice?: number;
+  minPrice?: number;
 }
 
 interface QueryProps {
@@ -41,13 +45,13 @@ const changeVariables = (
   types: string,
   price: string,
   limit: number,
-  start: number,
+  start: number
 ) => {
-  const arrayFilterPrice = price?.split('_');
+  const arrayFilterPrice = price?.split("_");
   const priceFrom = arrayFilterPrice ? Number(arrayFilterPrice[0]) : null;
   const priceTo = arrayFilterPrice ? Number(arrayFilterPrice[1]) : null;
-  const arrayFilterBrands = brands?.split('_');
-  const arrayFilterTypes = types?.split('_');
+  const arrayFilterBrands = brands?.split("_");
+  const arrayFilterTypes = types?.split("_");
 
   const varObj = {
     filterBrand: arrayFilterBrands,
@@ -67,28 +71,25 @@ const changeVariables = (
 };
 
 export const getServerSideProps: GetServerSideProps = async (params) => {
-  const totalCount = (await client.query({ query: GET_TOTAL })).data.productsConnection.aggregate
-    .totalCount;
   let gender: Array<string>;
-
   const {
     brands: brandsQuery,
     types: typesQuery,
     price: priceQuery,
     page,
-    gender: getGenderFromQuery,
+    gender: genderQuery,
   }: QueryProps = params.query;
 
-  if (getGenderFromQuery === undefined) {
-    gender = ['unisex', 'male', 'female'];
-  } else if (getGenderFromQuery === 'male') {
-    gender = ['unisex', 'male'];
+  if (genderQuery === undefined) {
+    gender = ["unisex", "male", "female"];
+  } else if (genderQuery === "male") {
+    gender = ["unisex", "male"];
   } else {
-    gender = ['unisex', 'female'];
+    gender = ["unisex", "female"];
   }
   const quanityItemsOnPage = 12;
-  const quantityPages = Math.ceil(totalCount / quanityItemsOnPage); // Подсчет количества страниц
   const currentPage = Number(page) * 12 - 12;
+
   const { data: dataProducts } = await client.query({
     query: GET_PRODUCTS,
     variables: changeVariables(
@@ -97,7 +98,7 @@ export const getServerSideProps: GetServerSideProps = async (params) => {
       typesQuery,
       priceQuery,
       quanityItemsOnPage,
-      currentPage,
+      currentPage
     ),
   });
   const { data: dataBrands } = await client.query({
@@ -106,29 +107,48 @@ export const getServerSideProps: GetServerSideProps = async (params) => {
   const { data: dataTypes } = await client.query({
     query: GET_TYPES,
   });
+
+  const { values: items } = dataProducts.productsConnection;
+  const {
+    count: totalCount,
+    min,
+    max,
+  } = dataProducts.productsConnection.aggregate;
+  const { price: minPrice } = min;
+  const { price: maxPrice } = max;
   const { brands } = dataBrands;
-  const { products } = dataProducts;
   const { types } = dataTypes;
-  return { props: { items: products, quantityPages, brands, types } };
+  const quantityPages = Math.ceil(totalCount / quanityItemsOnPage); // Подсчет количества страниц
+  return { props: { items, quantityPages, brands, types, maxPrice, minPrice } };
 };
 
 export const Context = React.createContext<ContextProps>({});
 
-const Page: React.FC<IPage> = ({ items, quantityPages, isLoading, brands, types }) => {
+const Page: React.FC<IPage> = ({
+  items,
+  quantityPages,
+  isLoading,
+  brands,
+  types,
+  maxPrice,
+  minPrice,
+}) => {
   const [state, dispatch] = useReducer(reducer, initialState);
 
   React.useEffect(() => {
     brands?.map(({ name, slug }) => {
-      dispatch({ type: 'BRANDS_ADD', payload: { name, slug } });
+      dispatch({ type: "BRANDS_ADD", payload: { name, slug } });
     });
     types?.map(({ name, slug }) => {
-      dispatch({ type: 'TYPES_ADD', payload: { name, slug } });
+      dispatch({ type: "TYPES_ADD", payload: { name, slug } });
     });
   }, []);
 
   return (
     <>
-      <Context.Provider value={{ state, dispatch } as ContextProps}>
+      <Context.Provider
+        value={{ state, dispatch, maxPrice, minPrice } as ContextProps}
+      >
         <Catalog items={items} isLoading={isLoading} />
         <Footer quantityPages={quantityPages} />
       </Context.Provider>

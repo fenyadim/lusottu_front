@@ -1,5 +1,5 @@
-import React from 'react';
-import styles from './Checkbox.module.scss';
+import React from "react";
+import styles from "./Checkbox.module.scss";
 
 interface CheckboxProps {
   name: string;
@@ -15,7 +15,8 @@ const Checkbox = ({ name, slug, isChecked, onClickFunc }: CheckboxProps) => {
         type="checkbox"
         name={name}
         value={slug}
-        defaultChecked={isChecked}
+        checked={isChecked}
+        readOnly={true}
         id={`${slug}_checkbox`}
         onClick={onClickFunc}
       />

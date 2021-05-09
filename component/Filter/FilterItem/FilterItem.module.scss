@@ -4,14 +4,18 @@
   border: 2px solid var(--second-color);
   margin-bottom: 10px;
   overflow: hidden;
-  transition: height 0.2s ease-in;
+  transition: all .2s ease !important;
   &:hover {
     border: 2px solid var(--accent-color);
+  }
+  &:last-child {
+    margin-bottom: 0;
   }
   .itemHeader {
     position: relative;
     cursor: pointer;
     padding: 10px;
+    margin-bottom: 10px;
     $height: 3px;
     $width: 15px;
     &::before,
@@ -24,7 +28,7 @@
       width: $width;
       height: $height;
       background-color: #000;
-      transition: all 0.1s ease;
+      transition: all 0.2s ease;
       cursor: pointer;
     }
     &::before {
@@ -39,23 +43,56 @@
   }
   .itemData {
     flex-direction: column;
-    padding: 10px;
+    overflow-y: scroll;
+    transition: transform .2s ease;
+    * {
+      padding: 0 10px;
+    }
   }
 }
 
 .active {
+  animation: slideOpen;
+  animation-duration: .2s;
   .itemHeader {
     &::after {
       transform: translateY(-1px) rotateZ(0deg);
     }
   }
   .itemData {
-    display: flex;
+    opacity: 1;
+    max-height: 250px;
+    transform: translateY(0);
   }
 }
 
 .disable {
+  animation: slideClose;
+  animation-duration: .2s;
+  .itemHeader {
+    margin-bottom: 0;
+  }
   .itemData {
-    display: none;
+    opacity: 0;
+    max-height: 0;
+    transform: translateY(100%);
+  }
+}
+
+@keyframes slideOpen {
+  0% {
+    max-height: 50px;
+  }
+  100% {
+    max-height: 297px;
+  }
+}
+
+@keyframes slideClose {
+  0% {
+    max-height: 297px;
+  }
+  100% {
+    max-height: 50px;
   }
 }

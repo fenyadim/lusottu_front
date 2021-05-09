@@ -43,3 +43,11 @@ export interface IAction {
   type: string;
   payload?: IState | string | any;
 }
+
+export interface IRouterProps {
+  page?: number;
+  gender?: string;
+  brands?: string;
+  types?: string;
+  price?: string;
+}
