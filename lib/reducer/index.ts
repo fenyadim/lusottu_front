@@ -1,11 +1,11 @@
-import { IAction, IState } from "../../../lib/types";
+import { IAction, IState } from "../types";
 
 export const initialState: IState = {
   brandsFilter: [],
   typesFilter: [],
 };
 
-export const reducer = (state: IState, action: IAction) => {
+export const index = (state: IState, action: IAction) => {
   const { type, payload } = action;
   const brandsFilter = state?.brandsFilter;
   const typesFilter = state?.typesFilter;

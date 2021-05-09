@@ -1,10 +1,14 @@
 .offer {
-  position: relative;
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   grid-template-areas: 'filter pagination empty';
-  grid-area: footer;
-  height: 100%;
+  height: 80px;
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  padding: 0 80px;
+  background-color: #fff;
 }
 
 @media screen and (max-width: 1150px) {

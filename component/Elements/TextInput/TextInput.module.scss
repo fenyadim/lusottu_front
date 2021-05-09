@@ -1,7 +1,6 @@
 %input {
   display: block;
   padding: 10px !important;
-  width: 90px;
   height: 100%;
   border: 2px solid var(--second-color);
   transition: all 0.2s ease;
@@ -25,7 +24,8 @@
   width: 140px;
   height: 35px;
   input {
-    @extend %input
+    @extend %input;
+    width: 90px;
   }
   input[type=number]::-webkit-inner-spin-button,
   input[type=number]::-webkit-outer-spin-button {
@@ -35,5 +35,5 @@
 }
 
 .input {
-  @extend %input
+  @extend %input;
 }
