@@ -1,21 +1,24 @@
 .catalog {
-  grid-area: content;
+  position: absolute;
+  top: 113px;
+  left: 0;
+  right: 0;
+  bottom: 80px;
+  padding: 0 80px;
   display: grid;
-  padding-top: 30px;
-  height: 100%;
+  align-self: center;
+  justify-content: space-around;
   grid-template-columns: repeat(auto-fill, 270px);
   grid-template-rows: repeat(auto-fill, 349px);
-  justify-content: space-around;
   grid-column-gap: min(25px);
   grid-row-gap: 45px;
+  overflow-y: scroll;
+  -webkit-overflow-scrolling: touch;
   a {
     display: block;
     height: 349px;
     width: 270px;
   }
-  align-self: center;
-  animation-name: fadeRight;
-  animation-duration: 0.5s;
 }
 
 .catalogInvisible {
@@ -35,8 +38,8 @@
   }
 }
 
-@media screen and (max-height: 929px), screen and (max-width: 1677px) {
-  .catalog {
-    overflow-y: scroll;
-  }
-}
+//@media screen and (max-height: 929px), screen and (max-width: 1677px) {
+//  .catalog {
+//    overflow-y: scroll;
+//  }
+//}

@@ -27,6 +27,7 @@
 .menuBtn {
   display: none;
   position: absolute;
+  cursor: pointer;
   z-index: 99;
   top: calc(97px / 2);
   margin-top: calc(-35px / 2);

@@ -1,16 +1,19 @@
 .productCard {
-  display: grid;
+  display: grid !important;
   grid-template-rows: auto 107px;
   padding: 30px 23px;
   border: 2px solid var(--second-color);
   background-color: #fff;
   height: 100%;
   width: 100%;
+  animation-name: fadeRight;
+  animation-duration: 0.5s;
   transition: all 0.2s ease;
   &:hover {
     box-shadow: 10px 10px 0 var(--accent-color);
     border-color: var(--accent-color);
   }
+
 }
 
 .productImg {
@@ -35,4 +38,16 @@
   font-weight: 400;
   font-size: 1.0625rem; //17px
   align-self: center;
+}
+
+@keyframes fadeRight {
+  0% {
+    transform: translateX(-50px);
+    opacity: 0;
+  }
+
+  100% {
+    transform: translateX(0);
+    opacity: 1;
+  }
 }

@@ -5,8 +5,8 @@ import { GET_BRAND, GET_PRODUCTS, GET_TYPES } from "../../lib/graphql/query";
 import { client } from "../../lib/graphql/";
 
 import { Catalog, Footer } from "../../component";
-import { initialState, reducer } from "../../component/Filter/Filter/reducer";
 
+import { initialState, index } from "../../lib/reducer";
 import { IAction, IItems, IState } from "../../lib/types";
 
 interface IPage {
@@ -133,7 +133,7 @@ const Page: React.FC<IPage> = ({
   maxPrice,
   minPrice,
 }) => {
-  const [state, dispatch] = useReducer(reducer, initialState);
+  const [state, dispatch] = useReducer(index, initialState);
 
   React.useEffect(() => {
     brands?.map(({ name, slug }) => {
@@ -150,7 +150,7 @@ const Page: React.FC<IPage> = ({
         value={{ state, dispatch, maxPrice, minPrice } as ContextProps}
       >
         <Catalog items={items} isLoading={isLoading} />
-        <Footer quantityPages={quantityPages} />
+        {!isLoading ? <Footer quantityPages={quantityPages} /> : ""}
       </Context.Provider>
     </>
   );
