@@ -1,14 +1,10 @@
 .header {
-  position: absolute;
-  left: -80px;
-  right: -80px;
-  padding: 0 80px;
+  grid-area: header;
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
   align-items: center;
   background-color: #fff;
-  height: 97px;
-  z-index: 3;
+  height: 100%;
   .logo {
     justify-self: center;
     width: 188px;
@@ -51,11 +47,14 @@
     border-bottom: 3px solid var(--accent-color);
   }
 }
+@media screen and (max-width: 1150px) {
+  .header {
+    padding: 0 30px;
+  }
+}
 
 @media screen and (max-width: 1050px) {
   .header {
-    left: 0;
-    right: 0;
     grid-template-columns: 1fr;
     .logo {
       width: 150px;

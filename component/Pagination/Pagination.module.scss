@@ -1,3 +1,11 @@
+.offer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: rgba($color: #fff, $alpha: 0);
+  grid-area: pagination;
+}
+
 .link {
   font-size: 1.0625rem; // 17px
   font-weight: 500;

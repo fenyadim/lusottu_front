@@ -1,0 +1,39 @@
+%input {
+  display: block;
+  padding: 10px !important;
+  width: 90px;
+  height: 100%;
+  border: 2px solid var(--second-color);
+  transition: all 0.2s ease;
+  font-size: 1rem; /* 16/16 */
+  &:hover,
+  &:focus {
+    border-color: var(--accent-color);
+  }
+  &:focus {
+    border-radius: 0;
+    outline: none;
+  }
+}
+
+.inputLabel {
+  position: relative;
+  display: flex;
+  align-items: center;
+  margin-bottom: 10px;
+  justify-content: space-between;
+  width: 140px;
+  height: 35px;
+  input {
+    @extend %input
+  }
+  input[type=number]::-webkit-inner-spin-button,
+  input[type=number]::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+  }
+}
+
+.input {
+  @extend %input
+}

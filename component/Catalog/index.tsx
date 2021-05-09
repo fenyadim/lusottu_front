@@ -2,21 +2,20 @@ import React from 'react';
 
 import { IItems } from '../../lib/types';
 
-import { Filter, Loader, Pagination, ProductCard } from '../index';
+import { Error, Loader, ProductCard } from '../index';
 
 import styles from './Catalog.module.scss';
 
 interface ICatalog {
   items: [IItems];
   isLoading: boolean;
-  quantityPages: number;
 }
 
-const Catalog: React.FC<ICatalog> = ({ items, isLoading, quantityPages }) => {
-  return (
-    <main className={!isLoading ? styles.offer : styles.offerInvisible}>
+const Catalog: React.FC<ICatalog> = ({ items, isLoading }) => {
+  return items[0] !== undefined ? (
+    <main className={!isLoading ? styles.catalog : styles.catalogInvisible}>
       {!isLoading ? (
-        <div className={styles.catalog}>
+        <>
           {items &&
             items.map((obj, index: number) =>
               obj ? (
@@ -31,15 +30,13 @@ const Catalog: React.FC<ICatalog> = ({ items, isLoading, quantityPages }) => {
                 ''
               ),
             )}
-        </div>
+        </>
       ) : (
         <Loader />
       )}
-      <div className={styles.pagination}>
-        <Pagination quantityPages={quantityPages} />
-      </div>
-      <Filter />
     </main>
+  ) : (
+    <Error />
   );
 };
 

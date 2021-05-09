@@ -1,35 +1,67 @@
-import React from 'react';
-import Link from 'next/link';
-import { useRouter } from 'next/router';
+import React from "react";
+import Link from "next/link";
+import { useRouter } from "next/router";
 
-import styles from './Pagination.module.scss';
+import { IRouterProps } from "../../lib/types";
 
-const Pagination: React.FC<{quantityPages: number}> = ({ quantityPages }) => {
+import styles from "./Pagination.module.scss";
+import { QueryUrl } from "../../lib/queryUrl";
+
+const Pagination: React.FC<{ quantityPages: number }> = ({ quantityPages }) => {
   const router = useRouter();
-  const { page: currentPage, gender } = router.query;
+  const {
+    page: currentPage,
+    gender,
+    types,
+    price,
+    brands,
+  } = router.query as IRouterProps;
+
   const paginator: number[] = [];
   for (let i = 1; i <= quantityPages; i++) {
     paginator.push(i);
   }
 
   return (
-    <>
-      {paginator.map((page: number) =>
+    <div className={styles.offer}>
+      {paginator.map((page) =>
         !gender ? (
-          <Link key={page} href={{ pathname: '/[page]', query: { page: page } }}>
-            <a className={`${styles.link} ${Number(currentPage) === page ? styles.active : ''}`}>
+          <Link
+            key={page}
+            href={{
+              pathname: "/[page]",
+              query: QueryUrl(page, "", brands, types, price),
+            }}
+            scroll={true}
+          >
+            <a
+              className={`${styles.link} ${
+                Number(currentPage) === page ? styles.active : ""
+              }`}
+            >
               {page}
             </a>
           </Link>
         ) : (
-          <Link key={page} href={{ pathname: '/[page]', query: { page: page, gender: gender } }}>
-            <a className={`${styles.link} ${Number(currentPage) === page ? styles.active : ''}`}>
+          <Link
+            key={page}
+            href={{
+              pathname: "/[page]",
+              query: QueryUrl(page, gender, brands, types, price),
+            }}
+            scroll={true}
+          >
+            <a
+              className={`${styles.link} ${
+                Number(currentPage) === page ? styles.active : ""
+              }`}
+            >
               {page}
             </a>
           </Link>
-        ),
+        )
       )}
-    </>
+    </div>
   );
 };
 

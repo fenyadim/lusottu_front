@@ -1,23 +1,6 @@
 .searchOffer {
   justify-self: right;
   .inputSearch {
-    position: relative;
-    input {
-      display: block;
-      padding: 10px 28px 10px 10px;
-      width: 300px;
-      border: 2px solid var(--second-color);
-      transition: all 0.2s ease;
-      font-size: 1rem; /* 16/16 */
-      &:hover,
-      &:focus {
-        border-color: var(--accent-color);
-      }
-      &:focus {
-        border-radius: 0;
-        outline: none;
-      }
-    }
     .showClear {
       display: block !important;
     }
@@ -68,11 +51,12 @@
 }
 
 .searchResult {
+  z-index: 1;
   display: none;
   position: absolute;
   overflow-y: scroll;
   top: 97px;
-  right: 80px;
+  right: 0;
   width: 500px;
   height: 600px;
   padding: 15px 15px 0 15px;
@@ -80,22 +64,7 @@
   border: 2px solid var(--accent-color);
   box-shadow: 10px 10px 0 var(--accent-color);
   transition: all 0.2s ease;
-  -webkit-overflow-scrolling: touch;
-  &::-webkit-scrollbar-track {
-    border-radius: 4px;
-  }
-  &::-webkit-scrollbar {
-    width: 6px;
-  }
-  &::-webkit-scrollbar-thumb {
-    border-radius: 4px;
-    background-color: var(--second-color);
-    transition: background-color 0.3s ease;
-  }
-  &:hover::-webkit-scrollbar-thumb {
-    background-color: var(--accent-color);
-    transition: background-color 0.3s ease;
-  }
+
 
   .productContainer {
     display: grid;
@@ -112,6 +81,9 @@
     align-items: center;
     &:hover {
       border-color: var(--accent-color);
+    }
+    * {
+      pointer-events: none;
     }
     .image {
       grid-area: img;

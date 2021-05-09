@@ -4,7 +4,7 @@ import styles from './Error.module.scss';
 
 const Error: React.FC = () => {
   return (
-    <div className={styles.errorContainer}>
+    <div className={styles.errorContainer} id="error">
       <h3>Ничего не найдено... 😞</h3>
     </div>
   );

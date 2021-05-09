@@ -1,18 +1,13 @@
 import React, { useReducer } from "react";
 import { GetServerSideProps } from "next";
 
-import {
-  GET_BRAND,
-  GET_PRODUCTS,
-  GET_TOTAL,
-  GET_TYPES,
-} from "../../lib/graphql/query";
+import { GET_BRAND, GET_PRODUCTS, GET_TYPES } from "../../lib/graphql/query";
 import { client } from "../../lib/graphql/";
 
-import { Catalog, Error } from "../../component";
+import { Catalog, Footer } from "../../component";
 import { initialState, reducer } from "../../component/Filter/Filter/reducer";
 
-import { Action, IItems, State } from "../../lib/types";
+import { IAction, IItems, IState } from "../../lib/types";
 
 interface IPage {
   items: [IItems];
@@ -20,6 +15,8 @@ interface IPage {
   quantityPages: number;
   brands: [FilterProps];
   types: [FilterProps];
+  minPrice: number;
+  maxPrice: number;
 }
 
 export interface FilterProps {
@@ -28,8 +25,10 @@ export interface FilterProps {
 }
 
 interface ContextProps {
-  state?: State;
-  dispatch?: React.Dispatch<Action>;
+  state?: IState;
+  dispatch?: React.Dispatch<IAction>;
+  maxPrice?: number;
+  minPrice?: number;
 }
 
 interface QueryProps {
@@ -72,28 +71,25 @@ const changeVariables = (
 };
 
 export const getServerSideProps: GetServerSideProps = async (params) => {
-  const totalCount = (await client.query({ query: GET_TOTAL })).data
-    .productsConnection.aggregate.totalCount;
   let gender: Array<string>;
-
   const {
     brands: brandsQuery,
     types: typesQuery,
     price: priceQuery,
     page,
-    gender: getGenderFromQuery,
+    gender: genderQuery,
   }: QueryProps = params.query;
 
-  if (getGenderFromQuery === undefined) {
+  if (genderQuery === undefined) {
     gender = ["unisex", "male", "female"];
-  } else if (getGenderFromQuery === "male") {
+  } else if (genderQuery === "male") {
     gender = ["unisex", "male"];
   } else {
     gender = ["unisex", "female"];
   }
   const quanityItemsOnPage = 12;
-  const quantityPages = Math.ceil(totalCount / quanityItemsOnPage); // Подсчет количества страниц
   const currentPage = Number(page) * 12 - 12;
+
   const { data: dataProducts } = await client.query({
     query: GET_PRODUCTS,
     variables: changeVariables(
@@ -111,10 +107,19 @@ export const getServerSideProps: GetServerSideProps = async (params) => {
   const { data: dataTypes } = await client.query({
     query: GET_TYPES,
   });
+
+  const { values: items } = dataProducts.productsConnection;
+  const {
+    count: totalCount,
+    min,
+    max,
+  } = dataProducts.productsConnection.aggregate;
+  const { price: minPrice } = min;
+  const { price: maxPrice } = max;
   const { brands } = dataBrands;
-  const { products } = dataProducts;
   const { types } = dataTypes;
-  return { props: { items: products, quantityPages, brands, types } };
+  const quantityPages = Math.ceil(totalCount / quanityItemsOnPage); // Подсчет количества страниц
+  return { props: { items, quantityPages, brands, types, maxPrice, minPrice } };
 };
 
 export const Context = React.createContext<ContextProps>({});
@@ -125,8 +130,11 @@ const Page: React.FC<IPage> = ({
   isLoading,
   brands,
   types,
+  maxPrice,
+  minPrice,
 }) => {
   const [state, dispatch] = useReducer(reducer, initialState);
+
   React.useEffect(() => {
     brands?.map(({ name, slug }) => {
       dispatch({ type: "BRANDS_ADD", payload: { name, slug } });
@@ -136,18 +144,15 @@ const Page: React.FC<IPage> = ({
     });
   }, []);
 
-  return items[0] !== undefined ? (
+  return (
     <>
-      <Context.Provider value={{ state, dispatch } as ContextProps}>
-        <Catalog
-          items={items}
-          quantityPages={quantityPages}
-          isLoading={isLoading}
-        />
+      <Context.Provider
+        value={{ state, dispatch, maxPrice, minPrice } as ContextProps}
+      >
+        <Catalog items={items} isLoading={isLoading} />
+        <Footer quantityPages={quantityPages} />
       </Context.Provider>
     </>
-  ) : (
-    <Error />
   );
 };
 
