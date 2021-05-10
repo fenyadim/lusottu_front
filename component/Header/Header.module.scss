@@ -61,9 +61,10 @@
 @media screen and (max-width: 1050px) {
   .header {
     grid-template-columns: 1fr;
+    height: 80px;
     .logo {
-      width: 150px;
-      height: 75px;
+      width: 120px;
+      height: 100%;
     }
   }
   .noMenu {

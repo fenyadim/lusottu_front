@@ -1,29 +1,36 @@
 import React from 'react';
 import { ApolloProvider } from '@apollo/client';
-import { Router, useRouter } from 'next/router';
+import { useRouter } from 'next/router';
 import { AppProps } from 'next/dist/next-server/lib/router/router';
 
 import { Layout } from '../component';
+
 import { client } from '../lib/graphql/';
 
 import '../styles/style.scss';
 
-const MyApp: React.FC<AppProps> = ({ Component, pageProps }) => {
+const MyApp = ({ Component, pageProps }: AppProps) => {
   const [isLoading, setIsLoading] = React.useState<boolean>(false);
+  const [screenWidth, setScreenWidth] = React.useState<number>();
   const router = useRouter();
   const { asPath } = router;
-  React.useMemo(() => {
-    Router.events.on('routeChangeStart', () => {
+
+  React.useEffect(() => {
+    setScreenWidth(document.documentElement.clientWidth);
+  }, []);
+
+  React.useEffect(() => {
+    router.events.on('routeChangeStart', () => {
       setIsLoading(true);
     });
-    Router.events.on('routeChangeComplete', () => {
+    router.events.on('routeChangeComplete', () => {
       setIsLoading(false);
     });
   }, [router && asPath]);
 
   return (
     <ApolloProvider client={client}>
-      <Layout>
+      <Layout screenWidth={screenWidth}>
         <Component {...pageProps} isLoading={isLoading} />
       </Layout>
     </ApolloProvider>

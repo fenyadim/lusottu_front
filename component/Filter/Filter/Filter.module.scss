@@ -75,3 +75,10 @@
     transform: translateY(0);
   }
 }
+
+@media screen and (max-width: 1050px) {
+  .filterBlock {
+    width: 100% !important;
+    right: 0;
+  }
+}

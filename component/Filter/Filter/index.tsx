@@ -1,19 +1,19 @@
-import React from "react";
-import Link from "next/link";
-import { useRouter } from "next/router";
+import React from 'react';
+import Link from 'next/link';
+import { useRouter } from 'next/router';
 
-import { Checkbox, FilterItem, TextInput } from "../..";
-import { Context } from "../../../pages/[page]";
+import { Checkbox, FilterItem, TextInput } from '../..';
 
-import { QueryUrl } from "../../../lib/queryUrl";
-import { IRouterProps } from "../../../lib/types";
+import { QueryUrl } from '../../../lib/queryUrl';
+import { IRouterProps } from '../../../lib/types';
+import { Context } from '../../../lib/context';
 
-import styles from "./Filter.module.scss";
+import styles from './Filter.module.scss';
 
 const Filter: React.FC = () => {
   const [filterMenu, setFilterMenu] = React.useState<boolean>(false);
-  const [valueFrom, setValueFrom] = React.useState<string>("");
-  const [valueTo, setValueTo] = React.useState<string>("");
+  const [valueFrom, setValueFrom] = React.useState<string>('');
+  const [valueTo, setValueTo] = React.useState<string>('');
   const context = React.useContext(Context);
   const { state, dispatch, minPrice, maxPrice } = context;
   const brandsFilter = state?.brandsFilter;
@@ -29,15 +29,15 @@ const Filter: React.FC = () => {
         setFilterMenu(false);
       }
     };
-    document.addEventListener("click", toggleFilter);
+    document.addEventListener('click', toggleFilter);
     return () => {
-      document.removeEventListener("click", toggleFilter);
+      document.removeEventListener('click', toggleFilter);
     };
   }, []);
 
   const toggleCheckboxFilter = (
     { currentTarget }: React.MouseEvent<HTMLInputElement>,
-    typeDispatch: string
+    typeDispatch: string,
   ) => {
     dispatch({
       type: typeDispatch,
@@ -55,40 +55,26 @@ const Filter: React.FC = () => {
     if (valueFrom || valueTo) {
       priceFilterActive.push(valueFrom, valueTo);
     }
-    brandsFilter.map(({ slug, isChecked }) =>
-      isChecked ? brandsFilterActive.push(slug) : ""
-    );
-    typesFilter.map(({ slug, isChecked }) =>
-      isChecked ? typesFilterActive.push(slug) : ""
-    );
+    brandsFilter.map(({ slug, isChecked }) => (isChecked ? brandsFilterActive.push(slug) : ''));
+    typesFilter.map(({ slug, isChecked }) => (isChecked ? typesFilterActive.push(slug) : ''));
     router.push({
-      pathname: "/[page]",
-      query: QueryUrl(
-        page,
-        gender,
-        brandsFilterActive,
-        typesFilterActive,
-        priceFilterActive
-      ),
+      pathname: '/[page]',
+      query: QueryUrl(1, gender, brandsFilterActive, typesFilterActive, priceFilterActive),
     });
     e.preventDefault();
   };
 
   const clearForm = () => {
-    setValueFrom("");
-    setValueTo("");
-    dispatch({ type: "CLEAR_FILTER" });
+    setValueFrom('');
+    setValueTo('');
+    dispatch({ type: 'CLEAR_FILTER' });
   };
 
   return (
-    <div
-      className={`${styles.filterOffer} ${
-        filterMenu ? styles.active : styles.disable
-      }`}
-    >
+    <div className={`${styles.filterOffer} ${filterMenu ? styles.active : styles.disable}`}>
       <form onSubmit={handleSubmit} className={styles.filterBlock}>
         <div className={styles.filterWrapper}>
-          <FilterItem title={"Цена"}>
+          <FilterItem title={'Цена'}>
             <TextInput
               type="number"
               name="От"
@@ -106,50 +92,32 @@ const Filter: React.FC = () => {
               setValue={setValueTo}
             />
           </FilterItem>
-          <FilterItem title={"Бренд"}>
+          <FilterItem title={'Бренд'}>
             {brandsFilter &&
               brandsFilter.map(
-                ({
-                  name,
-                  slug,
-                  isChecked,
-                }: {
-                  name: string;
-                  slug: string;
-                  isChecked: boolean;
-                }) => (
+                ({ name, slug, isChecked }: { name: string; slug: string; isChecked: boolean }) => (
                   <Checkbox
                     key={`${name}_${slug}`}
                     name={name}
                     slug={slug}
                     isChecked={isChecked}
-                    onClickFunc={(e) =>
-                      toggleCheckboxFilter(e, "BRANDS_TOGGLE")
-                    }
+                    onClickFunc={(e) => toggleCheckboxFilter(e, 'BRANDS_TOGGLE')}
                   />
-                )
+                ),
               )}
           </FilterItem>
-          <FilterItem title={"Тип парфюма"}>
+          <FilterItem title={'Тип парфюма'}>
             {typesFilter &&
               typesFilter.map(
-                ({
-                  name,
-                  slug,
-                  isChecked,
-                }: {
-                  name: string;
-                  slug: string;
-                  isChecked: boolean;
-                }) => (
+                ({ name, slug, isChecked }: { name: string; slug: string; isChecked: boolean }) => (
                   <Checkbox
                     key={`${name}_${slug}`}
                     name={name}
                     slug={slug}
                     isChecked={isChecked}
-                    onClickFunc={(e) => toggleCheckboxFilter(e, "TYPES_TOGGLE")}
+                    onClickFunc={(e) => toggleCheckboxFilter(e, 'TYPES_TOGGLE')}
                   />
-                )
+                ),
               )}
           </FilterItem>
         </div>
@@ -157,20 +125,16 @@ const Filter: React.FC = () => {
           <input className="btn solidBtn" type="submit" value="Принять" />
           <Link
             href={{
-              pathname: "/[page]",
-              query: QueryUrl(page, gender),
-            }}
-          >
+              pathname: '/[page]',
+              query: QueryUrl(1, gender),
+            }}>
             <button className="btn borderBtn" onClick={clearForm}>
               Сброс
             </button>
           </Link>
         </div>
       </form>
-      <button
-        className={styles.filterBtn}
-        onClick={() => setFilterMenu(!filterMenu)}
-      >
+      <button className={styles.filterBtn} onClick={() => setFilterMenu(!filterMenu)}>
         <svg x="0px" y="0px" viewBox="0 0 477.875 477.875">
           <g>
             <g>

@@ -77,10 +77,18 @@ label {
   font-weight: 500;
 }
 
+input {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  border: 0;
+}
+
 .btn {
   height: 40px;
   width: 100%;
   border: 0;
+  border-radius: 0;
   font-size: 0.923077rem;
   font-weight: 500;
   font-family: 'Montserrat', sans-serif;

@@ -65,7 +65,6 @@
   box-shadow: 10px 10px 0 var(--accent-color);
   transition: all 0.2s ease;
 
-
   .productContainer {
     display: grid;
     grid-template-areas:
@@ -122,7 +121,7 @@
   .searchResult {
     top: 70px;
     bottom: 0;
-    right: -50px;
+    right: -20px;
     box-shadow: none;
   }
 }

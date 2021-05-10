@@ -1,13 +1,16 @@
+import React from 'react';
 import Head from 'next/head';
 import { useRouter } from 'next/router';
 
-import { Header } from '../index';
+import { Header, MenuPopup } from '../index';
+
+import { IRouterProps } from '../../lib/types';
 
 import styles from './Layout.module.scss';
 
-export default function Layout({ children }) {
+const Layout: React.FC<{ screenWidth: number }> = ({ children, screenWidth }) => {
   const router = useRouter();
-  const { gender, slug }: { gender?: string; slug?: string } = router.query;
+  const { gender, slug } = router.query as IRouterProps;
 
   function formattingSlug(slug: string): string {
     return (
@@ -37,9 +40,12 @@ export default function Layout({ children }) {
         className={`${styles.container} ${
           gender === 'female' ? 'femaleTheme' : gender === 'male' ? 'maleTheme' : 'allTheme'
         }`}>
+        <MenuPopup gender={gender} />
         <Header />
         {children}
       </div>
     </>
   );
-}
+};
+
+export default Layout;

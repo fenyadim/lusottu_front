@@ -29,10 +29,10 @@
   position: absolute;
   cursor: pointer;
   z-index: 99;
-  top: calc(97px / 2);
+  top: calc(80px / 2);
   margin-top: calc(-35px / 2);
   left: 20px;
-  width: 50px;
+  width: 45px;
   height: 35px;
   background: none;
   border: none;
@@ -98,10 +98,15 @@
   }
   .searchBlock {
     position: absolute;
-    top: calc(97px / 2);
+    top: calc(80px / 2);
     margin-top: calc(-50px / 2);
-    right: 50px;
+    right: 20px;
     margin-left: 110px;
+  }
+  .filterBlock {
+    position: absolute;
+    left: 50px;
+    bottom: 20px;
   }
 }
 

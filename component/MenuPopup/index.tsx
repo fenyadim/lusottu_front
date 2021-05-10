@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { Search } from '..';
+import { Filter, Search } from '..';
 import { Navigation } from '../Header';
 
 import styles from './MenuPopup.module.scss';
@@ -15,23 +15,23 @@ const MenuPopup: React.FC<MenuPopupProps> = ({ gender }) => {
   const menuContainer = React.useRef();
 
   React.useEffect(() => {
-    const navLink = document.getElementsByClassName(styles.link);
-    const searchBlock = document.getElementsByTagName('input');
-    const resultBlock = document.getElementById('resultBlock');
+    const navLink = document.querySelectorAll('#nav');
+    const menuBlock = document.querySelector('.menu');
+
+    const isNavLink = (target: HTMLInputElement) => {
+      let howTrueElement = 0;
+      navLink.forEach((item) => {
+        if (item === target) {
+          ++howTrueElement;
+        }
+      });
+      return howTrueElement > 0 ? true : false;
+    };
 
     const showMenuListener = (e: Event) => {
-      if (
-        e.target !== menuContainer.current &&
-        e.target !== menuBtn.current &&
-        e.target !== searchBlock[0] &&
-        e.target !== resultBlock
-      ) {
+      const target = e.target as HTMLInputElement;
+      if (!menuBlock.contains(target) || isNavLink(target)) {
         setMenuHandler(false);
-      }
-      for (let i = 0; i < 3; i++) {
-        if (navLink[i] === e.target) {
-          setMenuHandler(false);
-        }
       }
     };
     document.addEventListener('click', showMenuListener);
@@ -41,12 +41,15 @@ const MenuPopup: React.FC<MenuPopupProps> = ({ gender }) => {
   }, []);
 
   return (
-    <div>
+    <div className="menu">
       <div className={!menuHandler ? styles.menuDisable : styles.menuActive} ref={menuContainer}>
         {Navigation(gender)}
         <div className={styles.searchBlock}>
           <Search />
         </div>
+        {/* <div className={styles.filterBlock}>
+          <Filter />
+        </div> */}
       </div>
       <button
         className={`${styles.menuBtn} ${!menuHandler ? '' : styles.activeBtn}`}
