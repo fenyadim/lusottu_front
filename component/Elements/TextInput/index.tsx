@@ -1,6 +1,6 @@
-import React from "react";
+import React from 'react';
 
-import styles from "./TextInput.module.scss";
+import styles from './TextInput.module.scss';
 
 interface TextInputProps {
   type: string;
@@ -21,7 +21,7 @@ const TextInput: React.FC<TextInputProps> = ({
   min,
   max,
 }) => {
-  return type === "number" ? (
+  return type === 'number' ? (
     <label className={styles.inputLabel}>
       {name}:
       <input

@@ -1,13 +1,14 @@
-import React, { useReducer } from "react";
-import { GetServerSideProps } from "next";
+import React, { useReducer } from 'react';
+import { GetServerSideProps } from 'next';
 
-import { GET_BRAND, GET_PRODUCTS, GET_TYPES } from "../../lib/graphql/query";
-import { client } from "../../lib/graphql/";
+import { GET_BRAND, GET_PRODUCTS, GET_TYPES } from '../../lib/graphql/query';
+import { client } from '../../lib/graphql/';
 
-import { Catalog, Footer } from "../../component";
+import { Catalog, Footer } from '../../component';
 
-import { initialState, index } from "../../lib/reducer";
-import { IAction, IItems, IState } from "../../lib/types";
+import { initialState, reducer } from '../../lib/reducer';
+import { IItems } from '../../lib/types';
+import { Context, ContextProps } from '../../lib/context';
 
 interface IPage {
   items: [IItems];
@@ -24,13 +25,6 @@ export interface FilterProps {
   slug?: string;
 }
 
-interface ContextProps {
-  state?: IState;
-  dispatch?: React.Dispatch<IAction>;
-  maxPrice?: number;
-  minPrice?: number;
-}
-
 interface QueryProps {
   brands?: string;
   types?: string;
@@ -45,13 +39,13 @@ const changeVariables = (
   types: string,
   price: string,
   limit: number,
-  start: number
+  start: number,
 ) => {
-  const arrayFilterPrice = price?.split("_");
+  const arrayFilterPrice = price?.split('_');
   const priceFrom = arrayFilterPrice ? Number(arrayFilterPrice[0]) : null;
   const priceTo = arrayFilterPrice ? Number(arrayFilterPrice[1]) : null;
-  const arrayFilterBrands = brands?.split("_");
-  const arrayFilterTypes = types?.split("_");
+  const arrayFilterBrands = brands?.split('_');
+  const arrayFilterTypes = types?.split('_');
 
   const varObj = {
     filterBrand: arrayFilterBrands,
@@ -81,11 +75,11 @@ export const getServerSideProps: GetServerSideProps = async (params) => {
   }: QueryProps = params.query;
 
   if (genderQuery === undefined) {
-    gender = ["unisex", "male", "female"];
-  } else if (genderQuery === "male") {
-    gender = ["unisex", "male"];
+    gender = ['unisex', 'male', 'female'];
+  } else if (genderQuery === 'male') {
+    gender = ['unisex', 'male'];
   } else {
-    gender = ["unisex", "female"];
+    gender = ['unisex', 'female'];
   }
   const quanityItemsOnPage = 12;
   const currentPage = Number(page) * 12 - 12;
@@ -98,7 +92,7 @@ export const getServerSideProps: GetServerSideProps = async (params) => {
       typesQuery,
       priceQuery,
       quanityItemsOnPage,
-      currentPage
+      currentPage,
     ),
   });
   const { data: dataBrands } = await client.query({
@@ -109,11 +103,7 @@ export const getServerSideProps: GetServerSideProps = async (params) => {
   });
 
   const { values: items } = dataProducts.productsConnection;
-  const {
-    count: totalCount,
-    min,
-    max,
-  } = dataProducts.productsConnection.aggregate;
+  const { count: totalCount, min, max } = dataProducts.productsConnection.aggregate;
   const { price: minPrice } = min;
   const { price: maxPrice } = max;
   const { brands } = dataBrands;
@@ -121,8 +111,6 @@ export const getServerSideProps: GetServerSideProps = async (params) => {
   const quantityPages = Math.ceil(totalCount / quanityItemsOnPage); // Подсчет количества страниц
   return { props: { items, quantityPages, brands, types, maxPrice, minPrice } };
 };
-
-export const Context = React.createContext<ContextProps>({});
 
 const Page: React.FC<IPage> = ({
   items,
@@ -133,24 +121,22 @@ const Page: React.FC<IPage> = ({
   maxPrice,
   minPrice,
 }) => {
-  const [state, dispatch] = useReducer(index, initialState);
+  const [state, dispatch] = useReducer(reducer, initialState);
 
   React.useEffect(() => {
     brands?.map(({ name, slug }) => {
-      dispatch({ type: "BRANDS_ADD", payload: { name, slug } });
+      dispatch({ type: 'BRANDS_ADD', payload: { name, slug } });
     });
     types?.map(({ name, slug }) => {
-      dispatch({ type: "TYPES_ADD", payload: { name, slug } });
+      dispatch({ type: 'TYPES_ADD', payload: { name, slug } });
     });
   }, []);
 
   return (
     <>
-      <Context.Provider
-        value={{ state, dispatch, maxPrice, minPrice } as ContextProps}
-      >
+      <Context.Provider value={{ state, dispatch, maxPrice, minPrice } as ContextProps}>
         <Catalog items={items} isLoading={isLoading} />
-        {!isLoading ? <Footer quantityPages={quantityPages} /> : ""}
+        {!isLoading ? <Footer quantityPages={quantityPages} /> : ''}
       </Context.Provider>
     </>
   );

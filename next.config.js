@@ -1,15 +1,17 @@
 module.exports = {
   images: {
-    domains: ["strapi.lusottu.live"],
+    domains: ['strapi.lusottu.live'],
+  },
+  future: {
+    webpack5: true,
   },
   async redirects() {
     return [
       {
-        source: "/",
-        destination: "/1",
+        source: '/',
+        destination: '/1',
         permanent: true,
       },
     ];
   },
-  // basePath: '/home',
 };

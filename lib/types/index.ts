@@ -46,6 +46,7 @@ export interface IAction {
 
 export interface IRouterProps {
   page?: number;
+  slug?: string;
   gender?: string;
   brands?: string;
   types?: string;

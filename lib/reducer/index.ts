@@ -1,11 +1,11 @@
-import { IAction, IState } from "../types";
+import { IAction, IState } from '../types';
 
 export const initialState: IState = {
   brandsFilter: [],
   typesFilter: [],
 };
 
-export const index = (state: IState, action: IAction) => {
+export const reducer = (state: IState, action: IAction) => {
   const { type, payload } = action;
   const brandsFilter = state?.brandsFilter;
   const typesFilter = state?.typesFilter;
@@ -13,10 +13,10 @@ export const index = (state: IState, action: IAction) => {
   const toggleCheckbox = (
     typeFirst: any[],
     typeSecond?: any[],
-    payload?: { targetValue: string; targetIsChecked: boolean }
+    payload?: { targetValue: string; targetIsChecked: boolean },
   ) => {
-    const targetValue = payload ? payload.targetValue : "";
-    const targetIsChecked = payload ? payload.targetIsChecked : "";
+    const targetValue = payload ? payload.targetValue : '';
+    const targetIsChecked = payload ? payload.targetIsChecked : '';
     if (payload) {
       typeFirst.forEach(({ slug }, index) => {
         if (slug === targetValue) {
@@ -39,33 +39,27 @@ export const index = (state: IState, action: IAction) => {
   };
 
   switch (type) {
-    case "BRANDS_ADD": {
+    case 'BRANDS_ADD': {
       const { name, slug } = payload;
       return {
-        brandsFilter: [
-          ...brandsFilter,
-          { name: name, slug: slug, isChecked: false },
-        ],
+        brandsFilter: [...brandsFilter, { name: name, slug: slug, isChecked: false }],
         typesFilter: [...typesFilter],
       };
     }
-    case "TYPES_ADD": {
+    case 'TYPES_ADD': {
       const { name, slug } = payload;
       return {
         brandsFilter: [...brandsFilter],
-        typesFilter: [
-          ...typesFilter,
-          { name: name, slug: slug, isChecked: false },
-        ],
+        typesFilter: [...typesFilter, { name: name, slug: slug, isChecked: false }],
       };
     }
-    case "BRANDS_TOGGLE": {
+    case 'BRANDS_TOGGLE': {
       return toggleCheckbox(brandsFilter, [], payload);
     }
-    case "TYPES_TOGGLE": {
+    case 'TYPES_TOGGLE': {
       return toggleCheckbox(typesFilter, [], payload);
     }
-    case "CLEAR_FILTER": {
+    case 'CLEAR_FILTER': {
       return toggleCheckbox(brandsFilter, typesFilter);
     }
     default:
