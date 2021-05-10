@@ -104,7 +104,7 @@ const SearchProduct = ({ image, name, price, slug }: ISearchProductProps) => {
   return (
     <Link href="/product/[slug]" as={`/product/${slug}/`}>
       <a>
-        <div className={styles.productContainer}>
+        <div className={styles.productContainer} id="searchProduct">
           <div className={styles.image}>
             <Image
               src={`${image ? `https://strapi.lusottu.live${image.url}` : '/null'}`}

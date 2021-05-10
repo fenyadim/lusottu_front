@@ -14,18 +14,20 @@ interface IProductCardProps {
 const ProductCard: React.FC<IProductCardProps> = ({ name, price, img, slug }) => {
   return (
     <Link href="/product/[slug]" as={`/product/${slug}/`}>
-      <a className={styles.productCard}>
-        <div className={styles.productImg}>
-          <Image
-            src={`${img ? `https://strapi.lusottu.live${img}` : '/null'}`}
-            layout="fill"
-            objectFit="contain"
-            alt={name}
-          />
-        </div>
-        <div className={styles.productInfo}>
-          <h2 className={styles.productTitle}>{name}</h2>
-          <span className={styles.productPrice}>{price} руб.</span>
+      <a>
+        <div className={styles.productCard}>
+          <div className={styles.productImg}>
+            <Image
+              src={`${img ? `https://strapi.lusottu.live${img}` : '/null'}`}
+              layout="fill"
+              objectFit="contain"
+              alt={name}
+            />
+          </div>
+          <div className={styles.productInfo}>
+            <h2 className={styles.productTitle}>{name}</h2>
+            <span className={styles.productPrice}>{price} руб.</span>
+          </div>
         </div>
       </a>
     </Link>
