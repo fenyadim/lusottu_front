@@ -26,8 +26,6 @@ jobs:
       - run: npm run build
       # Deploy
       - run: rsync -e "ssh -i $HOME/.ssh/key -o StrictHostKeyChecking=no" --archive --compress --delete . fenyadim@185.251.88.68:/var/www/lusottu.live/html/
-      
-      - name: Reload Front
-        with:
+      - with:
           script: pm2 restart lusottu_front
 # cd .next &&
