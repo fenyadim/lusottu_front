@@ -30,13 +30,17 @@ const MenuPopup: React.FC<MenuPopupProps> = ({ gender }) => {
 
     const showMenuListener = (e: Event) => {
       const target = e.target as HTMLInputElement;
-      if (!menuBlock.contains(target) || isNavLink(target)) {
+      const searchAttributes = target.attributes[1];
+      const searchProduct: string = searchAttributes ? searchAttributes.value : '';
+      if (!menuBlock.contains(target) || isNavLink(target) || searchProduct === 'searchProduct') {
         setMenuHandler(false);
       }
     };
     document.addEventListener('click', showMenuListener);
+    document.addEventListener('touchstart', showMenuListener);
     return () => {
       document.removeEventListener('click', showMenuListener);
+      document.removeEventListener('touchstart', showMenuListener);
     };
   }, []);
 

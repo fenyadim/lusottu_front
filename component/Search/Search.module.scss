@@ -1,6 +1,7 @@
 .searchOffer {
   justify-self: right;
   .inputSearch {
+    position: relative;
     .showClear {
       display: block !important;
     }
@@ -119,9 +120,9 @@
     }
   }
   .searchResult {
-    top: 70px;
-    bottom: 0;
+    top: 50px;
     right: -20px;
+    height: 470px;
     box-shadow: none;
   }
 }

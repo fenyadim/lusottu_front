@@ -14,26 +14,28 @@ interface ICatalog {
 const Catalog: React.FC<ICatalog> = ({ items, isLoading }) => {
   return items[0] !== undefined ? (
     <main className={!isLoading ? styles.catalog : styles.catalogInvisible}>
-      {!isLoading ? (
-        <>
-          {items &&
-            items.map((obj, index: number) =>
-              obj ? (
-                <ProductCard
-                  key={`${obj.slug}_${index}`}
-                  name={obj.name}
-                  price={obj.price}
-                  img={obj.image && obj.image.url}
-                  slug={obj.slug}
-                />
-              ) : (
-                ''
-              ),
-            )}
-        </>
-      ) : (
-        <Loader />
-      )}
+      <div className={styles.catalogWrapper}>
+        {!isLoading ? (
+          <>
+            {items &&
+              items.map((obj, index: number) =>
+                obj ? (
+                  <ProductCard
+                    key={`${obj.slug}_${index}`}
+                    name={obj.name}
+                    price={obj.price}
+                    img={obj.image && obj.image.url}
+                    slug={obj.slug}
+                  />
+                ) : (
+                  ''
+                ),
+              )}
+          </>
+        ) : (
+          <Loader />
+        )}
+      </div>
     </main>
   ) : (
     <Error />
