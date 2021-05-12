@@ -1,12 +1,9 @@
 .container {
   display: grid;
-  grid-template-areas:
-    'header'
-    'content'
-    'footer';
   grid-auto-rows: auto;
   padding: 0 80px;
-  height: 100vh;
+  min-height: 100vh;
+  min-height: -webkit-fill-available;
   overflow: hidden;
 }
 

@@ -7,7 +7,6 @@ import { Error, Loader, TextInput } from '../index';
 import { SEARCH_ITEMS } from '../../lib/graphql/query';
 
 import styles from './Search.module.scss';
-
 interface ISearchProductProps {
   name: string;
   slug: string;
