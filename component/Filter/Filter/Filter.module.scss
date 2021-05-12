@@ -9,7 +9,7 @@
     position: absolute;
     display: none;
     bottom: 80px;
-    left: 0;
+    left: 80px;
     width: 300px;
     background-color: #fff;
     max-height: 70vh; //TODO: обдумать
@@ -80,6 +80,6 @@
   .filterBlock {
     width: 100% !important;
     right: 0;
-    max-height: 60vh !important;
+    left: 0 !important;
   }
 }
