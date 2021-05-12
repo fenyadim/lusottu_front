@@ -52,3 +52,12 @@ export interface IRouterProps {
   types?: string;
   price?: string;
 }
+
+export interface ISearchProductProps {
+  name: string;
+  slug: string;
+  price: number;
+  image?: {
+    url: string;
+  };
+}

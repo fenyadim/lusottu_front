@@ -15,6 +15,9 @@ export const SingleProduct = dynamic(() => import('./Product/SingleProduct'));
 //Pagination
 export const Pagination = dynamic(() => import('./Pagination'));
 
+//Navigation
+export const Navigation = dynamic(() => import('./Navigation'));
+
 //Loader
 export const Loader = dynamic(() => import('./Loader'));
 

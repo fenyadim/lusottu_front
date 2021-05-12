@@ -1,0 +1,48 @@
+.productContainer {
+  display: grid;
+  grid-template-areas:
+    'img title'
+    'img price';
+  grid-template-columns: 100px auto;
+  grid-template-rows: 1fr 1fr;
+  height: 100px;
+  border: 2px solid var(--second-color);
+  margin-bottom: 15px;
+  padding: 5px;
+  transition: all 0.2s ease;
+  align-items: center;
+  &:hover {
+    border-color: var(--accent-color);
+  }
+  * {
+    pointer-events: none;
+  }
+  .image {
+    grid-area: img;
+    height: 100%;
+    width: 100%;
+    justify-self: left;
+    position: relative;
+  }
+  .title {
+    grid-area: title;
+  }
+  .price {
+    grid-area: price;
+    font-size: 1.125rem; /* 18/16 */
+  }
+}
+
+@media screen and (max-width: 660px) {
+  .productContainer {
+    grid-template-columns: 70px auto;
+    .title {
+      grid-area: title;
+      font-size: 1.25rem; /* 20/16 */
+    }
+    .price {
+      grid-area: price;
+      font-size: 1rem; /* 16/16 */
+    }
+  }
+}

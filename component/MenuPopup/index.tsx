@@ -1,7 +1,6 @@
 import React from 'react';
 
-import { Filter, Search } from '..';
-import { Navigation } from '../Header';
+import { Filter, Navigation, Search } from '..';
 
 import styles from './MenuPopup.module.scss';
 
@@ -48,7 +47,7 @@ const MenuPopup: React.FC<MenuPopupProps> = ({ gender }) => {
     screenWidth < 1050 && (
       <div className="menu">
         <div className={!menuHandler ? styles.menuDisable : styles.menuActive} ref={menuContainer}>
-          {Navigation(gender)}
+          <Navigation gender={gender} />
           <div className={styles.searchBlock}>
             <Search />
           </div>
