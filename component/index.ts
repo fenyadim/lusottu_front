@@ -33,5 +33,5 @@ export const FilterItem = dynamic(() => import('./Filter/FilterItem'));
 
 //Custom Elements
 export const Checkbox = dynamic(() => import('./Elements/Checkbox'));
-export const AttributeWrapper = dynamic(() => import('./Elements/AttributeWrapper'));
+export const Attribute = dynamic(() => import('./Elements/Attribute'));
 export const TextInput = dynamic(() => import('./Elements/TextInput'));
