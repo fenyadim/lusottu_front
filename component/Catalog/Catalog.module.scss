@@ -1,5 +1,6 @@
 .catalog {
-  grid-area: content;
+  grid-column: 1;
+  grid-row: 2/3;
   display: block;
   height: 100%;
   padding: 20px 0;
