@@ -7,13 +7,12 @@ body {
   padding: 0;
   margin: 0;
   height: 100%;
-  height: -webkit-fill-available;
+  max-height: 100vh;
   overflow: hidden;
 }
 
 #__next {
   height: 100%;
-  height: -webkit-fill-available;
 }
 
 h1,
