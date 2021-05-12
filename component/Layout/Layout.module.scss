@@ -4,7 +4,7 @@
     'header'
     'content'
     'footer';
-  grid-template-rows: 97px auto 70px;
+  grid-auto-rows: auto;
   padding: 0 80px;
   height: 100vh;
   overflow: hidden;
