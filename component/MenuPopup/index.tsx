@@ -13,10 +13,12 @@ const MenuPopup: React.FC<MenuPopupProps> = ({ gender }) => {
   const [menuHandler, setMenuHandler] = React.useState<boolean>(false);
   const menuBtn = React.useRef();
   const menuContainer = React.useRef();
+  const [screenWidth, setScreenWidth] = React.useState(0);
 
   React.useEffect(() => {
     const navLink = document.querySelectorAll('#nav');
     const menuBlock = document.querySelector('.menu');
+    setScreenWidth(document.documentElement.clientWidth);
 
     const isNavLink = (target: HTMLInputElement) => {
       let howTrueElement = 0;
@@ -37,31 +39,31 @@ const MenuPopup: React.FC<MenuPopupProps> = ({ gender }) => {
       }
     };
     document.addEventListener('click', showMenuListener);
-    document.addEventListener('touchstart', showMenuListener);
     return () => {
       document.removeEventListener('click', showMenuListener);
-      document.removeEventListener('touchstart', showMenuListener);
     };
   }, []);
 
   return (
-    <div className="menu">
-      <div className={!menuHandler ? styles.menuDisable : styles.menuActive} ref={menuContainer}>
-        {Navigation(gender)}
-        <div className={styles.searchBlock}>
-          <Search />
-        </div>
-        {/* <div className={styles.filterBlock}>
+    screenWidth < 1050 && (
+      <div className="menu">
+        <div className={!menuHandler ? styles.menuDisable : styles.menuActive} ref={menuContainer}>
+          {Navigation(gender)}
+          <div className={styles.searchBlock}>
+            <Search />
+          </div>
+          {/* <div className={styles.filterBlock}>
           <Filter />
         </div> */}
+        </div>
+        <button
+          className={`${styles.menuBtn} ${!menuHandler ? '' : styles.activeBtn}`}
+          onClick={() => setMenuHandler(!menuHandler)}
+          ref={menuBtn}>
+          <span />
+        </button>
       </div>
-      <button
-        className={`${styles.menuBtn} ${!menuHandler ? '' : styles.activeBtn}`}
-        onClick={() => setMenuHandler(!menuHandler)}
-        ref={menuBtn}>
-        <span />
-      </button>
-    </div>
+    )
   );
 };
 
