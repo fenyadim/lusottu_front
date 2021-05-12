@@ -1,6 +1,10 @@
 .container {
-  display: flex;
-  flex-direction: column;
+  display: grid;
+  grid-template-areas:
+    'header'
+    'content'
+    'footer';
+  grid-template-rows: 97px auto 70px;
   padding: 0 80px;
   height: 100vh;
   overflow: hidden;

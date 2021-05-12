@@ -19,7 +19,7 @@ const Filter: React.FC = () => {
   const brandsFilter = state?.brandsFilter;
   const typesFilter = state?.typesFilter;
   const router = useRouter();
-  const { page, gender } = router.query as IRouterProps;
+  const { gender } = router.query as IRouterProps;
 
   React.useEffect(() => {
     const filterOffer = document.querySelector(`.${styles.filterOffer}`);
