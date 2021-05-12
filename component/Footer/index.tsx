@@ -6,10 +6,10 @@ import styles from './Footer.module.scss';
 
 const Footer: React.FC<{ quantityPages: number }> = ({ quantityPages }) => {
   return (
-    <div className={styles.offer}>
+    <footer className={styles.offer}>
       <Pagination quantityPages={quantityPages} />
       <Filter />
-    </div>
+    </footer>
   );
 };
 
