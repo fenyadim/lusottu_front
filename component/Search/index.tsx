@@ -33,9 +33,9 @@ const Search: React.FC = () => {
 
     const toggleMenu = (e: Event) => {
       const target = e.target as HTMLInputElement;
-      const inputValue: string | undefined = inputSearch[idActiveScreen].value;
+      const inputValue: string | undefined = inputSearch[idActiveScreen]?.value;
       if (
-        searchOffer[idActiveScreen].contains(target) &&
+        searchOffer[idActiveScreen]?.contains(target) &&
         inputValue.length !== 0 &&
         target.attributes[0].value !== styles.productContainer
       ) {
