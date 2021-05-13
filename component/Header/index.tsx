@@ -28,7 +28,7 @@ const Header: React.FC = () => {
   );
 };
 
-export default Header;
+export default React.memo(Header);
 
 export const Navigation = (gender: string | string[]) => {
   return (

@@ -30,7 +30,7 @@ const TextInput: React.FC<TextInputProps> = ({
         value={value}
         min={min}
         max={max}
-        placeholder={placeholder}
+        placeholder={min ? String(min) : String(max)}
         onChange={(e) => {
           e && setValue(e.target.value);
         }}

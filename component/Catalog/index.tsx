@@ -18,14 +18,14 @@ const Catalog: React.FC<ICatalog> = ({ items, isLoading }) => {
         {!isLoading ? (
           <>
             {items &&
-              items.map((obj, index: number) =>
-                obj ? (
+              items.map(({ name, price, image, slug }, index: number) =>
+                name ? (
                   <ProductCard
-                    key={`${obj.slug}_${index}`}
-                    name={obj.name}
-                    price={obj.price}
-                    img={obj.image && obj.image.url}
-                    slug={obj.slug}
+                    key={`${slug}_${index}`}
+                    name={name}
+                    price={price}
+                    img={image && image.url}
+                    slug={slug}
                   />
                 ) : (
                   ''
