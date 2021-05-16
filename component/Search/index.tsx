@@ -20,12 +20,10 @@ const Search: React.FC = () => {
   const [value, setValue] = React.useState<string>('');
   const [toggleContainer, setToggleContainer] = React.useState<boolean>(false);
 
-  const { data, loading, error } = useQuery(SEARCH_ITEMS, {
+  const { data, loading } = useQuery(SEARCH_ITEMS, {
     variables: { search: value },
   });
   const products: Array<ISearchProductProps> = data?.products;
-
-  console.log(data, error)
 
   React.useEffect(() => {
     const searchOffer = document.querySelectorAll(`.${styles.searchOffer}`);

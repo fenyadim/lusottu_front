@@ -57,7 +57,7 @@
   position: absolute;
   overflow-y: scroll;
   top: 97px;
-  right: 0;
+  right: 80px;
   width: 500px;
   height: 600px;
   padding: 15px 15px 0 15px;
@@ -110,6 +110,12 @@
   100% {
     opacity: 1;
     transform: translateY(0);
+  }
+}
+
+@media screen and (max-width: 1150px) {
+  .searchResult {
+    right: 30px;
   }
 }
 
