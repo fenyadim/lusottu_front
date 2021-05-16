@@ -76,8 +76,8 @@ const Search: React.FC = () => {
         className={`${styles.searchResult} ${toggleContainer ? styles.visible : ''}`}
         id="resultBlock">
         {!loading ? (
-          products.length !== 0 ? (
-            products.map(({ image, name, price, slug }, index: number) => (
+          products?.length !== 0 ? (
+            products?.map(({ image, name, price, slug }, index: number) => (
               <SearchProduct
                 key={`${name}_${index}`}
                 image={image && image}
