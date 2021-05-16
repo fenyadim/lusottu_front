@@ -20,10 +20,12 @@ const Search: React.FC = () => {
   const [value, setValue] = React.useState<string>('');
   const [toggleContainer, setToggleContainer] = React.useState<boolean>(false);
 
-  const { data, loading } = useQuery(SEARCH_ITEMS, {
+  const { data, loading, error } = useQuery(SEARCH_ITEMS, {
     variables: { search: value },
   });
   const products: Array<ISearchProductProps> = data?.products;
+
+  console.log(data, error)
 
   React.useEffect(() => {
     const searchOffer = document.querySelectorAll(`.${styles.searchOffer}`);
@@ -58,6 +60,7 @@ const Search: React.FC = () => {
     }
   }, [value]);
 
+
   return (
     <div className={styles.searchOffer}>
       <div className={styles.inputSearch}>
@@ -76,8 +79,8 @@ const Search: React.FC = () => {
         className={`${styles.searchResult} ${toggleContainer ? styles.visible : ''}`}
         id="resultBlock">
         {!loading ? (
-          products.length !== 0 ? (
-            products.map(({ image, name, price, slug }, index: number) => (
+          products?.length !== 0 ? (
+            products?.map(({ image, name, price, slug }, index: number) => (
               <SearchProduct
                 key={`${name}_${index}`}
                 image={image && image}
