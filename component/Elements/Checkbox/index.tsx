@@ -10,7 +10,6 @@ interface CheckboxProps {
 }
 
 const Checkbox = ({ name, slug, isChecked, toggleCheckbox }: CheckboxProps) => {
-  console.log('CHECKBOX')
   return (
     <div className={styles.checkbox}>
       <input
