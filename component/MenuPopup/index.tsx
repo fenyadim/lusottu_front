@@ -34,7 +34,7 @@ const MenuPopup: React.FC<MenuPopupProps> = ({ gender }) => {
       const target = e.target as HTMLInputElement;
       const searchAttributes = target.attributes[1];
       const searchProduct: string = searchAttributes ? searchAttributes.value : '';
-      if (!menuBlock.contains(target) || isNavLink(target) || searchProduct === 'searchProduct') {
+      if (!menuBlock?.contains(target) || isNavLink(target) || searchProduct === 'searchProduct') {
         setMenuHandler(false);
       }
     };

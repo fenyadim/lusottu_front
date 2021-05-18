@@ -79,7 +79,7 @@ const Search: React.FC = () => {
           products?.length !== 0 ? (
             products?.map(({ image, name, price, slug }, index: number) => (
               <SearchProduct
-                key={`${name}_${index}`}
+                key={`${name}_${index}_search`}
                 image={image && image}
                 name={name}
                 price={price}
