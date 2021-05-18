@@ -6,10 +6,11 @@ interface CheckboxProps {
   name: string;
   slug: string;
   isChecked: boolean;
-  onClickFunc: ({ currentTarget }: React.MouseEvent<HTMLInputElement>) => void;
+  toggleCheckbox: ({ currentTarget }: React.MouseEvent<HTMLInputElement>) => void;
 }
 
-const Checkbox = ({ name, slug, isChecked, onClickFunc }: CheckboxProps) => {
+const Checkbox = ({ name, slug, isChecked, toggleCheckbox }: CheckboxProps) => {
+  console.log('CHECKBOX')
   return (
     <div className={styles.checkbox}>
       <input
@@ -19,7 +20,7 @@ const Checkbox = ({ name, slug, isChecked, onClickFunc }: CheckboxProps) => {
         checked={isChecked}
         readOnly={true}
         id={`${slug}_checkbox`}
-        onClick={onClickFunc}
+        onClick={toggleCheckbox}
       />
       <label htmlFor={`${slug}_checkbox`}>{name}</label>
     </div>

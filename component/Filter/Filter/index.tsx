@@ -79,14 +79,12 @@ const Filter: React.FC = () => {
               type="number"
               name="От"
               min={minPrice}
-              max={maxPrice}
               value={valueFrom}
               setValue={setValueFrom}
             />
             <TextInput
               type="number"
               name="До"
-              min={minPrice}
               max={maxPrice}
               value={valueTo}
               setValue={setValueTo}
@@ -101,7 +99,7 @@ const Filter: React.FC = () => {
                     name={name}
                     slug={slug}
                     isChecked={isChecked}
-                    onClickFunc={(e) => toggleCheckboxFilter(e, 'BRANDS_TOGGLE')}
+                    toggleCheckbox={(e) => toggleCheckboxFilter(e, 'BRANDS_TOGGLE')}
                   />
                 ),
               )}
@@ -115,7 +113,7 @@ const Filter: React.FC = () => {
                     name={name}
                     slug={slug}
                     isChecked={isChecked}
-                    onClickFunc={(e) => toggleCheckboxFilter(e, 'TYPES_TOGGLE')}
+                    toggleCheckbox={(e) => toggleCheckboxFilter(e, 'TYPES_TOGGLE')}
                   />
                 ),
               )}

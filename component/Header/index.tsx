@@ -17,7 +17,7 @@ const Header: React.FC = () => {
         <div className={styles.noMenu}>{Navigation(gender)}</div>
         <Link href="/1">
           <a className={styles.logo}>
-            <Image src="/logo.svg" layout="fill" alt="Lusottu" />
+            <Image src="/logo.svg" layout="fill" alt="Lusottu" priority={true}/>
           </a>
         </Link>
         <div className={styles.noMenu} style={{ justifySelf: 'right' }}>
