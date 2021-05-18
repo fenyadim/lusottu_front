@@ -8,9 +8,9 @@ import { IRouterProps } from '../../lib/types';
 
 import styles from './Layout.module.scss';
 
-const Layout: React.FC<{ screenWidth: number }> = ({ children, screenWidth }) => {
+const Layout: React.FC<{ screenWidth: number }> = ({children, screenWidth}) => {
   const router = useRouter();
-  const { gender, slug } = router.query as IRouterProps;
+  const {gender, slug} = router.query as IRouterProps;
 
   function formattingSlug(slug: string): string {
     return (
@@ -20,6 +20,7 @@ const Layout: React.FC<{ screenWidth: number }> = ({ children, screenWidth }) =>
       })
     );
   }
+
   function headTitle(gender: string, slug: string): string {
     if (gender === 'male') {
       return 'Мужские духи - Lusottu';
@@ -40,8 +41,8 @@ const Layout: React.FC<{ screenWidth: number }> = ({ children, screenWidth }) =>
         className={`${styles.container} ${
           gender === 'female' ? 'femaleTheme' : gender === 'male' ? 'maleTheme' : 'allTheme'
         }`}>
-        <MenuPopup gender={gender} />
-        <Header />
+        <MenuPopup gender={gender}/>
+        <Header/>
         {children}
       </div>
     </>
