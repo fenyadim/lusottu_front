@@ -1,3 +1,13 @@
+.loaderWrapper {
+  grid-column: 1;
+  grid-row: 2/3;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  width: 100%;
+}
+
 .loader {
   --size: 60px;
   --half-size: var(--size) / 2;
