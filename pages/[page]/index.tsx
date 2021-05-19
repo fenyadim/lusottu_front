@@ -4,7 +4,7 @@ import { GetServerSideProps } from 'next';
 import { GET_BRAND, GET_PRODUCTS, GET_TYPES } from '../../lib/graphql/query';
 import { client } from '../../lib/graphql/';
 
-import { Catalog, Footer } from '../../component';
+import { Catalog, Footer } from '../../components';
 
 import { initialState, reducer } from '../../lib/reducer';
 import { IItems } from '../../lib/types';
