@@ -23,6 +23,7 @@ export const Loader = dynamic(() => import('./Loader'));
 
 //Search
 export const Search = dynamic(() => import('./Search'));
+export const SearchProduct = dynamic(() => import('./Search/SearchProduct'));
 
 //Error
 export const Error = dynamic(() => import('./Error'));

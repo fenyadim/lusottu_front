@@ -1,20 +1,12 @@
 import React from 'react';
 import { useQuery } from '@apollo/client';
-import Image from 'next/image';
-import Link from 'next/link';
 
-import { Error, Loader, TextInput } from '../index';
+import { Error, Loader, SearchProduct, TextInput } from '../index';
+
 import { SEARCH_ITEMS } from '../../lib/graphql/query';
+import { ISearchProductProps } from '../../lib/types';
 
 import styles from './Search.module.scss';
-interface ISearchProductProps {
-  name: string;
-  slug: string;
-  price: number;
-  image?: {
-    url: string;
-  };
-}
 
 const Search: React.FC = () => {
   const [value, setValue] = React.useState<string>('');
@@ -58,7 +50,6 @@ const Search: React.FC = () => {
     }
   }, [value]);
 
-
   return (
     <div className={styles.searchOffer}>
       <div className={styles.inputSearch}>
@@ -99,23 +90,3 @@ const Search: React.FC = () => {
 };
 
 export default Search;
-
-const SearchProduct = ({ image, name, price, slug }: ISearchProductProps) => {
-  return (
-    <Link href="/product/[slug]" as={`/product/${slug}/`}>
-      <a>
-        <div className={styles.productContainer} id="searchProduct">
-          <div className={styles.image}>
-            <Image
-              src={`${image ? `https://strapi.lusottu.live${image.url}` : '/null'}`}
-              layout="fill"
-              objectFit="contain"
-            />
-          </div>
-          <h2 className={styles.title}>{name}</h2>
-          <p className={styles.price}>{price} руб.</p>
-        </div>
-      </a>
-    </Link>
-  );
-};

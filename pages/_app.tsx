@@ -11,7 +11,7 @@ import '../styles/style.scss';
 
 const MyApp = ({ Component, pageProps }: AppProps) => {
   const [isLoading, setIsLoading] = React.useState<boolean>(false);
-  const [screenWidth, setScreenWidth] = React.useState<number>();
+  const [screenWidth, setScreenWidth] = React.useState<number>(0);
   const router = useRouter();
   const { asPath } = router;
 

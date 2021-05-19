@@ -4,8 +4,6 @@ import React from 'react';
 import styles from './Navigation.module.scss';
 
 const Navigation: React.FC<{ gender: string | string[] }> = ({ gender }) => {
-  console.log('NAVIGATION');
-
   return (
     <nav
       className={`${styles.navigation} ${

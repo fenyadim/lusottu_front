@@ -12,15 +12,15 @@ const Layout: React.FC<{ screenWidth: number }> = ({ children, screenWidth }) =>
   const router = useRouter();
   const { gender, slug } = router.query as IRouterProps;
 
-  function formattingSlug(slug: string): string {
+  const formattingSlug = (slug: string): string => {
     return (
       slug &&
       slug.replace(/-/g, ' ').replace(/(^|\s)\S/g, (a) => {
         return a.toUpperCase();
       })
     );
-  }
-  function headTitle(gender: string, slug: string): string {
+  };
+  const headTitle = (gender: string, slug: string): string => {
     if (gender === 'male') {
       return 'Мужские духи - Lusottu';
     } else if (gender === 'female') {
@@ -29,7 +29,7 @@ const Layout: React.FC<{ screenWidth: number }> = ({ children, screenWidth }) =>
       return `${formattingSlug(slug)} - Lusottu`;
     }
     return 'Главная - Lusottu';
-  }
+  };
 
   return (
     <>
@@ -40,7 +40,7 @@ const Layout: React.FC<{ screenWidth: number }> = ({ children, screenWidth }) =>
         className={`${styles.container} ${
           gender === 'female' ? 'femaleTheme' : gender === 'male' ? 'maleTheme' : 'allTheme'
         }`}>
-        <MenuPopup gender={gender} />
+        {screenWidth < 1050 && <MenuPopup gender={gender} />}
         <Header />
         {children}
       </div>
