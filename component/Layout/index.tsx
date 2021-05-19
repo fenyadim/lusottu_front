@@ -8,9 +8,9 @@ import { IRouterProps } from '../../lib/types';
 
 import styles from './Layout.module.scss';
 
-const Layout: React.FC<{ screenWidth: number }> = ({children, screenWidth}) => {
+const Layout: React.FC<{ screenWidth: number }> = ({ children, screenWidth }) => {
   const router = useRouter();
-  const {gender, slug} = router.query as IRouterProps;
+  const { gender, slug } = router.query as IRouterProps;
 
   const formattingSlug = (slug: string): string => {
     return (
@@ -19,14 +19,8 @@ const Layout: React.FC<{ screenWidth: number }> = ({children, screenWidth}) => {
         return a.toUpperCase();
       })
     );
-<<<<<<< HEAD
   };
   const headTitle = (gender: string, slug: string): string => {
-=======
-  }
-
-  function headTitle(gender: string, slug: string): string {
->>>>>>> develop
     if (gender === 'male') {
       return 'Мужские духи - Lusottu';
     } else if (gender === 'female') {
@@ -46,13 +40,8 @@ const Layout: React.FC<{ screenWidth: number }> = ({children, screenWidth}) => {
         className={`${styles.container} ${
           gender === 'female' ? 'femaleTheme' : gender === 'male' ? 'maleTheme' : 'allTheme'
         }`}>
-<<<<<<< HEAD
         {screenWidth < 1050 && <MenuPopup gender={gender} />}
         <Header />
-=======
-        <MenuPopup gender={gender}/>
-        <Header/>
->>>>>>> develop
         {children}
       </div>
     </>
