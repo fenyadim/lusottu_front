@@ -16,35 +16,46 @@ const Pagination: React.FC<{ quantityPages: number }> = ({ quantityPages }) => {
     paginator.push(i);
   }
 
+  React.useEffect(() => {
+    const navigationKeys = (forwardOrBackward: number) => {
+      if (forwardOrBackward <= quantityPages && forwardOrBackward >= 1) {
+        router.push({
+          pathname: '/[page]',
+          query: QueryUrl(forwardOrBackward, gender, brands, types, price),
+        });
+      }
+    };
+    const navigationOnKeysEvent = (e: KeyboardEvent) => {
+      switch (e.key) {
+        case 'ArrowRight':
+          navigationKeys(Number(currentPage) + 1);
+          break;
+        case 'ArrowLeft':
+          navigationKeys(Number(currentPage) - 1);
+          break;
+      }
+    };
+    document.addEventListener('keydown', navigationOnKeysEvent);
+    return () => {
+      document.removeEventListener('keydown', navigationOnKeysEvent);
+    };
+  }, []);
+
   return (
     <div className={styles.offer}>
-      {paginator.map((page) =>
-        !gender ? (
-          <Link
-            key={page}
-            href={{
-              pathname: '/[page]',
-              query: QueryUrl(page, '', brands, types, price),
-            }}
-            scroll={true}>
-            <a className={`${styles.link} ${Number(currentPage) === page ? styles.active : ''}`}>
-              {page}
-            </a>
-          </Link>
-        ) : (
-          <Link
-            key={page}
-            href={{
-              pathname: '/[page]',
-              query: QueryUrl(page, gender, brands, types, price),
-            }}
-            scroll={true}>
-            <a className={`${styles.link} ${Number(currentPage) === page ? styles.active : ''}`}>
-              {page}
-            </a>
-          </Link>
-        ),
-      )}
+      {paginator.map((page) => (
+        <Link
+          key={page}
+          href={{
+            pathname: '/[page]',
+            query: QueryUrl(page, gender, brands, types, price),
+          }}
+          scroll={true}>
+          <a className={`${styles.link} ${Number(currentPage) === page ? styles.active : ''}`}>
+            {page}
+          </a>
+        </Link>
+      ))}
     </div>
   );
 };

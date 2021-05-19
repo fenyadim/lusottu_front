@@ -9,11 +9,11 @@ import { client } from '../lib/graphql/';
 
 import '../styles/style.scss';
 
-const MyApp = ({ Component, pageProps }: AppProps) => {
+const MyApp = ({Component, pageProps}: AppProps) => {
   const [isLoading, setIsLoading] = React.useState<boolean>(false);
   const [screenWidth, setScreenWidth] = React.useState<number>(0);
   const router = useRouter();
-  const { asPath } = router;
+  const {asPath} = router;
 
   React.useEffect(() => {
     setScreenWidth(document.documentElement.clientWidth);
@@ -29,11 +29,11 @@ const MyApp = ({ Component, pageProps }: AppProps) => {
   }, [router && asPath]);
 
   return (
-    <ApolloProvider client={client}>
-      <Layout screenWidth={screenWidth}>
-        <Component {...pageProps} isLoading={isLoading} />
-      </Layout>
-    </ApolloProvider>
+      <ApolloProvider client={client}>
+        <Layout screenWidth={screenWidth}>
+          <Component {...pageProps} isLoading={isLoading}/>
+        </Layout>
+      </ApolloProvider>
   );
 };
 

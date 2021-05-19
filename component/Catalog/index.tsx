@@ -18,19 +18,15 @@ const Catalog: React.FC<ICatalog> = ({ items, isLoading }) => {
         {!isLoading ? (
           <>
             {items &&
-              items.map(({ name, price, image, slug }, index: number) =>
-                name ? (
-                  <ProductCard
-                    key={`${slug}_${index}`}
-                    name={name}
-                    price={price}
-                    img={image && image.url}
-                    slug={slug}
-                  />
-                ) : (
-                  ''
-                ),
-              )}
+              items.map(({ name, price, image, slug }, index: number) => (
+                <ProductCard
+                  key={`${slug}_${index}`}
+                  name={name}
+                  price={price}
+                  img={image && image.url}
+                  slug={slug}
+                />
+              ))}
           </>
         ) : (
           <Loader />
