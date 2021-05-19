@@ -28,8 +28,18 @@
   }
 }
 
+@media screen and (max-width: 1050px) {
+  .navigation {
+    .link {
+      font-size: 1.5625rem;
+    }
+  }
+}
+
 @media screen and (max-width: 660px) {
-  .link {
-    font-size: 1.25rem !important;
+  .navigation {
+    .link {
+      font-size: 1.25rem;
+    }
   }
 }

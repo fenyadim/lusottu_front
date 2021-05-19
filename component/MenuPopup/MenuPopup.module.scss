@@ -73,11 +73,6 @@
     transform: translateX(0);
     box-shadow: 10px 10px 0 var(--accent-color);
     border: 2px solid var(--accent-color);
-    nav {
-      a {
-        font-size: 1.5625rem !important;
-      }
-    }
   }
   .menuActive,
   .menuDisable {
@@ -118,10 +113,5 @@
   .menuActive,
   .menuDisable {
     width: 100%;
-    nav {
-      a {
-        font-size: 1.25rem !important;
-      }
-    }
   }
 }

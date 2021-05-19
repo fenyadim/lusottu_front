@@ -76,11 +76,21 @@
   }
 }
 
-@media screen and (max-width: 1050px) {
-  .filterBlock {
-    width: 100% !important;
-    right: 0;
-    left: 0 !important;
-    max-height: 60vh !important;
+@media screen and (max-width: 1150px) {
+  .filterOffer {
+    .filterBlock {
+      left: 30px;
+    }
+  }
+}
+
+@media screen and (max-width: 660px) {
+  .filterOffer {
+    .filterBlock {
+      width: 100%;
+      right: 0;
+      left: 0;
+      max-height: 60vh;
+    }
   }
 }
