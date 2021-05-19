@@ -1,10 +1,8 @@
 import React from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
-import { motion, useTransform, useMotionValue } from 'framer-motion';
 
 import styles from './ProductCard.module.scss';
-import Loader from '../../Loader';
 
 interface IProductCardProps {
   name: string;
@@ -24,7 +22,6 @@ const ProductCard: React.FC<IProductCardProps> = ({ name, price, img, slug }) =>
               layout="fill"
               objectFit="contain"
               alt={name}
-              priority={true}
             />
           </div>
           <div className={styles.productInfo}>
