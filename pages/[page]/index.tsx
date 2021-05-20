@@ -9,7 +9,6 @@ import { Catalog, Footer } from '../../components';
 import { initialState, reducer } from '../../lib/reducer';
 import { IItems } from '../../lib/types';
 import { Context, ContextProps } from '../../lib/context';
-
 interface IPage {
   items: [IItems];
   isLoading: boolean;
@@ -19,12 +18,10 @@ interface IPage {
   minPrice: number;
   maxPrice: number;
 }
-
-export interface FilterProps {
+interface FilterProps {
   name?: string;
   slug?: string;
 }
-
 interface QueryProps {
   brands?: string;
   types?: string;

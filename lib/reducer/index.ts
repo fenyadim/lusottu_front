@@ -10,7 +10,7 @@ export const reducer = (state: IState, action: IAction) => {
   const brandsFilter = state?.brandsFilter;
   const typesFilter = state?.typesFilter;
 
-  const toggleCheckbox = (
+  const toggleIsChecked = (
     typeFirst: any[],
     typeSecond?: any[],
     payload?: { targetValue: string; targetIsChecked: boolean },
@@ -54,13 +54,13 @@ export const reducer = (state: IState, action: IAction) => {
       };
     }
     case 'BRANDS_TOGGLE': {
-      return toggleCheckbox(brandsFilter, [], payload);
+      return toggleIsChecked(brandsFilter, [], payload);
     }
     case 'TYPES_TOGGLE': {
-      return toggleCheckbox(typesFilter, [], payload);
+      return toggleIsChecked(typesFilter, [], payload);
     }
     case 'CLEAR_FILTER': {
-      return toggleCheckbox(brandsFilter, typesFilter);
+      return toggleIsChecked(brandsFilter, typesFilter);
     }
     default:
       return state;
