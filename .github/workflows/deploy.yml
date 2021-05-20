@@ -7,7 +7,7 @@ on:
 
 jobs:
   deploy:
-    runs-on: self-hosted
+    runs-on: ubuntu-latest
     strategy:
       matrix:
         node-version: [12.x]
@@ -26,7 +26,5 @@ jobs:
       - run: npm run build
       # Deploy
       - run: rsync -e "ssh -i $HOME/.ssh/key -o StrictHostKeyChecking=no" --archive --compress --delete . fenyadim@185.251.88.68:/var/www/lusottu.live/html/
-      - run: pm2 reload lusottu_front
-        env:
-          CI: true
+      - run: "pm2 reload lusottu_front"
 # cd .next &&
