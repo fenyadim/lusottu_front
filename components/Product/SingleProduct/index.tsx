@@ -7,8 +7,8 @@ import { Loader, Attribute } from '../..';
 
 import styles from './SingleProduct.module.scss';
 
-const SingleProduct: React.FC<ISingleProduct> = ({product, isLoading}) => {
-  const {name, brand, desc, image, price, volume, notes} = product;
+const SingleProduct: React.FC<ISingleProduct> = ({ product, isLoading }) => {
+  const { name, brand, desc, image, price, volume, notes } = product;
   return !isLoading ? (
     <div className={!isLoading ? styles.offer : styles.offerInvisible}>
       <div className={styles.imageSide}>
@@ -21,15 +21,15 @@ const SingleProduct: React.FC<ISingleProduct> = ({product, isLoading}) => {
       </div>
       <div className={styles.infoSide}>
         <h1 className={styles.title}>{name}</h1>
-        <Attribute name="Бренд" value={brand.name}/>
-        <Attribute name="Описание" value={desc}/>
-        <Attribute name="Ноты" value={notes}/>
-        <Attribute name="Цена" value={price} addition="руб."/>
-        <Attribute name="Объем" value={volume} addition="мл."/>
+        <Attribute name="Бренд" value={brand.name} />
+        <Attribute name="Описание" value={desc} />
+        <Attribute name="Ноты" value={notes} />
+        <Attribute name="Цена" value={price} addition="руб." />
+        <Attribute name="Объем" value={volume} addition="мл." />
       </div>
     </div>
   ) : (
-    <Loader/>
+    <Loader />
   );
 };
 

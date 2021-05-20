@@ -132,7 +132,7 @@ const Page: React.FC<IPage> = ({
   return (
     <Context.Provider value={{ state, dispatch, maxPrice, minPrice } as ContextProps}>
       <Catalog items={items} isLoading={isLoading} />
-      {!isLoading ? <Footer quantityPages={quantityPages} /> : ''}
+      <Footer quantityPages={quantityPages} />
     </Context.Provider>
   );
 };

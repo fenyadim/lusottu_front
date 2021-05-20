@@ -22,6 +22,7 @@ const ProductCard: React.FC<IProductCardProps> = ({ name, price, img, slug }) =>
               layout="fill"
               objectFit="contain"
               alt={name}
+              // priority={true}
             />
           </div>
           <div className={styles.productInfo}>

@@ -18,6 +18,7 @@ const Pagination: React.FC<{ quantityPages: number }> = ({ quantityPages }) => {
 
   React.useEffect(() => {
     const navigationKeys = (forwardOrBackward: number) => {
+      console.log(forwardOrBackward);
       if (forwardOrBackward <= quantityPages && forwardOrBackward >= 1) {
         router.push({
           pathname: '/[page]',
@@ -39,7 +40,7 @@ const Pagination: React.FC<{ quantityPages: number }> = ({ quantityPages }) => {
     return () => {
       document.removeEventListener('keydown', navigationOnKeysEvent);
     };
-  }, []);
+  }, [currentPage]);
 
   return (
     <div className={styles.offer}>

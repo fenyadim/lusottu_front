@@ -4,7 +4,7 @@ import { GetServerSideProps, GetServerSidePropsContext } from 'next';
 import { GET_SINGLE_PRODUCT } from '../../lib/graphql/query';
 import { client } from '../../lib/graphql/';
 
-import { Error, SingleProduct } from '../../component';
+import { Error, SingleProduct } from '../../components';
 import { ISingleProduct } from '../../lib/types';
 
 export const getServerSideProps: GetServerSideProps = async (params: GetServerSidePropsContext) => {
