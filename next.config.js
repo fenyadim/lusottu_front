@@ -1,6 +1,6 @@
 module.exports = {
   images: {
-    domains: ['strapi.lusottu.live'],
+    domains: ['media.graphcms.com'],
   },
   future: {
     webpack5: true,

@@ -23,7 +23,7 @@ const Catalog: React.FC<ICatalog> = ({ items, isLoading }) => {
                   key={`${slug}_${index}`}
                   name={name}
                   price={price}
-                  img={image && image.url}
+                  img={image && image.handle}
                   slug={slug}
                 />
               ))}

@@ -18,7 +18,7 @@ const ProductCard: React.FC<IProductCardProps> = ({ name, price, img, slug }) =>
         <div className={styles.productCard}>
           <div className={styles.productImg}>
             <Image
-              src={`${img ? `https://strapi.lusottu.live${img}` : '/null'}`}
+              src={`${img ? `https://media.graphcms.com/${img}` : '/null'}`}
               layout="fill"
               objectFit="contain"
               alt={name}

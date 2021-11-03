@@ -12,11 +12,11 @@ const SearchProduct: React.FC<ISearchProductProps> = ({ image, name, price, slug
       <a>
         <div className={styles.productContainer} id="searchProduct">
           <div className={styles.image}>
-            <Image
-              src={`${image ? `https://strapi.lusottu.live${image.url}` : '/null'}`}
-              layout="fill"
-              objectFit="contain"
-            />
+            {/*<Image*/}
+            {/*  src={`${image ? `https://media.graphcms.com/${image.url}` : '/null'}`}*/}
+            {/*  layout="fill"*/}
+            {/*  objectFit="contain"*/}
+            {/*/>*/}
           </div>
           <h2 className={styles.title}>{name}</h2>
           <p className={styles.price}>{price} руб.</p>

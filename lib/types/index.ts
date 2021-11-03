@@ -3,7 +3,7 @@ export interface IItems {
   name: string;
   price: number;
   image?: {
-    url: string;
+    handle: string;
   };
 }
 
@@ -14,7 +14,7 @@ export interface ISingleProduct {
 
 interface IProductProps {
   image?: {
-    url: string;
+    handle: string;
   };
   name?: string;
   brand?: {
@@ -23,7 +23,6 @@ interface IProductProps {
   desc?: string;
   price?: number;
   volume?: number;
-  notes?: string;
 }
 
 export interface IState {
@@ -58,6 +57,6 @@ export interface ISearchProductProps {
   slug: string;
   price: number;
   image?: {
-    url: string;
+    handle: string;
   };
 }
